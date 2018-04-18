@@ -58,7 +58,7 @@
                                         <Insets right="10.0" />
                                     </HBox.margin></Button>
                                 <Button mnemonicParsing="false" onAction="#skipBackwardVideo" prefHeight="25.0" prefWidth="90.0" stylesheets="@style.css" text="&lt;l" />
-                                <Button mnemonicParsing="false" onAction="#skipBackwardVideo" prefHeight="25.0" prefWidth="90.0" stylesheets="@style.css" text="l&gt;" />
+                                <Button mnemonicParsing="false" onAction="#skipFowardVideo" prefHeight="25.0" prefWidth="90.0" stylesheets="@style.css" text="l&gt;" />
                                 <Slider fx:id="slider" prefHeight="14.0" prefWidth="134.0" />
                             </children>
                         </HBox>
@@ -98,9 +98,9 @@
                                 <Font size="13.0" />
                             </font>
                         </Label>
-                        <TextField layoutX="100.0" layoutY="29.0" />
-                        <TextField layoutX="100.0" layoutY="68.0" />
-                        <TextField layoutX="100.0" layoutY="103.0" />
+                        <TextField layoutX="100.0" layoutY="29.0" fx:id="player1Txt" />
+                        <TextField layoutX="100.0" layoutY="68.0" fx:id="player2Txt" />
+                        <TextField layoutX="100.0" layoutY="103.0" fx:id="ballTxt" />
                     </children>
                 </Pane>
             </top>

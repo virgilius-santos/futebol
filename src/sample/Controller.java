@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -35,6 +36,13 @@ public class Controller implements Initializable {
 
     @FXML
     private Slider seekSlider;
+
+    @FXML
+    private TextField player1Txt;
+    @FXML
+    private TextField player2Txt;
+    @FXML
+    private TextField ballTxt;
 
 
     @FXML
@@ -81,7 +89,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void skipBackwardVideo(ActionEvent event) {
-
+        System.out.println(player1Txt.getText());
 
     }
 
