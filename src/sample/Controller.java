@@ -4,10 +4,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -16,16 +14,17 @@ import javafx.util.Duration;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.FileOutputStream; // import de método que está comentado
+import java.io.IOException; // import de método que está comentado
+import java.io.ObjectOutputStream; // import de método que está comentado
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 public class Controller implements Initializable {
 
-    private int count = 0;
+    private boolean playing = false; // Player reproduzindo ou não
+    private double step = 0.0; // Step em mili segundos para o vídeo
 
     @FXML
     private MediaView mediaView;
@@ -35,7 +34,27 @@ public class Controller implements Initializable {
     private Slider seekSlider;
 
     @FXML
-    private void videoPath(ActionEvent event) {
+    private void setStep(){ // Define o tempo que sera utilizado no step do vídeo
+
+    }
+
+    @FXML
+    private void setPosition1(){ // Define a posição do primeiro objeto para o frame
+
+    }
+
+    @FXML
+    private void setPosition2(){ // Define a posição do segundo objeto para o frame
+
+    }
+
+    @FXML
+    private void setOBS(){ // Define o texto de observação para o frame, caso necessário
+
+    }
+
+    @FXML
+    private void videoPath(ActionEvent event) { // Para importar o vídeo
 
         FileChooser video = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select the video(*.mp4)","*.mp4");
@@ -61,7 +80,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void saveProject(ActionEvent event){
+    private void saveProject(ActionEvent event){ // Para salvar o projeto
 
         Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
@@ -97,7 +116,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void loadProject(ActionEvent event) {
+    private void loadProject(ActionEvent event) { // Para carregar um projeto salvo
 
         Alert alert = new Alert(AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
@@ -107,31 +126,35 @@ public class Controller implements Initializable {
             JFileChooser load = new JFileChooser();
             load.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             load.showOpenDialog(null);
-            System.out.println(load.getCurrentDirectory());
-            System.out.println(load.getSelectedFile());
+            System.out.println(load.getCurrentDirectory()); // teste de console para verificar se está funcionando
+            System.out.println(load.getSelectedFile()); // teste de console para verificar se está funcionando
         }
     }
 
     @FXML
     private void playPause(ActionEvent event) {
 
-        if(count%2 == 0) {
+        if(!playing) {
             mediaPlayer.play();
-            count++;
+            playing = true;
         } else {
             mediaPlayer.pause();
-            count--;
+            playing = false;
         }
     }
 
     @FXML
-    private void skipforward(ActionEvent event){
-
+    private void skipForward(ActionEvent event){ // Avança o vídeo em duração pré-definida de 1,5 segundos e o pausa
+        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(new Duration(1500)));
+        mediaPlayer.pause();
+        playing = false;
     }
 
     @FXML
-    private void skipbackward(ActionEvent event){
-
+    private void skipBackward(ActionEvent event){ // Retrocede o vídeo em duração pré-definida de 1,5 segundos e o pausa
+        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(new Duration(-1500)));
+        mediaPlayer.pause();
+        playing = false;
     }
 
     @Override
