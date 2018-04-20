@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("FutAges_Plano_C");
+        stage.setTitle("AGES - Futebol");
 
         /**  scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
         @Override

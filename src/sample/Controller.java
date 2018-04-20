@@ -14,7 +14,11 @@ import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,10 +37,10 @@ public class Controller implements Initializable {
     @FXML
     private void videoPath(ActionEvent event) {
 
-        FileChooser fileChooser = new FileChooser();
+        FileChooser video = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select the video(*.mp4)","*.mp4");
-        fileChooser.getExtensionFilters().add(filter);
-        File file = fileChooser.showOpenDialog(null);
+        video.getExtensionFilters().add(filter);
+        File file = video.showOpenDialog(null);
         String filePath = file.toURI().toString();
 
         if (filePath != null) {
@@ -54,7 +58,58 @@ public class Controller implements Initializable {
                 mediaPlayer.seek(Duration.seconds(seekSlider.getValue()));
             });
         }
+    }
 
+    @FXML
+    private void saveProject(ActionEvent event){
+
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+
+            // Caminho para salvar o projeto
+
+            JFileChooser save = new JFileChooser();
+            save.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            save.showSaveDialog(null);
+
+            // Método que usei para salvar o estado de um jogo no semestre passado, podemos tentar usar..
+
+//            String savePath = "Futebol.ser";
+//            try {
+//                FileOutputStream fileOut = new FileOutputStream(savePath); // abre uma stream direcionada ao arquivo especifico em savePath acima
+//
+//                ObjectOutputStream out = new ObjectOutputStream(fileOut); // abre uma stream de objeto, para serializar, o objeto e colocar neste arquivo
+//                out.writeObject(mediaPlayer); // escreve o objeto no arquivo alvo através do stream de objetos acima (ObjectOutputStream)
+//
+//                out.close(); // fecha a stream de objeto
+//                fileOut.close(); // fecha a stream de arquivo.
+//
+//                // É importante sempre fechar as streams após usa-las para evitar que dados sejam corrompidos
+//
+//                System.out.printf("Data saved to \"" + savePath + "\""); // Verificar no console
+//
+//            } catch (IOException i) {  // Caso dê algum outro erro referente aos streams de gravação em arquivo
+//                System.err.println(i.getMessage());
+//            }
+        }
+    }
+
+    @FXML
+    private void loadProject(ActionEvent event) {
+
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+
+            JFileChooser load = new JFileChooser();
+            load.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            load.showOpenDialog(null);
+            System.out.println(load.getCurrentDirectory());
+            System.out.println(load.getSelectedFile());
+        }
     }
 
     @FXML
@@ -67,18 +122,15 @@ public class Controller implements Initializable {
             mediaPlayer.pause();
             count--;
         }
+    }
+
+    @FXML
+    private void skipforward(ActionEvent event){
 
     }
 
     @FXML
-    private void saveAs(ActionEvent event) { //caminho para salvar o video ;
-
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-        alert.showAndWait();
-
-        if (alert.getResult() == ButtonType.YES) { // Salvar o arquivo em tal lugar
-            // codar
-        }
+    private void skipbackward(ActionEvent event){
 
     }
 
