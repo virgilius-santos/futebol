@@ -70,7 +70,6 @@ public class Controller implements Initializable {
 
     }
 
-
     @FXML
     private void saveAs(ActionEvent event) { //caminho para salvar o video ;
 
@@ -78,17 +77,13 @@ public class Controller implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) { // Salvar o arquivo em tal lugar
-
             // codar
-
         }
 
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
 }
