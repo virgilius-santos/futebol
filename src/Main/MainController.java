@@ -1,6 +1,8 @@
 package Main;
 //-------------------------------------------------------
 
+import Modal.FrameData;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +17,7 @@ public class MainController {
     private String videoPath;
     private Integer tempoDivisao;
     private Integer linhas, colunas; // Variáveis que formam os quadrantes.
-    private Map<Integer,Object> dados;
+    private Map<Integer, FrameData> dados;
 
     public static MainController shared = new MainController(); //singleton
 
@@ -24,8 +26,8 @@ public class MainController {
         this.nomeProjeto = "default";
         this.videoPath = null;
         this.tempoDivisao = this.stepDefault;
-        this.linhas = null;
-        this.colunas = null;
+        this.linhas = 4;
+        this.colunas = 8;
         this.dados = new HashMap();
     }
 
@@ -33,9 +35,7 @@ public class MainController {
     public void setNomeProjeto(String nomeProjeto){
         this.nomeProjeto = nomeProjeto;
     }
-    public void setVideoPath(String videoPath){
-        this.videoPath = videoPath;
-    }
+    public void setVideoPath(String videoPath){ this.videoPath = videoPath; }
     public void setTempo(Integer tempoDivisao){
         this.tempoDivisao = tempoDivisao;
     }
@@ -45,7 +45,6 @@ public class MainController {
     public void setColunas(Integer colunas){
         this.colunas = colunas;
     }
-
 
     // Gets
     public String getNomeProjeto(){
@@ -62,11 +61,11 @@ public class MainController {
         return tempoDivisao;
     }
 
-    public void addData(Object data, Integer timeInSeconds){
+    public void addData(FrameData data, Integer timeInSeconds){
         this.dados.put(timeInSeconds, data);
     }
 
-    public Object getData(Integer timeInSeconds){ return dados.get(timeInSeconds); }
+    public FrameData getData(Integer timeInSeconds){ return dados.get(timeInSeconds); }
 
 
 

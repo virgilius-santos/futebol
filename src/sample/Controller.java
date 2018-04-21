@@ -4,6 +4,7 @@ import Main.MainController;
 import Media.MediaController;
 import IO.IOFiles;
 
+import Modal.FrameData;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +23,7 @@ public class Controller implements Initializable {
 
     private MediaController mediaController = MediaController.shared;
     private MainController mainController = MainController.shared;
-
-    private String filePath;
+    private FrameData currentFrame = null;
 
     @FXML
     private MediaView mediaView;
@@ -44,13 +44,26 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        linha.setText(mainController.getLinhas().toString());
+        coluna.setText(mainController.getColunas().toString());
+
         step.setText(mainController.getTempoDivisao().toString());
         step.setOnKeyReleased(event -> mainController.setTempo(Integer.parseInt(step.getText())));
+
+        linha.setOnKeyReleased(event -> mainController.setLinhas(Integer.parseInt(linha.getText())));
+        coluna.setOnKeyReleased(event -> mainController.setColunas(Integer.parseInt(coluna.getText())));
+
+        seekSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            currentFrame = mainController.getData(newValue.intValue());
+            loadFrame();
+
+        });
     }
     @FXML
     private void videoPath(ActionEvent event) { // Para importar o vídeo
 
-        filePath = IOFiles.getPath();
+        String filePath = IOFiles.getPath();
         mainController.setVideoPath(filePath);
         mediaController.setMedia(filePath, mediaView);
         mediaController.setSeekSlider(seekSlider);
@@ -115,6 +128,46 @@ public class Controller implements Initializable {
             event.consume();
         }
     }
+
+    @FXML
+    private void saveFrame(ActionEvent event) {
+        Double obj1 = Double.parseDouble(object1.getText());
+        Double obj2 = Double.parseDouble(object2.getText());
+        String obs = this.obs.getText();
+        Integer time = mediaController.getCurrentTime();
+
+        if (currentFrame == null) {
+            //FrameData(Double obj1, Double obj2, String obs, Integer time)
+            try {
+                currentFrame = new FrameData(obj1, obj2, obs, time);
+            } catch (Exception e) {
+                currentFrame = null;
+            }
+        }
+
+        if (currentFrame != null) {
+            mainController.addData(currentFrame, time);
+        }
+
+    }
+
+    private void loadFrame(){
+        if (currentFrame == null) {
+            clearFrame();
+            return;
+        }
+
+        if (currentFrame.getObj1() != null) object1.setText(currentFrame.getObj1().toString());
+        if (currentFrame.getObj2() != null) object2.setText(currentFrame.getObj2().toString());
+        if (currentFrame.getObs() != null) obs.setText(currentFrame.getObs());
+    }
+
+    private void clearFrame() {
+        obs.clear();
+        object1.clear();
+        object2.clear();
+    }
+
 
 }
 
