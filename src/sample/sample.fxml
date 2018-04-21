@@ -44,5 +44,9 @@
       <Label layoutX="24.0" layoutY="50.0" prefHeight="40.0" prefWidth="123.0" text="Object 1 - Position" />
       <Label layoutX="24.0" layoutY="108.0" prefHeight="40.0" prefWidth="123.0" text="Object 2 - Position" />
       <TextArea layoutX="26.0" layoutY="167.0" onDragDetected="#setOBS" prefHeight="336.0" prefWidth="363.0" />
+      <TextField layoutX="136.0" layoutY="568.0" prefHeight="30.0" prefWidth="50.0" />
+      <TextField layoutX="138.0" layoutY="623.0" prefHeight="30.0" prefWidth="50.0" />
+      <Label layoutX="68.0" layoutY="575.0" text="Linha" />
+      <Label layoutX="63.0" layoutY="629.0" text="Coluna" />
     </children>
 </AnchorPane>

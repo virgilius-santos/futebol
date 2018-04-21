@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bde35f47-9354-4f9b-9fc8-f858a510c296" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/1010011_screenhi_930x524_ru_ru_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/12.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/12.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/images.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/maxresdefault-766340.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/maxresdefault.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/neymar.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/sample.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,8 +18,8 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="129" column="110" selection-start-line="129" selection-start-column="110" selection-end-line="129" selection-end-column="110" />
+            <state relative-caret-position="675">
+              <caret line="132" selection-start-line="132" selection-end-line="132" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#initialize#0;class#Controller#0" />
@@ -53,10 +46,11 @@
         <option value="Márcio S. do Carmo &lt;villghust@github.com&gt;" />
       </list>
     </option>
+    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="Screen" />
       </map>
     </option>
   </component>
@@ -206,7 +200,7 @@
       <updated>1524245194036</updated>
       <workItem from="1524245195633" duration="868000" />
       <workItem from="1524246937629" duration="8234000" />
-      <workItem from="1524255402683" duration="116000" />
+      <workItem from="1524255402683" duration="1046000" />
     </task>
     <task id="LOCAL-00001" summary="Starting update">
       <created>1524247124265</created>
@@ -229,15 +223,28 @@
       <option name="project" value="LOCAL" />
       <updated>1524251564343</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Update para continuar na AGES">
+      <created>1524255563656</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1524255563656</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update para continuar na AGES">
+      <created>1524255583929</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524255583929</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9218000" />
+    <option name="totallyTimeSpent" value="10148000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1280" height="997" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -245,11 +252,11 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50078124" side_tool="true" visible="true" weight="0.28196347" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28196347" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49921876" visible="true" weight="0.28196347" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -279,7 +286,8 @@
     <MESSAGE value="Starting update" />
     <MESSAGE value="teste" />
     <MESSAGE value="Janela para navegação entre as pastas&#10;Método para salvar em arquivo (está como comentário)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Janela para navegação entre as pastas&#10;Método para salvar em arquivo (está como comentário)" />
+    <MESSAGE value="Update para continuar na AGES" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update para continuar na AGES" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -332,8 +340,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="129" column="110" selection-start-line="129" selection-start-column="110" selection-end-line="129" selection-end-column="110" />
+        <state relative-caret-position="675">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#initialize#0;class#Controller#0" />
