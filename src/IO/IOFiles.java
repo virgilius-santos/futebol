@@ -1,39 +1,90 @@
 package IO;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import javafx.stage.FileChooser;
+import sample.Main;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.lang.reflect.Type;
 
 public class IOFiles {
 
-    public static String getPath(){
+    private static Gson gson = new Gson();
+
+    public static File getVideoPath(){
         FileChooser video = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select the video(*.mp4)","*.mp4");
         video.getExtensionFilters().add(filter);
-        File file = video.showOpenDialog(null);
-        String filePath = file.toURI().toString();
-        return filePath;
+        File file = video.showOpenDialog(Main.primaryStage);
+        return file;
     }
 
-    public void save(String savePath, Object object){
+    public static File getSaveFilePath(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.json"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+
+        File file = fileChooser.showSaveDialog(Main.primaryStage);
+        return file;
+    }
+
+    public static File getLoadFilePath(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.json"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+
+        File file = fileChooser.showOpenDialog(Main.primaryStage);
+        return file;
+    }
+
+    public static <T> void save(File file, T object){
+
+        String jsonString = gson.toJson(object);
+
+        FileWriter arquivo;
+
             try {
-                FileOutputStream fileOut = new FileOutputStream(savePath); // abre uma stream direcionada ao arquivo especifico em savePath acima
 
-                ObjectOutputStream out = new ObjectOutputStream(fileOut); // abre uma stream de objeto, para serializar, o objeto e colocar neste arquivo
-                out.writeObject(object); // escreve o objeto no arquivo alvo através do stream de objetos acima (ObjectOutputStream)
+                arquivo = new FileWriter(file);
 
-                out.close(); // fecha a stream de objeto
-                fileOut.close(); // fecha a stream de arquivo.
+                arquivo.write(jsonString);
 
-                // É importante sempre fechar as streams após usa-las para evitar que dados sejam corrompidos
+                arquivo.close();
 
-                System.out.printf("Data saved to \"" + savePath + "\""); // Verificar no console
-
-            } catch (IOException i) {  // Caso dê algum outro erro referente aos streams de gravação em arquivo
+            } catch (IOException i) {
                 System.err.println(i.getMessage());
             }
     }
+
+
+
+    public static <T> T load(File file, Class<T> type){
+
+        T obj = null;
+
+        FileReader arquivo;
+
+        try {
+
+            arquivo = new FileReader(file);
+
+            JsonReader reader = new JsonReader(arquivo);
+
+            obj = gson.fromJson(reader, type);
+
+            arquivo.close();
+
+        } catch (IOException i) {
+            System.err.println(i.getMessage());
+        }
+
+        return obj;
+    }
+
+
+
+
 }

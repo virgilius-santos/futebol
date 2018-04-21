@@ -5,16 +5,19 @@ import Media.MediaController;
 import IO.IOFiles;
 
 import Modal.FrameData;
+import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.MediaView;
+import javafx.stage.FileChooser;
 
-import javax.swing.*;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -63,7 +66,7 @@ public class Controller implements Initializable {
     @FXML
     private void videoPath(ActionEvent event) { // Para importar o vídeo
 
-        String filePath = IOFiles.getPath();
+        String filePath = IOFiles.getVideoPath().toURI().toString();
         mainController.setVideoPath(filePath);
         mediaController.setMedia(filePath, mediaView);
         mediaController.setSeekSlider(seekSlider);
@@ -73,34 +76,34 @@ public class Controller implements Initializable {
     @FXML
     private void saveProject(ActionEvent event){ // Para salvar o projeto
 
-//        Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-//        alert.showAndWait();
-//
-//        if (alert.getResult() == ButtonType.YES) {
-//
-//            // Caminho para salvar o projeto
-//
-//            JFileChooser save = new JFileChooser();
-//            save.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//            save.showSaveDialog(null);
-//
-//        }
+
+
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+
+            // Caminho para salvar o projeto
+
+            File file = IOFiles.getSaveFilePath();
+            mainController.setNomeProjeto(file.getName());
+            IOFiles.save(file, mainController);
+        }
     }
 
     @FXML
     private void loadProject(ActionEvent event) { // Para carregar um projeto salvo
 
-//        Alert alert = new Alert(AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-//        alert.showAndWait();
-//
-//        if (alert.getResult() == ButtonType.YES) {
-//
-//            JFileChooser load = new JFileChooser();
-//            load.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//            load.showOpenDialog(null);
-//            System.out.println(load.getCurrentDirectory()); // teste de console para verificar se está funcionando
-//            System.out.println(load.getSelectedFile()); // teste de console para verificar se está funcionando
-//        }
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+
+            File file = IOFiles.getLoadFilePath();
+
+            mainController = IOFiles.load(file, MainController.class);
+            
+        }
     }
 
 

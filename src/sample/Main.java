@@ -8,8 +8,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public static Stage primaryStage;
     @Override
     public void start(Stage stage) throws Exception{
+        primaryStage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("AGES - Futebol");
