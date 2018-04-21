@@ -88,12 +88,12 @@ public class Controller implements Initializable {
 
     @FXML
     private void skipForward(ActionEvent event){ // Avança o vídeo em duração pré-definida de 1,5 segundos e o pausa
-        mediaController.skip(1500.0,false);
+        mediaController.skip(1.5,false);
     }
 
     @FXML
     private void skipBackward(ActionEvent event){ // Retrocede o vídeo em duração pré-definida de 1,5 segundos e o pausa
-        mediaController.skip(1500.0,true);
+        mediaController.skip(1.5,true);
     }
 
     @Override

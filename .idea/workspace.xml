@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53e6d9a8-fa11-4ef1-89f7-ef301272a558" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/IO/IOFiles.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Media/MediaController.java" afterPath="$PROJECT_DIR$/src/Media/MediaController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Controller.java" afterPath="$PROJECT_DIR$/src/sample/Controller.java" />
     </list>
@@ -24,6 +22,16 @@
               <caret line="110" column="0" lean-forward="true" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1524310073943" expanded="true" signature="1675:2319" ph="{...}" />
+                <marker date="1524310073943" expanded="false" signature="2377:2388" ph=" { " />
+                <marker date="1524310073943" expanded="false" signature="2416:2422" ph=" }" />
+                <marker date="1524310073943" expanded="false" signature="2481:2559" ph=" { " />
+                <marker date="1524310073943" expanded="false" signature="2591:2597" ph=" }" />
+                <marker date="1524310073943" expanded="false" signature="2657:2738" ph=" { " />
+                <marker date="1524310073943" expanded="false" signature="2769:2775" ph=" }" />
+                <marker date="1524310073943" expanded="true" signature="2858:2952" ph="{...}" />
+                <marker date="1524310073943" expanded="true" signature="3003:3488" ph="{...}" />
+                <marker date="1524310073943" expanded="true" signature="3227:3480" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -32,11 +40,9 @@
       <file leaf-file-name="MediaController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Media/MediaController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="39" column="36" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="60">
+              <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -283,12 +289,12 @@
       <updated>1524006000337</updated>
       <workItem from="1524006002489" duration="1123000" />
       <workItem from="1524088828366" duration="215000" />
-      <workItem from="1524263053107" duration="14715000" />
+      <workItem from="1524263053107" duration="14866000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23584000" />
+    <option name="totallyTimeSpent" value="23735000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
@@ -518,6 +524,16 @@
           <caret line="110" column="0" lean-forward="true" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1524310073943" expanded="true" signature="1675:2319" ph="{...}" />
+            <marker date="1524310073943" expanded="false" signature="2377:2388" ph=" { " />
+            <marker date="1524310073943" expanded="false" signature="2416:2422" ph=" }" />
+            <marker date="1524310073943" expanded="false" signature="2481:2559" ph=" { " />
+            <marker date="1524310073943" expanded="false" signature="2591:2597" ph=" }" />
+            <marker date="1524310073943" expanded="false" signature="2657:2738" ph=" { " />
+            <marker date="1524310073943" expanded="false" signature="2769:2775" ph=" }" />
+            <marker date="1524310073943" expanded="true" signature="2858:2952" ph="{...}" />
+            <marker date="1524310073943" expanded="true" signature="3003:3488" ph="{...}" />
+            <marker date="1524310073943" expanded="true" signature="3227:3480" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -535,11 +551,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Media/MediaController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="39" column="36" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>

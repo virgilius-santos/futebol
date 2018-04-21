@@ -3,12 +3,10 @@ package Media;
 
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Slider;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
-import java.util.EventListener;
 
 public class MediaController {
 
@@ -35,7 +33,12 @@ public class MediaController {
 
     public void setSeekSlider(Slider seekSlider) {
         this.seekSlider = seekSlider;
-        this.seekSlider.setMax(1);
+        this.seekSlider.setMax(100);
+//        this.seekSlider.setShowTickLabels(true);
+//        this.seekSlider.setShowTickMarks(true);
+//        this.seekSlider.setMajorTickUnit(50);
+//        this.seekSlider.setMinorTickCount(5);
+//        this.seekSlider.setBlockIncrement(10);
 
         this.mediaPlayer.currentTimeProperty().addListener((ObservableValue<? extends Duration> observable,
                                                             Duration oldValue,
@@ -62,7 +65,7 @@ public class MediaController {
 
     public void skip(Double step, Boolean backward){
         Double newStep = (backward) ? -step : step;
-        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(new Duration(newStep)));
+        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(newStep)));
         mediaPlayer.pause();
     }
 
@@ -71,7 +74,10 @@ public class MediaController {
     }
 
     private Duration getMediaPlayerCurrentValue(){
-        return Duration.seconds(seekSlider.getValue() * mediaPlayer.getTotalDuration().toSeconds());
+        Double newValue = mediaPlayer.getTotalDuration().toSeconds();
+        Double position = seekSlider.getValue() / seekSlider.getMax(); // transforma e, %
+        newValue *= position;
+        return Duration.seconds(newValue);
     }
 
 
