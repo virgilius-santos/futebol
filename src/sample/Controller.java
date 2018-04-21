@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,45 +14,36 @@ import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
 import javax.swing.*;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileOutputStream; // import de método que está comentado
 import java.io.IOException; // import de método que está comentado
 import java.io.ObjectOutputStream; // import de método que está comentado
 import java.net.URL;
 import java.util.ResourceBundle;
+import Media.*;
 
 
 public class Controller implements Initializable {
 
-    private boolean playing = false; // Player reproduzindo ou não
-    private double step = 0.0; // Step em mili segundos para o vídeo
+    private MediaController mediaController = MediaController.shared;
 
     @FXML
     private MediaView mediaView;
-    private MediaPlayer mediaPlayer;
-
     @FXML
     private Slider seekSlider;
-
     @FXML
-    private void setStep(){ // Define o tempo que sera utilizado no step do vídeo
-
-    }
-
+    private TextField object1;
     @FXML
-    private void setPosition1(){ // Define a posição do primeiro objeto para o frame
-
-    }
-
+    private TextField object2;
     @FXML
-    private void setPosition2(){ // Define a posição do segundo objeto para o frame
-
-    }
-
+    private TextField step;
     @FXML
-    private void setOBS(){ // Define o texto de observação para o frame, caso necessário
-
-    }
+    private TextArea obs;
+    @FXML
+    private TextField linha;
+    @FXML
+    private TextField coluna;
 
     @FXML
     private void videoPath(ActionEvent event) { // Para importar o vídeo
@@ -62,21 +54,9 @@ public class Controller implements Initializable {
         File file = video.showOpenDialog(null);
         String filePath = file.toURI().toString();
 
-        if (filePath != null) {
-            Media media = new Media(filePath);
-            this.mediaPlayer = new MediaPlayer(media);
-            this.mediaView.setMediaPlayer(this.mediaPlayer);
+        mediaController.setMedia(filePath, mediaView);
+        mediaController.setSeekSlider(seekSlider);
 
-            // Double time = mediaPlayer.getTotalDuration().toSeconds(); // Pega a duração do vídeo
-            // seekSlider.setMax(time); // Define a duração do Slider como a mesma do vídeo
-
-            this.mediaPlayer.currentTimeProperty().addListener((ObservableValue<? extends Duration> observable,Duration oldValue,Duration newValue) -> {
-                seekSlider.setValue(newValue.toSeconds());
-            });
-            seekSlider.setOnMouseClicked(mouseEvent -> {
-                mediaPlayer.seek(Duration.seconds(seekSlider.getValue()));
-            });
-        }
     }
 
     @FXML
@@ -134,32 +114,40 @@ public class Controller implements Initializable {
 
     @FXML
     private void playPause(ActionEvent event) {
-
-        if(!playing) {
-            mediaPlayer.play();
-            playing = true;
-        } else {
-            mediaPlayer.pause();
-            playing = false;
-        }
+        mediaController.playPause();
     }
 
     @FXML
     private void skipForward(ActionEvent event){ // Avança o vídeo em duração pré-definida de 1,5 segundos e o pausa
-        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(new Duration(1500)));
-        mediaPlayer.pause();
-        playing = false;
+        mediaController.skip(1500.0,false);
     }
 
     @FXML
     private void skipBackward(ActionEvent event){ // Retrocede o vídeo em duração pré-definida de 1,5 segundos e o pausa
-        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(new Duration(-1500)));
-        mediaPlayer.pause();
-        playing = false;
+        mediaController.skip(1500.0,true);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        addListener(object1);
+        addListener(object2);
+        addListener(step);
+    }
+
+    private void addListener(TextField textField){
+
+        textField.textProperty().addListener((ObservableValue<? extends String> observable,
+                                              String oldValue,
+                                              String newValue) -> {
+
+            String value  = (!newValue.matches("\\d*"))
+                        ? newValue.replaceAll("[^\\d]", "")
+                        : newValue ;
+
+            textField.setText( (value.length() > 5) ? value.substring(0,5) : value);
+
+
+        });
     }
 
 }
