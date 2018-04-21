@@ -53,6 +53,9 @@ public class MediaController {
         seekSlider.setOnMousePressed(event -> mediaPlayer.pause());
     }
 
+    public Integer getCurrentTime() {
+        return ((Double)mediaPlayer.getCurrentTime().toSeconds()).intValue();
+    }
 
     public void playPause(){
         if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED
@@ -63,21 +66,24 @@ public class MediaController {
         }
     }
 
-    public void skip(Double step, Boolean backward){
-        Double newStep = (backward) ? -step : step;
+    public void skip(Integer step, Boolean backward){
+        Integer newStep = (backward) ? -step : step;
         mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(newStep)));
         mediaPlayer.pause();
     }
 
     private Double getSeekSliderCurrentValue(Duration duration){
-        return seekSlider.getMax() * duration.toSeconds() / mediaPlayer.getTotalDuration().toSeconds();
+        Double value = seekSlider.getMax();
+        value *= duration.toSeconds() / mediaPlayer.getTotalDuration().toSeconds();
+        value = value.intValue() * 1.0;
+        return value;
     }
 
     private Duration getMediaPlayerCurrentValue(){
         Double newValue = mediaPlayer.getTotalDuration().toSeconds();
         Double position = seekSlider.getValue() / seekSlider.getMax(); // transforma e, %
         newValue *= position;
-        return Duration.seconds(newValue);
+        return Duration.seconds(newValue.intValue());
     }
 
 

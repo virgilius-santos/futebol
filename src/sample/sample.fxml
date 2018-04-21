@@ -43,9 +43,9 @@
       <Button layoutX="921.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#skipForward" prefHeight="40.0" prefWidth="40.0" text="&gt;&gt;" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="526.0" />
       <Button layoutX="831.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playPause" prefHeight="40.0" prefWidth="50.0" text="Play" AnchorPane.rightAnchor="399.0" AnchorPane.topAnchor="526.0" />
       <Button layoutX="751.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#skipBackward" prefHeight="40.0" prefWidth="40.0" text="&lt;&lt;" />
-      <TextField fx:id="object1" layoutX="168.0" layoutY="50.0" prefHeight="40.0" prefWidth="100.0" />
-      <TextField fx:id="object2" layoutX="168.0" layoutY="108.0" prefHeight="40.0" prefWidth="100.0" />
-      <TextField fx:id="step" layoutX="611.0" layoutY="526.0" prefHeight="40.0" prefWidth="100.0" />
+      <TextField fx:id="object1" layoutX="168.0" layoutY="50.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
+      <TextField fx:id="object2" layoutX="168.0" layoutY="108.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
+      <TextField fx:id="step" layoutX="611.0" layoutY="526.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
       <Label layoutX="24.0" layoutY="50.0" prefHeight="40.0" prefWidth="123.0" text="Object 1 - Position" />
       <Label layoutX="24.0" layoutY="108.0" prefHeight="40.0" prefWidth="123.0" text="Object 2 - Position" />
       <TextArea fx:id="obs" layoutX="26.0" layoutY="167.0" prefHeight="336.0" prefWidth="363.0" />
