@@ -72,11 +72,10 @@ public class MediaController {
         mediaPlayer.pause();
     }
 
-    private Double getSeekSliderCurrentValue(Duration duration){
+    private Integer getSeekSliderCurrentValue(Duration duration){
         Double value = seekSlider.getMax();
         value *= duration.toSeconds() / mediaPlayer.getTotalDuration().toSeconds();
-        value = value.intValue() * 1.0;
-        return value;
+        return value.intValue();
     }
 
     private Duration getMediaPlayerCurrentValue(){
