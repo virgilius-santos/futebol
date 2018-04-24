@@ -4,6 +4,7 @@ import Main.MainController;
 import Media.MediaController;
 import IO.IOFiles;
 
+import Media.MediaControllerInterface;
 import Modal.FrameData;
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
@@ -22,9 +23,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class Controller implements Initializable {
+public class Controller implements Initializable, MediaControllerInterface {
 
-    private MediaController mediaController = MediaController.shared;
+    private MediaController mediaController;
     private MainController mainController = MainController.shared;
     private FrameData currentFrame = null;
 
@@ -45,6 +46,9 @@ public class Controller implements Initializable {
     @FXML
     private TextField coluna;
 
+    @FXML
+    private Label timeStamp;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -62,15 +66,13 @@ public class Controller implements Initializable {
             loadFrame();
 
         });
+
     }
     @FXML
     private void videoPath(ActionEvent event) { // Para importar o vídeo
-
         String filePath = IOFiles.getVideoPath().toURI().toString();
         mainController.setVideoPath(filePath);
-        mediaController.setMedia(filePath, mediaView);
-        mediaController.setSeekSlider(seekSlider);
-
+        mediaController = new MediaController(filePath, this);
     }
 
     @FXML
@@ -172,5 +174,19 @@ public class Controller implements Initializable {
     }
 
 
+    @Override
+    public Label getLabel() {
+        return this.timeStamp;
+    }
+
+    @Override
+    public MediaView getMediaView() {
+        return this.mediaView;
+    }
+
+    @Override
+    public Slider getSlider() {
+        return this.seekSlider;
+    }
 }
 
