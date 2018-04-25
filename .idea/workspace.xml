@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53e6d9a8-fa11-4ef1-89f7-ef301272a558" name="Default" comment="implemented video functions">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Media/MediaControllerInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Media/MediaController.java" afterPath="$PROJECT_DIR$/src/Media/MediaController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Controller.java" afterPath="$PROJECT_DIR$/src/sample/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/sample.fxml" afterPath="$PROJECT_DIR$/src/sample/sample.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -355,7 +351,7 @@
       <workItem from="1524502564001" duration="100000" />
       <workItem from="1524502670361" duration="121000" />
       <workItem from="1524518048500" duration="8778000" />
-      <workItem from="1524612449865" duration="1849000" />
+      <workItem from="1524612449865" duration="1955000" />
     </task>
     <task id="LOCAL-00001" summary="implemented video functions">
       <created>1524536885408</created>
@@ -368,7 +364,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50072000" />
+    <option name="totallyTimeSpent" value="50178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
