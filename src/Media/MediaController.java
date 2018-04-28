@@ -53,7 +53,6 @@ public class MediaController {
 
         mediaPlayer.setOnPaused(() -> {
             System.out.println("onPaused");
-            //updateValues();
         });
 
         mediaPlayer.setOnReady(() -> {
@@ -133,7 +132,7 @@ public class MediaController {
     }
 
     public Integer getCurrentTime() {
-        return (mediaPlayer == null) ? ((Double)mediaPlayer.getCurrentTime().toSeconds()).intValue() : null;
+        return (mediaPlayer != null) ? ((Double)mediaPlayer.getCurrentTime().toSeconds()).intValue() : null;
     }
 
     public void playPause(){
