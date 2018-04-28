@@ -83,10 +83,14 @@ public class MediaController {
         });
 
         slider.setOnMousePressed( event -> {
-//            mcInterface.getSlider().setValueChanging(true);
-//            mediaPlayer.pause();
-//            mediaPlayer.seek(duration.multiply(((Slider)event.getSource()).getValue() / 100.0));
-//            mcInterface.getSlider().setValueChanging(false);
+            mcInterface.getSlider().setValueChanging(true);
+            mediaPlayer.pause();
+        });
+
+        slider.setOnMouseReleased( event -> {
+            mediaPlayer.play();
+            mediaPlayer.seek(duration.multiply(((Slider)event.getSource()).getValue() / 100.0));
+            mcInterface.getSlider().setValueChanging(false);
         });
 
     }
