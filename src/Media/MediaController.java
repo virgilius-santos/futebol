@@ -32,6 +32,7 @@ public class MediaController {
         mcInterface.getMediaView().setMediaPlayer(mediaPlayer);
         configureMediaPlayer();
         configureSlider();
+        configureButton();
 
     }
 
@@ -64,7 +65,7 @@ public class MediaController {
         });
     }
 
-    private  void configureSlider() {
+    private void configureSlider() {
         if (this.mcInterface.getSlider() == null) return;
 
         this.mcInterface.getSlider().setMax(100);
@@ -82,6 +83,29 @@ public class MediaController {
             mediaPlayer.seek(duration.multiply(((Slider)event.getSource()).getValue() / 100.0));
             mcInterface.getSlider().setValueChanging(false);
         });
+
+    }
+
+    private void configureButton() {
+        if (mediaPlayer == null) return;
+
+        if (this.mcInterface.getPlayPause() != null) {
+            this.mcInterface.getPlayPause().setOnAction( evt -> {
+                playPause();
+            });
+        }
+
+        if (this.mcInterface.getSkipBackWard() != null && this.mcInterface.timeStep() != null) {
+            this.mcInterface.getSkipBackWard().setOnAction( evt -> {
+                skip(this.mcInterface.timeStep(),true);
+            });
+        }
+
+        if (this.mcInterface.getSkipForWard() != null) {
+            this.mcInterface.getSkipBackWard().setOnAction( evt -> {
+                skip(this.mcInterface.timeStep(),false);
+            });
+        }
 
     }
 

@@ -45,6 +45,12 @@ public class Controller implements Initializable, MediaControllerInterface {
     private TextField linha;
     @FXML
     private TextField coluna;
+    @FXML
+    private Button btnSkipForward;
+    @FXML
+    private Button btnPlayPause;
+    @FXML
+    private Button btnSkipBackward;
 
     @FXML
     private Label timeStamp;
@@ -77,9 +83,7 @@ public class Controller implements Initializable, MediaControllerInterface {
 
     @FXML
     private void saveProject(ActionEvent event){ // Para salvar o projeto
-
-
-
+        
         Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
 
@@ -106,22 +110,6 @@ public class Controller implements Initializable, MediaControllerInterface {
             mainController = IOFiles.load(file, MainController.class);
             
         }
-    }
-
-
-    @FXML
-    private void playPause(ActionEvent event) {
-        mediaController.playPause();
-    }
-
-    @FXML
-    private void skipForward(ActionEvent event){ // Avança o vídeo em duração pré-definida de 1,5 segundos e o pause
-        mediaController.skip(mainController.getTempoDivisao(),false);
-    }
-
-    @FXML
-    private void skipBackward(ActionEvent event){ // Retrocede o vídeo em duração pré-definida de 1,5 segundos e o pause
-        mediaController.skip(mainController.getTempoDivisao(),true);
     }
 
     @FXML
@@ -188,5 +176,27 @@ public class Controller implements Initializable, MediaControllerInterface {
     public Slider getSlider() {
         return this.seekSlider;
     }
+
+    @Override
+    public Button getPlayPause() {
+        return this.btnPlayPause;
+    }
+
+    @Override
+    public Button getSkipBackWard() {
+        return this.btnSkipBackward;
+    }
+
+    @Override
+    public Button getSkipForWard() {
+        return this.btnSkipForward;
+    }
+
+    @Override
+    public Integer timeStep() {
+        return mainController.getTempoDivisao();
+    }
+
+
 }
 
