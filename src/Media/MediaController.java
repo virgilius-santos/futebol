@@ -27,9 +27,9 @@ public class MediaController {
         Media media = new Media(filePath);
         if (media == null) return;
 
-        mcInterface.getMediaView().setMediaPlayer(mediaPlayer);
 
         mediaPlayer = new MediaPlayer(media);
+        mcInterface.getMediaView().setMediaPlayer(mediaPlayer);
         configureMediaPlayer();
         configureSlider();
 
