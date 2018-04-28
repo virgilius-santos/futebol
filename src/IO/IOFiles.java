@@ -66,6 +66,7 @@ public class IOFiles {
 
     public static <T> T load(File file, Class<T> type){
 
+        if (file == null) return null;
         T obj = null;
 
         FileReader arquivo;
@@ -77,7 +78,6 @@ public class IOFiles {
             JsonReader reader = new JsonReader(arquivo);
 
             obj = gson.fromJson(reader, type);
-
             arquivo.close();
 
         } catch (IOException i) {

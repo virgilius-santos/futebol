@@ -103,9 +103,12 @@ public class Controller implements Initializable {
 
             File file = IOFiles.getLoadFilePath();
 
-            mainController = IOFiles.load(file, MainController.class);
-            System.out.println(mainController.getNomeProjeto());
-            mediaController.setMedia(mainController.getVideoPath(), mediaView);
+            MainController mainController = IOFiles.load(file, MainController.class);
+            if (mainController != null) {
+                this.mainController = mainController;
+                mediaController.setMedia(mainController.getVideoPath(), mediaView);
+            }
+
 
         }
     }
