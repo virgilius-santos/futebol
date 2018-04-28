@@ -3,6 +3,7 @@ package Media;
 
 import Util.StringFuncions;
 import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,13 +31,17 @@ public class MediaController {
 
         mediaPlayer = new MediaPlayer(media);
         mcInterface.getMediaView().setMediaPlayer(mediaPlayer);
-        configureMediaPlayer();
-        configureSlider();
-        configureButton();
+        configureMediaPlayer(mediaPlayer);
+
+        configureSlider(mcInterface.getSlider());
+
+        configureButton(mcInterface.getPlayPause(),
+                mcInterface.getSkipBackWard(),
+                mcInterface.getSkipForWard());
 
     }
 
-    private void configureMediaPlayer() {
+    private void configureMediaPlayer(MediaPlayer mediaPlayer) {
         mediaPlayer.currentTimeProperty().addListener(ov -> updateValues());
 
         mediaPlayer.setOnPlaying(() -> {
@@ -65,44 +70,45 @@ public class MediaController {
         });
     }
 
-    private void configureSlider() {
-        if (this.mcInterface.getSlider() == null) return;
+    private void configureSlider(Slider slider) {
+        if (slider == null) return;
 
-        this.mcInterface.getSlider().setMax(100);
+        slider.setMax(100);
 
-        this.mcInterface.getSlider().valueProperty().addListener(ov -> {
+        slider.valueProperty().addListener(ov -> {
             if (mcInterface.getSlider().isValueChanging()) {
                 // multiply duration by percentage calculated by slider position
-                mediaPlayer.seek(duration.multiply(mcInterface.getSlider().getValue() / 100.0));
+                double newValue = mcInterface.getSlider().getValue() / mcInterface.getSlider().getMax();
+                mediaPlayer.seek(duration.multiply(newValue));
             }
         });
 
-        this.mcInterface.getSlider().setOnMousePressed( event -> {
-            mcInterface.getSlider().setValueChanging(true);
-            mediaPlayer.pause();
-            mediaPlayer.seek(duration.multiply(((Slider)event.getSource()).getValue() / 100.0));
-            mcInterface.getSlider().setValueChanging(false);
+        slider.setOnMousePressed( event -> {
+//            mcInterface.getSlider().setValueChanging(true);
+//            mediaPlayer.pause();
+//            mediaPlayer.seek(duration.multiply(((Slider)event.getSource()).getValue() / 100.0));
+//            mcInterface.getSlider().setValueChanging(false);
         });
 
     }
 
-    private void configureButton() {
+    private void configureButton(Button playPause, Button skipBackWard, Button skipForWard) {
         if (mediaPlayer == null) return;
 
-        if (this.mcInterface.getPlayPause() != null) {
-            this.mcInterface.getPlayPause().setOnAction( evt -> {
+        if (playPause != null) {
+            playPause.setOnAction( evt -> {
                 playPause();
             });
         }
 
-        if (this.mcInterface.getSkipBackWard() != null && this.mcInterface.timeStep() != null) {
+        if (skipBackWard != null) {
             this.mcInterface.getSkipBackWard().setOnAction( evt -> {
                 skip(this.mcInterface.timeStep(),true);
             });
         }
 
-        if (this.mcInterface.getSkipForWard() != null) {
-            this.mcInterface.getSkipBackWard().setOnAction( evt -> {
+        if (skipForWard != null) {
+            skipForWard.setOnAction( evt -> {
                 skip(this.mcInterface.timeStep(),false);
             });
         }
@@ -110,16 +116,17 @@ public class MediaController {
     }
 
     private void updateValues() {
-        if (mcInterface.getSlider() == null || duration == null) return;
+        Slider slider = mcInterface.getSlider();
+        if (slider == null || duration == null) return;
 
         Platform.runLater(() -> {
             Duration currentTime = mediaPlayer.getCurrentTime();
             updateTimeStamp();
-            mcInterface.getSlider().setDisable(duration.isUnknown());
-            if (!mcInterface.getSlider().isDisabled()
+            slider.setDisable(duration.isUnknown());
+            if (!slider.isDisabled()
                     && duration.greaterThan(Duration.ZERO)
-                    && !mcInterface.getSlider().isValueChanging()) {
-                mcInterface.getSlider().setValue( currentTime.toMillis() / duration.toMillis() * 100.0);
+                    && !slider.isValueChanging()) {
+                slider.setValue( currentTime.toMillis() / duration.toMillis() * 100.0);
             }
         });
 
