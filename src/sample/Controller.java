@@ -83,7 +83,7 @@ public class Controller implements Initializable, MediaControllerInterface {
 
     @FXML
     private void saveProject(ActionEvent event){ // Para salvar o projeto
-        
+
         Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
 
