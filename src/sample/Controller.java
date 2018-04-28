@@ -52,6 +52,8 @@ public class Controller implements Initializable {
         coluna.setText(mainController.getColunas().toString());
 
         step.setText(mainController.getTempoDivisao().toString());
+
+
         step.setOnKeyReleased(event -> mainController.setTempo(Integer.parseInt(step.getText())));
 
         linha.setOnKeyReleased(event -> mainController.setLinhas(Integer.parseInt(linha.getText())));
@@ -102,7 +104,9 @@ public class Controller implements Initializable {
             File file = IOFiles.getLoadFilePath();
 
             mainController = IOFiles.load(file, MainController.class);
-            
+            System.out.println(mainController.getNomeProjeto());
+            mediaController.setMedia(mainController.getVideoPath(), mediaView);
+
         }
     }
 

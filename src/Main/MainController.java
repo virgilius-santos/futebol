@@ -69,7 +69,7 @@ public class MainController {
     public FrameData getData(Integer timeInSeconds){ return dados.get(timeInSeconds); }
 
 
-
+    public String getVideoPath(){return videoPath;}
 
 
 }
