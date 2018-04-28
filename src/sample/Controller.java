@@ -66,7 +66,7 @@ public class Controller implements Initializable, MediaControllerInterface {
 
 
         step.setOnKeyPressed( event -> {
-            if(event.isControlDown()) {
+            if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
                 event.consume();
 
             }else{
@@ -78,7 +78,7 @@ public class Controller implements Initializable, MediaControllerInterface {
         });
 
         linha.setOnKeyPressed(event -> {
-            if(event.isControlDown()) {
+            if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
                 event.consume();
 
             }else{
@@ -91,7 +91,7 @@ public class Controller implements Initializable, MediaControllerInterface {
 
 
         coluna.setOnKeyPressed(event -> {
-            if(event.isControlDown()) {
+            if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
                 event.consume();
 
             }else{
