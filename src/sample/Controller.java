@@ -18,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 
+
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -62,10 +63,44 @@ public class Controller implements Initializable, MediaControllerInterface {
         coluna.setText(mainController.getColunas().toString());
 
         step.setText(mainController.getTempoDivisao().toString());
-        step.setOnKeyReleased(event -> mainController.setTempo(Integer.parseInt(step.getText())));
 
-        linha.setOnKeyReleased(event -> mainController.setLinhas(Integer.parseInt(linha.getText())));
-        coluna.setOnKeyReleased(event -> mainController.setColunas(Integer.parseInt(coluna.getText())));
+
+        step.setOnKeyPressed( event -> {
+            if(event.isControlDown()) {
+                event.consume();
+
+            }else{
+                Integer value = ValidEntry(step.getText());
+
+                mainController.setTempo(value);
+            }
+
+        });
+
+        linha.setOnKeyPressed(event -> {
+            if(event.isControlDown()) {
+                event.consume();
+
+            }else{
+                Integer value = ValidEntry(linha.getText());
+
+                mainController.setLinhas(value);
+            }
+
+        });
+
+
+        coluna.setOnKeyPressed(event -> {
+            if(event.isControlDown()) {
+                event.consume();
+
+            }else{
+                Integer value = ValidEntry(coluna.getText());
+
+                mainController.setColunas(value);
+            }
+
+        });
 
         seekSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             currentFrame = mainController.getData(newValue.intValue());
@@ -159,6 +194,20 @@ public class Controller implements Initializable, MediaControllerInterface {
         obs.clear();
         object1.clear();
         object2.clear();
+    }
+
+    private Integer ValidEntry(String value) {
+        Integer aux;
+
+        try {
+            aux = Integer.parseInt(value);
+
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+
+        return aux;
+
     }
 
 
