@@ -78,7 +78,7 @@ public class Controller implements Initializable {
 
 
 
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
@@ -86,7 +86,7 @@ public class Controller implements Initializable {
             // Caminho para salvar o projeto
 
             File file = IOFiles.getSaveFilePath();
-            mainController.setNomeProjeto(file.getName());
+            mainController.setNomeProjeto(file);
             IOFiles.save(file, mainController);
         }
     }
@@ -94,7 +94,7 @@ public class Controller implements Initializable {
     @FXML
     private void loadProject(ActionEvent event) { // Para carregar um projeto salvo
 
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {

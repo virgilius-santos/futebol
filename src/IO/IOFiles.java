@@ -23,9 +23,8 @@ public class IOFiles {
     public static File getSaveFilePath(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Text Files", "*.json"),
-                new FileChooser.ExtensionFilter("All Files", "*.*"));
-
+                new FileChooser.ExtensionFilter("Text Files", "*.json"));
+                //new FileChooser.ExtensionFilter("All Files", "*.*"));
         File file = fileChooser.showSaveDialog(Main.primaryStage);
         return file;
     }
@@ -37,14 +36,17 @@ public class IOFiles {
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
 
         File file = fileChooser.showOpenDialog(Main.primaryStage);
+
         return file;
     }
 
     public static <T> void save(File file, T object){
-
-        String jsonString = gson.toJson(object);
-
-        FileWriter arquivo;
+        if(file == null || object == null) return;
+        if ( !file.getName().toLowerCase().contains(".json")){
+            file = new File(file+".json");
+        }
+            String jsonString = gson.toJson(object);
+            FileWriter arquivo;
 
             try {
 
@@ -57,6 +59,7 @@ public class IOFiles {
             } catch (IOException i) {
                 System.err.println(i.getMessage());
             }
+
     }
 
 
