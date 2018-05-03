@@ -1,45 +1,35 @@
 package Modal;
 
 public class FrameData {
-    private Double obj1;
-    private Double obj2;
-    private String obs;
+    private Integer obj1;
+    private Integer obj2;
     private Integer time;
 
-    public FrameData(Double obj1, Double obj2, String obs, Integer time) throws Exception {
+    public FrameData(Integer obj1, Integer obj2, Integer time) throws Exception {
 
-        if (obj1 == null && obj2 == null && obs == null && time == null) {
+        if (obj1 == null && obj2 == null && time == null) {
             throw new Exception("elemento nulo");
         }
 
         this.obj1 = obj1;
         this.obj2 = obj2;
-        this.obs = obs;
         this.time = time;
     }
 
-    public Double getObj1() {
+    public Integer getObj1() {
         return obj1;
     }
 
-    public void setObj1(Double obj1) {
+    public void setObj1(Integer obj1) {
         this.obj1 = obj1;
     }
 
-    public Double getObj2() {
+    public Integer getObj2() {
         return obj2;
     }
 
-    public void setObj2(Double obj2) {
+    public void setObj2(Integer obj2) {
         this.obj2 = obj2;
-    }
-
-    public String getObs() {
-        return obs;
-    }
-
-    public void setObs(String obs) {
-        this.obs = obs;
     }
 
     public Integer getTime() {
@@ -49,4 +39,5 @@ public class FrameData {
     public void setTime(Integer time) {
         this.time = time;
     }
+
 }

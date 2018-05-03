@@ -39,8 +39,6 @@ public class Controller implements Initializable {
     @FXML
     private TextField step;
     @FXML
-    private TextArea obs;
-    @FXML
     private TextField linha;
     @FXML
     private TextField coluna;
@@ -134,15 +132,14 @@ public class Controller implements Initializable {
 
     @FXML
     private void saveFrame(ActionEvent event) {
-        Double obj1 = Double.parseDouble(object1.getText());
-        Double obj2 = Double.parseDouble(object2.getText());
-        String obs = this.obs.getText();
+        Integer obj1 = Integer.parseInt(object1.getText());
+        Integer obj2 = Integer.parseInt(object2.getText());
         Integer time = mediaController.getCurrentTime();
 
         if (currentFrame == null) {
             //FrameData(Double obj1, Double obj2, String obs, Integer time)
             try {
-                currentFrame = new FrameData(obj1, obj2, obs, time);
+                currentFrame = new FrameData(obj1, obj2, time);
             } catch (Exception e) {
                 currentFrame = null;
             }
@@ -162,11 +159,9 @@ public class Controller implements Initializable {
 
         if (currentFrame.getObj1() != null) object1.setText(currentFrame.getObj1().toString());
         if (currentFrame.getObj2() != null) object2.setText(currentFrame.getObj2().toString());
-        if (currentFrame.getObs() != null) obs.setText(currentFrame.getObs());
     }
 
     private void clearFrame() {
-        obs.clear();
         object1.clear();
         object2.clear();
     }

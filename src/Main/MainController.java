@@ -56,7 +56,6 @@ public class MainController {
     public Integer getColunas(){
         return  colunas;
     }
-
     public Integer getTempoDivisao() {
         return tempoDivisao;
     }
