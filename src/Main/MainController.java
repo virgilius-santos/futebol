@@ -3,6 +3,7 @@ package Main;
 
 import Modal.FrameData;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,9 +33,9 @@ public class MainController {
     }
 
     // Sets
-    public void setNomeProjeto(String nomeProjeto){
-        this.nomeProjeto = nomeProjeto;
-    }
+    public void setNomeProjeto(File nomeProjeto){
+        if (nomeProjeto == null)return ;
+        this.nomeProjeto = nomeProjeto.getName();}
     public void setVideoPath(String videoPath){ this.videoPath = videoPath; }
     public void setTempo(Integer tempoDivisao){
         this.tempoDivisao = tempoDivisao;
@@ -67,7 +68,7 @@ public class MainController {
     public FrameData getData(Integer timeInSeconds){ return dados.get(timeInSeconds); }
 
 
-
+    public String getVideoPath(){return videoPath;}
 
 
 }
