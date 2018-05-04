@@ -88,7 +88,7 @@ public class MediaController {
         });
 
         slider.setOnMouseReleased( event -> {
-            mediaPlayer.play();
+//            mediaPlayer.play();
             double newValue = mcInterface.getSlider().getValue() / mcInterface.getSlider().getMax();
             mediaPlayer.seek(duration.multiply(newValue));
             mcInterface.getSlider().setValueChanging(false);

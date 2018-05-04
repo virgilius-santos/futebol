@@ -145,7 +145,7 @@ public class Controller implements Initializable, MediaControllerInterface {
             MainController mainController = IOFiles.load(file, MainController.class);
             if (mainController != null) {
                 this.mainController = mainController;
-                mediaController.setMedia(mainController.getVideoPath(), mediaView);
+                mediaController = new MediaController(mainController.getVideoPath(), this);
             }
 
 
