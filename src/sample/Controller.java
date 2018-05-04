@@ -4,6 +4,7 @@ import Main.MainController;
 import Media.MediaController;
 import IO.IOFiles;
 
+import Media.MediaControllerInterface;
 import Modal.FrameData;
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
@@ -17,14 +18,15 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 
+
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class Controller implements Initializable {
+public class Controller implements Initializable, MediaControllerInterface {
 
-    private MediaController mediaController = MediaController.shared;
+    private MediaController mediaController;
     private MainController mainController = MainController.shared;
     private FrameData currentFrame = null;
 
@@ -42,6 +44,15 @@ public class Controller implements Initializable {
     private TextField linha;
     @FXML
     private TextField coluna;
+    @FXML
+    private Button btnSkipForward;
+    @FXML
+    private Button btnPlayPause;
+    @FXML
+    private Button btnSkipBackward;
+
+    @FXML
+    private Label timeStamp;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,25 +63,55 @@ public class Controller implements Initializable {
         step.setText(mainController.getTempoDivisao().toString());
 
 
-        step.setOnKeyReleased(event -> mainController.setTempo(Integer.parseInt(step.getText())));
+        step.setOnKeyPressed( event -> {
+            if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
+                event.consume();
 
-        linha.setOnKeyReleased(event -> mainController.setLinhas(Integer.parseInt(linha.getText())));
-        coluna.setOnKeyReleased(event -> mainController.setColunas(Integer.parseInt(coluna.getText())));
+            }else{
+                Integer value = ValidEntry(step.getText());
+
+                mainController.setTempo(value);
+            }
+
+        });
+
+        linha.setOnKeyPressed(event -> {
+            if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
+                event.consume();
+
+            }else{
+                Integer value = ValidEntry(linha.getText());
+
+                mainController.setLinhas(value);
+            }
+
+        });
+
+
+        coluna.setOnKeyPressed(event -> {
+            if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
+                event.consume();
+
+            }else{
+                Integer value = ValidEntry(coluna.getText());
+
+                mainController.setColunas(value);
+            }
+
+        });
 
         seekSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             currentFrame = mainController.getData(newValue.intValue());
             loadFrame();
 
         });
+
     }
     @FXML
     private void videoPath(ActionEvent event) { // Para importar o vídeo
-
         String filePath = IOFiles.getVideoPath().toURI().toString();
         mainController.setVideoPath(filePath);
-        mediaController.setMedia(filePath, mediaView);
-        mediaController.setSeekSlider(seekSlider);
-
+        mediaController = new MediaController(filePath, this);
     }
 
     @FXML
@@ -109,22 +150,6 @@ public class Controller implements Initializable {
 
 
         }
-    }
-
-
-    @FXML
-    private void playPause(ActionEvent event) {
-        mediaController.playPause();
-    }
-
-    @FXML
-    private void skipForward(ActionEvent event){ // Avança o vídeo em duração pré-definida de 1,5 segundos e o pause
-        mediaController.skip(mainController.getTempoDivisao(),false);
-    }
-
-    @FXML
-    private void skipBackward(ActionEvent event){ // Retrocede o vídeo em duração pré-definida de 1,5 segundos e o pause
-        mediaController.skip(mainController.getTempoDivisao(),true);
     }
 
     @FXML
@@ -171,6 +196,56 @@ public class Controller implements Initializable {
     private void clearFrame() {
         object1.clear();
         object2.clear();
+    }
+
+    private Integer ValidEntry(String value) {
+        Integer aux;
+
+        try {
+            aux = Integer.parseInt(value);
+
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+
+        return aux;
+
+    }
+
+
+    @Override
+    public Label getLabel() {
+        return this.timeStamp;
+    }
+
+    @Override
+    public MediaView getMediaView() {
+        return this.mediaView;
+    }
+
+    @Override
+    public Slider getSlider() {
+        return this.seekSlider;
+    }
+
+    @Override
+    public Button getPlayPause() {
+        return this.btnPlayPause;
+    }
+
+    @Override
+    public Button getSkipBackWard() {
+        return this.btnSkipBackward;
+    }
+
+    @Override
+    public Button getSkipForWard() {
+        return this.btnSkipForward;
+    }
+
+    @Override
+    public Integer timeStep() {
+        return mainController.getTempoDivisao();
     }
 
 

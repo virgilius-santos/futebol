@@ -5,53 +5,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
-<?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.media.MediaView?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-    <children>
-        <MenuBar layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                  <MenuItem mnemonicParsing="false" onAction="#videoPath" text="New Project" />
-                        <MenuItem mnemonicParsing="false" onAction="#loadProject" text="Load Project" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" onAction="#saveProject" text="Save As.." />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-            <MediaView fx:id="mediaView" fitHeight="480.0" fitWidth="848.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="34.0">
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-      </MediaView>
-      <AnchorPane layoutX="209.0" layoutY="115.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="848.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="34.0" />
-            <Slider id="seekSlider" fx:id="seekSlider" layoutX="432.0" layoutY="495.0" prefHeight="16.0" prefWidth="848.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="495.0" />
-      <Button layoutX="921.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#skipForward" prefHeight="40.0" prefWidth="40.0" text="&gt;&gt;" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="526.0" />
-      <Button layoutX="831.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playPause" prefHeight="40.0" prefWidth="50.0" text="Play" AnchorPane.rightAnchor="399.0" AnchorPane.topAnchor="526.0" />
-      <Button layoutX="751.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#skipBackward" prefHeight="40.0" prefWidth="40.0" text="&lt;&lt;" />
-      <TextField fx:id="object1" layoutX="168.0" layoutY="50.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
-      <TextField fx:id="object2" layoutX="168.0" layoutY="108.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
-      <TextField fx:id="step" layoutX="611.0" layoutY="526.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
-      <Label layoutX="24.0" layoutY="50.0" prefHeight="40.0" prefWidth="123.0" text="Object 1 - Position" />
-      <Label layoutX="24.0" layoutY="108.0" prefHeight="40.0" prefWidth="123.0" text="Object 2 - Position" />
-      <TextField fx:id="linha" layoutX="136.0" layoutY="568.0" prefHeight="30.0" prefWidth="50.0" />
-      <TextField fx:id="coluna" layoutX="138.0" layoutY="623.0" prefHeight="30.0" prefWidth="50.0" />
-      <Label layoutX="68.0" layoutY="575.0" text="Line" />
-      <Label layoutX="63.0" layoutY="629.0" text="Column" />
-      <Button layoutX="168.0" layoutY="513.0" mnemonicParsing="false" onAction="#saveFrame" text="Save Frame" />
-    </children>
+   <children>
+       <MenuBar layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <menus>
+               <Menu mnemonicParsing="false" text="File">
+                   <items>
+                       <MenuItem mnemonicParsing="false" onAction="#videoPath" text="New Project" />
+                       <MenuItem mnemonicParsing="false" onAction="#loadProject" text="Load Project" />
+                       <SeparatorMenuItem mnemonicParsing="false" />
+                       <MenuItem mnemonicParsing="false" text="Save" />
+                       <MenuItem mnemonicParsing="false" onAction="#saveProject" text="Save As.." />
+                   </items>
+               </Menu>
+           </menus>
+       </MenuBar>
+       <MediaView fx:id="mediaView" fitHeight="480.0" fitWidth="848.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="34.0">
+           <viewport>
+       <Rectangle2D />
+           </viewport>
+       </MediaView>
+       <AnchorPane layoutX="209.0" layoutY="115.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="848.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="34.0" />
+       <Slider id="seekSlider" fx:id="seekSlider" layoutX="432.0" layoutY="495.0" prefHeight="16.0" prefWidth="848.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="495.0" />
+       <Button fx:id="btnSkipForward" layoutX="921.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="&gt;&gt;" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="526.0" />
+       <Button fx:id="btnPlayPause" layoutX="831.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="50.0" text="Play" AnchorPane.rightAnchor="399.0" AnchorPane.topAnchor="526.0" />
+       <Button fx:id="btnSkipBackward" layoutX="751.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="&lt;&lt;" />
+       <TextField fx:id="object1" layoutX="168.0" layoutY="50.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
+       <TextField fx:id="object2" layoutX="168.0" layoutY="108.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
+       <TextField fx:id="step" layoutX="611.0" layoutY="526.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
+       <Label layoutX="24.0" layoutY="50.0" prefHeight="40.0" prefWidth="123.0" text="Object 1 - Position" />
+       <Label layoutX="24.0" layoutY="108.0" prefHeight="40.0" prefWidth="123.0" text="Object 2 - Position" />
+       <TextArea fx:id="obs" layoutX="26.0" layoutY="167.0" prefHeight="336.0" prefWidth="363.0" />
+       <TextField fx:id="linha" layoutX="136.0" layoutY="568.0" prefHeight="30.0" prefWidth="50.0" />
+       <TextField fx:id="coluna" layoutX="138.0" layoutY="623.0" prefHeight="30.0" prefWidth="50.0" />
+       <Label layoutX="68.0" layoutY="575.0" text="Line" />
+       <Label layoutX="63.0" layoutY="629.0" text="Column" />
+       <Button layoutX="168.0" layoutY="513.0" mnemonicParsing="false" onAction="#saveFrame" text="Save Frame" />
+       <Label fx:id="timeStamp" layoutX="983.0" layoutY="525.0" prefHeight="30.0" prefWidth="169.0" />
+   </children>
 </AnchorPane>
