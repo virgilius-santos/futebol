@@ -17,3 +17,5 @@ hs_err_pid*
 
 out/*
 !/src/libs/gson-2.2.2.jar
+
+\.idea/workspace\.xml
