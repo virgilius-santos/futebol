@@ -32,10 +32,16 @@ public class MainController {
         this.dados = new HashMap();
     }
 
+    public static void setMainController(MainController mainController){
+        if (mainController == null) return;
+        shared = mainController;
+    }
+
     // Sets
     public void setNomeProjeto(File nomeProjeto){
         if (nomeProjeto == null)return ;
-        this.nomeProjeto = nomeProjeto.getName();}
+        this.nomeProjeto = nomeProjeto.getName();
+    }
     public void setVideoPath(String videoPath){ this.videoPath = videoPath; }
     public void setTempo(Integer tempoDivisao){
         this.tempoDivisao = tempoDivisao;
@@ -57,9 +63,7 @@ public class MainController {
     public Integer getColunas(){
         return  colunas;
     }
-    public Integer getTempoDivisao() {
-        return tempoDivisao;
-    }
+    public Integer getTempoDivisao() { return tempoDivisao; }
 
     public void addData(FrameData data, Integer timeInSeconds){
         this.dados.put(timeInSeconds, data);
