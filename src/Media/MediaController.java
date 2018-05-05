@@ -18,6 +18,7 @@ public class MediaController {
     private final boolean repeat = false;
     private boolean stopRequested = false;
     private boolean atEndOfMedia = false;
+    private boolean playing = false;
 
 
     public MediaController(String filePath, MediaControllerInterface mcInterface) {
@@ -74,6 +75,7 @@ public class MediaController {
 
         slider.setMax(100);
 
+
         slider.valueProperty().addListener(ov -> {
             if (mcInterface.getSlider().isValueChanging()) {
                 // multiply duration by percentage calculated by slider position
@@ -84,11 +86,18 @@ public class MediaController {
 
         slider.setOnMousePressed( event -> {
             mcInterface.getSlider().setValueChanging(true);
-            mediaPlayer.pause();
-        });
+            if (!(mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED
+                    || mediaPlayer.getStatus() == MediaPlayer.Status.READY
+                    || mediaPlayer.getStatus() == MediaPlayer.Status.STOPPED)) {
+                mediaPlayer.pause();
+                playing = true;
+            }});
 
         slider.setOnMouseReleased( event -> {
-//            mediaPlayer.play();
+            if(playing == true) {
+                mediaPlayer.play();
+                playing = false;
+            }
             double newValue = mcInterface.getSlider().getValue() / mcInterface.getSlider().getMax();
             mediaPlayer.seek(duration.multiply(newValue));
             mcInterface.getSlider().setValueChanging(false);
