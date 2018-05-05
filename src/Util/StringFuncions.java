@@ -6,11 +6,11 @@ public class StringFuncions {
 
     public static String formatTime(Duration elapsed, Duration duration){
 
-        int elapsedSeconds = (int) elapsed.toSeconds();
-        int elapsedMinutes = (int) elapsed.toMinutes();
+        int elapsedSeconds = ((int) elapsed.toSeconds()) % 60;
+        int elapsedMinutes = ((int) elapsed.toMinutes()) % 60;
         int elapsedHours = (int)  elapsed.toHours();
-        int durationSeconds = (int) duration.toSeconds();
-        int durationMinutes = (int) duration.toMinutes();
+        int durationSeconds = ((int) duration.toSeconds()) % 60;
+        int durationMinutes = ((int) duration.toMinutes()) % 60;
         int durationHours = (int) duration.toHours();
 
         //String currentTime = String.format("%02d:%02d:%02d", elapsedHours, elapsedMinutes, elapsedSeconds);
@@ -20,7 +20,7 @@ public class StringFuncions {
         if (duration.greaterThan(Duration.ZERO)) {
 
             if (durationHours > 0) {
-                return String.format("%d:%02d:%02d/%d:%02d:%02d",
+                return String.format("%02d:%02d:%02d/%02d:%02d:%02d",
                         elapsedHours, elapsedMinutes, elapsedSeconds,
                         durationHours, durationMinutes, durationSeconds);
             } else {
@@ -30,7 +30,7 @@ public class StringFuncions {
             }
         } else {
             if (elapsedHours > 0) {
-                return String.format("%d:%02d:%02d", elapsedHours,
+                return String.format("%02d:%02d:%02d", elapsedHours,
                         elapsedMinutes, elapsedSeconds);
             } else {
                 return String.format("%02d:%02d",elapsedMinutes,
