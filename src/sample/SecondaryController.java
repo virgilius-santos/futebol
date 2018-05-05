@@ -97,9 +97,9 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         });
 
         seekSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            currentFrame = mainController.getData(newValue.intValue());
+            Integer time = mediaController.getCurrentTime();
+            currentFrame = mainController.getData(time);
             loadFrame();
-
         });
 
     }
@@ -164,19 +164,15 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         Integer obj2 = Integer.parseInt(object2.getText());
         Integer time = mediaController.getCurrentTime();
 
-        if (currentFrame == null) {
-            //FrameData(Double obj1, Double obj2, String obs, Integer time)
-            try {
-                currentFrame = new FrameData(obj1, obj2, time);
-            } catch (Exception e) {
-                currentFrame = null;
-            }
+        try {
+            currentFrame = new FrameData(obj1, obj2, time);
+        } catch (Exception e) {
+            currentFrame = null;
         }
 
         if (currentFrame != null) {
             mainController.addData(currentFrame, time);
         }
-
     }
 
     private void loadFrame(){
