@@ -21,20 +21,20 @@ public class StringFuncions {
 
             if (durationHours > 0) {
                 return String.format("%d:%02d:%02d/%d:%02d:%02d",
-                        elapsedHours, elapsedMinutes, elapsedSeconds,
-                        durationHours, durationMinutes, durationSeconds);
+                        elapsedHours, elapsedMinutes, (elapsedSeconds%60),
+                        durationHours, durationMinutes, (durationSeconds%60));
             } else {
                 return String.format("%02d:%02d/%02d:%02d",
-                        elapsedMinutes, elapsedSeconds,durationMinutes,
-                        durationSeconds);
+                        elapsedMinutes, (elapsedSeconds%60),durationMinutes,
+                        (durationSeconds%60));
             }
         } else {
             if (elapsedHours > 0) {
                 return String.format("%d:%02d:%02d", elapsedHours,
-                        elapsedMinutes, elapsedSeconds);
+                        elapsedMinutes, (elapsedSeconds%60));
             } else {
                 return String.format("%02d:%02d",elapsedMinutes,
-                        elapsedSeconds);
+                        (elapsedSeconds%60));
             }
         }
     }
