@@ -67,11 +67,6 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         step.setOnKeyPressed( event -> {
             if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
                 event.consume();
-
-            }else{
-                Integer value = ValidEntry(step.getText());
-
-                mainController.setTempo(value);
             }
 
         });
@@ -246,6 +241,8 @@ public class SecondaryController implements Initializable, MediaControllerInterf
 
     @Override
     public Integer timeStep() {
+        Integer value = ValidEntry(step.getText());
+        mainController.setTempo(value);
         return mainController.getTempoDivisao();
     }
 
