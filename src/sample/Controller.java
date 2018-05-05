@@ -67,10 +67,6 @@ public class Controller implements Initializable, MediaControllerInterface {
             if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
                 event.consume();
 
-            }else{
-                Integer value = ValidEntry(step.getText());
-
-                mainController.setTempo(value);
             }
 
         });
@@ -245,6 +241,8 @@ public class Controller implements Initializable, MediaControllerInterface {
 
     @Override
     public Integer timeStep() {
+        Integer value = ValidEntry(step.getText());
+        mainController.setTempo(value);
         return mainController.getTempoDivisao();
     }
 

@@ -108,6 +108,7 @@ public class MediaController {
         if (skipBackWard != null) {
             this.mcInterface.getSkipBackWard().setOnAction( evt -> {
                 skip(this.mcInterface.timeStep(),true);
+
             });
         }
 
