@@ -14,7 +14,7 @@ public class IOFiles {
 
     public static File getVideoPath(){
         FileChooser video = new FileChooser();
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select the video(*.mp4)","*.mp4","*.avi","*.wmv","*.flv","*.mkv");
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select the video(*.mp4)","*.mp4","*.flv");
         video.getExtensionFilters().add(filter);
         File file = video.showOpenDialog(Main.primaryStage);
         return file;
