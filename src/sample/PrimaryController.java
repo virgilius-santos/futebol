@@ -30,7 +30,11 @@ public class PrimaryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        newProjectButton.setOnAction( evt -> openSecondaryScene());
+        newProjectButton.setOnAction( evt -> {
+            String filePath = IOFiles.getVideoPath().toURI().toString();
+            MainController.shared.setVideoPath(filePath);
+            openSecondaryScene();
+        });
 
         loadProjectButton.setOnAction( evt -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO);

@@ -53,6 +53,11 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        String video = mainController.getVideoPath();
+        if (video != null) {
+            mediaController = new MediaController(video,this);
+        }
+
         linha.setText(mainController.getLinhas().toString());
         coluna.setText(mainController.getColunas().toString());
 
