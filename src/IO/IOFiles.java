@@ -14,7 +14,7 @@ public class IOFiles {
 
     public static File getVideoPath(){
         FileChooser video = new FileChooser();
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select the video(*.mp4)","*.mp4");
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select the video(*.mp4)","*.mp4","*.flv");
         video.getExtensionFilters().add(filter);
         File file = video.showOpenDialog(Main.primaryStage);
         return file;
@@ -23,9 +23,8 @@ public class IOFiles {
     public static File getSaveFilePath(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Text Files", "*.json"),
-                new FileChooser.ExtensionFilter("All Files", "*.*"));
-
+                new FileChooser.ExtensionFilter("Text Files", "*.json"));
+                //new FileChooser.ExtensionFilter("All Files", "*.*"));
         File file = fileChooser.showSaveDialog(Main.primaryStage);
         return file;
     }
@@ -37,14 +36,17 @@ public class IOFiles {
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
 
         File file = fileChooser.showOpenDialog(Main.primaryStage);
+
         return file;
     }
 
     public static <T> void save(File file, T object){
-
-        String jsonString = gson.toJson(object);
-
-        FileWriter arquivo;
+        if(file == null || object == null) return;
+        if ( !file.getName().toLowerCase().contains(".json")){
+            file = new File(file+".json");
+        }
+            String jsonString = gson.toJson(object);
+            FileWriter arquivo;
 
             try {
 
@@ -57,12 +59,14 @@ public class IOFiles {
             } catch (IOException i) {
                 System.err.println(i.getMessage());
             }
+
     }
 
 
 
     public static <T> T load(File file, Class<T> type){
 
+        if (file == null) return null;
         T obj = null;
 
         FileReader arquivo;
@@ -74,7 +78,6 @@ public class IOFiles {
             JsonReader reader = new JsonReader(arquivo);
 
             obj = gson.fromJson(reader, type);
-
             arquivo.close();
 
         } catch (IOException i) {

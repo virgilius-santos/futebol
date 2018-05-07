@@ -12,9 +12,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         primaryStage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("AGES - Futebol");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
 
         /**  scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
         @Override
@@ -25,11 +28,7 @@ public class Main extends Application {
         }
         });
          */
-        stage.setScene(scene);
-        stage.show();
-
     }
-
 
     public static void main(String[] args) {
         launch(args);
