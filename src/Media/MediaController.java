@@ -52,10 +52,6 @@ public class MediaController {
             }
         });
 
-        mediaPlayer.setOnPaused(() -> {
-            System.out.println("onPaused");
-        });
-
         mediaPlayer.setOnReady(() -> {
             duration = mediaPlayer.getMedia().getDuration();
             updateValues();
