@@ -81,7 +81,13 @@ public class MediaController {
                 // multiply duration by percentage calculated by slider position
                 double newValue = mcInterface.getSlider().getValue() / mcInterface.getSlider().getMax();
                 mediaPlayer.seek(duration.multiply(newValue));
+                updateValues();
             }
+        });
+
+
+        slider.setOnMouseClicked( event -> {
+            updateValues();
         });
 
         slider.setOnMousePressed( event -> {
@@ -91,7 +97,8 @@ public class MediaController {
                     || mediaPlayer.getStatus() == MediaPlayer.Status.STOPPED)) {
                 mediaPlayer.pause();
                 playing = true;
-            }});
+            }
+        });
 
         slider.setOnMouseReleased( event -> {
             if(playing == true) {
