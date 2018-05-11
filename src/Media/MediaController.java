@@ -171,13 +171,12 @@ public class MediaController {
                 mediaPlayer.seek(mediaPlayer.getStartTime());
                 atEndOfMedia = false;
             }
-
+            mcInterface.getPlayPause().setText("Pause");
             mediaPlayer.play();
 
         } else {
-
+            mcInterface.getPlayPause().setText("Play");
             mediaPlayer.pause();
-
         }
     }
 
