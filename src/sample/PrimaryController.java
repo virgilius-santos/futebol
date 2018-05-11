@@ -30,28 +30,43 @@ public class PrimaryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        newProjectButton.setOnAction( evt -> {
-            String filePath = IOFiles.getVideoPath().toURI().toString();
-            MainController.shared.setVideoPath(filePath);
-            openSecondaryScene();
-        });
 
-        loadProjectButton.setOnAction( evt -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO);
-            alert.showAndWait();
+        try {
+            newProjectButton.setOnAction(evt -> {
+                String filePath = "";
+                File aux = null;
+                aux = IOFiles.getVideoPath();
 
-            if (alert.getResult() == ButtonType.YES) {
-
-                File file = IOFiles.getLoadFilePath();
-                MainController mainController = IOFiles.load(file, MainController.class);
-
-                if (mainController != null) {
-                    MainController.setMainController(mainController);
+                if( aux == null){ return; }
+                    filePath = aux.toURI().toString();
+                    MainController.shared.setVideoPath(filePath);
                     openSecondaryScene();
-                }
 
+
+            });
+
+
+            loadProjectButton.setOnAction( evt -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO);
+                alert.showAndWait();
+
+                if (alert.getResult() == ButtonType.YES) {
+
+                    File file = IOFiles.getLoadFilePath();
+                    MainController mainController = IOFiles.load(file, MainController.class);
+
+                    if (mainController != null) {
+                        MainController.setMainController(mainController);
+                        openSecondaryScene();
+                    }
+
+                }
+            });
+             }catch (Exception e){
+                e.getMessage();
             }
-        });
+
+
     }
 
     public void openSecondaryScene(){
