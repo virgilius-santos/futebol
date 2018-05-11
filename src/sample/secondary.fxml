@@ -36,7 +36,7 @@
         <AnchorPane layoutX="209.0" layoutY="115.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="848.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="34.0" />
         <Slider id="seekSlider" fx:id="seekSlider" layoutX="432.0" layoutY="495.0" prefHeight="16.0" prefWidth="848.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="495.0" />
         <Button fx:id="btnSkipForward" layoutX="921.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="&gt;&gt;" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="526.0" />
-        <Button fx:id="btnPlayPause" layoutX="831.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="50.0" text="Play" AnchorPane.rightAnchor="399.0" AnchorPane.topAnchor="526.0" />
+        <Button fx:id="btnPlayPause" layoutX="821.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="72.0" text="Play" AnchorPane.rightAnchor="387.0" AnchorPane.topAnchor="526.0" />
         <Button fx:id="btnSkipBackward" layoutX="751.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="&lt;&lt;" />
         <TextField fx:id="object1" layoutX="168.0" layoutY="50.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
         <TextField fx:id="object2" layoutX="168.0" layoutY="108.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
