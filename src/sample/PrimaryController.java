@@ -72,6 +72,7 @@ public class PrimaryController implements Initializable {
             Parent newParent = FXMLLoader.load(getClass().getResource("secondary.fxml"));
             Scene scene =  new Scene(newParent);
             root.setScene(scene);
+            root.centerOnScreen();
             root.show();
         }
         catch (IOException e) {
