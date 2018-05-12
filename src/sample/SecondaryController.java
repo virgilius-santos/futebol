@@ -157,7 +157,8 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     @FXML
     private void openPrimaryScene(ActionEvent event) { // carrega a primeira tela no evento do close project
         Stage root = Main.primaryStage;
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Deseja fechar o projeto?", ButtonType.YES, ButtonType.NO);
+        String msg = "Você irá perder todas as informações não salvas, Deseja prosseguir com o fechamento do projeto?";
+        Alert alert = new Alert(AlertType.CONFIRMATION, msg, ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         try {
         if(alert.getResult() == ButtonType.YES) {
