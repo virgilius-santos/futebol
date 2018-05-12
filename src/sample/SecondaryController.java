@@ -8,13 +8,18 @@ import Media.MediaControllerInterface;
 import Modal.FrameData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -142,9 +147,30 @@ public class SecondaryController implements Initializable, MediaControllerInterf
             if (mainController != null) {
                 this.mainController = mainController;
                 mediaController = new MediaController(mainController.getVideoPath(), this);
+
             }
 
 
+        }
+    }
+
+    @FXML
+    private void openPrimaryScene(ActionEvent event) { // carrega a primeira tela no evento do close project
+        Stage root = Main.primaryStage;
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Deseja fechar o projeto?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        try {
+        if(alert.getResult() == ButtonType.YES){
+
+                Parent newParent = FXMLLoader.load(getClass().getResource("primary.fxml"));
+                Scene scene =  new Scene(newParent);
+                root.setScene(scene);
+                root.show();
+            }else{return;}
+        }
+
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -183,6 +209,8 @@ public class SecondaryController implements Initializable, MediaControllerInterf
 
         if (currentFrame.getObj1() != null) object1.setText(currentFrame.getObj1().toString());
         if (currentFrame.getObj2() != null) object2.setText(currentFrame.getObj2().toString());
+
+
     }
 
     private void clearFrame() {
