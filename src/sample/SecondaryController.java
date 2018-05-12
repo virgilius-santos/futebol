@@ -160,13 +160,13 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         Alert alert = new Alert(AlertType.CONFIRMATION, "Deseja fechar o projeto?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         try {
-        if(alert.getResult() == ButtonType.YES){
+        if(alert.getResult() == ButtonType.YES) {
 
                 Parent newParent = FXMLLoader.load(getClass().getResource("primary.fxml"));
                 Scene scene =  new Scene(newParent);
                 root.setScene(scene);
                 root.show();
-            }else{return;}
+            } else {return;}
         }
 
         catch (IOException e) {
