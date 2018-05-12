@@ -71,6 +71,9 @@ public class MainController {
 
     public FrameData getData(Integer id) { return dados.get(id); }
 
+    public  Map<Integer, FrameData> getDados() {
+        return dados;
+    }
 
     public String getVideoPath() { return videoPath; }
 }

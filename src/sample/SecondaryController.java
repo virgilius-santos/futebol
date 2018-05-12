@@ -53,10 +53,12 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     public void initialize(URL location, ResourceBundle resources) {
 
         // Setup data - Inicializar um FrameData para cada linha da tabela
-        FrameData obj1 = new FrameData(1, "Obj1");
-        FrameData obj2 = new FrameData(2, "Obj2");
-        mainController.addData(obj1);
-        mainController.addData(obj2);
+        if (mainController.getDados().isEmpty()) {
+            FrameData obj1 = new FrameData(1, "Obj1");
+            FrameData obj2 = new FrameData(2, "Obj2");
+            mainController.addData(obj1);
+            mainController.addData(obj2);
+        }
 
         String video = mainController.getVideoPath();
         if (video != null) {
@@ -67,7 +69,7 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         coluna.setText(mainController.getColunas().toString());
 
         step.setText(mainController.getTempoDivisao().toString());
-
+        loadFrame();
 
         step.setOnKeyPressed( event -> {
             if (event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
