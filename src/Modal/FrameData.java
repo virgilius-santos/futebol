@@ -1,43 +1,41 @@
 package Modal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FrameData {
-    private Integer obj1;
-    private Integer obj2;
-    private Integer time;
+    private Integer id;
+    private String name;
+    private Map<Integer, Integer> quadrants;
 
-    public FrameData(Integer obj1, Integer obj2, Integer time) throws Exception {
+    public FrameData(Integer id, String name) {
 
-        if (obj1 == null && obj2 == null && time == null) {
-            throw new Exception("elemento nulo");
-        }
-
-        this.obj1 = obj1;
-        this.obj2 = obj2;
-        this.time = time;
+        this.id = id;
+        this.name = name;
+        quadrants = new HashMap();
     }
 
-    public Integer getObj1() {
-        return obj1;
+    public Integer getId() {
+        return id;
     }
 
-    public void setObj1(Integer obj1) {
-        this.obj1 = obj1;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getObj2() {
-        return obj2;
+    public String getName() {
+        return name;
     }
 
-    public void setObj2(Integer obj2) {
-        this.obj2 = obj2;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getTime() {
-        return time;
+    public Integer getQuadrant(Integer time) {
+        return quadrants.get(time);
     }
 
-    public void setTime(Integer time) {
-        this.time = time;
+    public void setQuadrant(Integer time, Integer quadrant) {
+        quadrants.put(time, quadrant);
     }
-
 }

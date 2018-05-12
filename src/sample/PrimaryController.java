@@ -37,12 +37,10 @@ public class PrimaryController implements Initializable {
                 File aux = null;
                 aux = IOFiles.getVideoPath();
 
-                if( aux == null){ return; }
+                if (aux == null){ return; }
                     filePath = aux.toURI().toString();
                     MainController.shared.setVideoPath(filePath);
                     openSecondaryScene();
-
-
             });
 
 
@@ -53,20 +51,18 @@ public class PrimaryController implements Initializable {
                 if (alert.getResult() == ButtonType.YES) {
 
                     File file = IOFiles.getLoadFilePath();
+
                     MainController mainController = IOFiles.load(file, MainController.class);
 
                     if (mainController != null) {
                         MainController.setMainController(mainController);
                         openSecondaryScene();
                     }
-
                 }
             });
-             }catch (Exception e){
+             } catch (Exception e) {
                 e.getMessage();
             }
-
-
     }
 
     public void openSecondaryScene(){
