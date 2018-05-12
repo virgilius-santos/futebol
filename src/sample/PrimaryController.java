@@ -50,20 +50,18 @@ public class PrimaryController implements Initializable {
                 if (alert.getResult() == ButtonType.YES) {
 
                     File file = IOFiles.getLoadFilePath();
+
                     MainController mainController = IOFiles.load(file, MainController.class);
 
                     if (mainController != null) {
                         MainController.setMainController(mainController);
                         openSecondaryScene();
                     }
-
                 }
             });
-             }catch (Exception e){
+             } catch (Exception e) {
                 e.getMessage();
             }
-
-
     }
 
     public void openSecondaryScene(){

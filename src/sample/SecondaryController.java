@@ -29,7 +29,6 @@ public class SecondaryController implements Initializable, MediaControllerInterf
 
     private MediaController mediaController;
     private MainController mainController = MainController.shared;
-    private FrameData currentFrame = null;
 
     @FXML
     private MediaView mediaView;
@@ -58,6 +57,14 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // Setup data - Inicializar um FrameData para cada linha da tabela
+        if (mainController.getDados().isEmpty()) {
+            FrameData obj1 = new FrameData(1, "Obj1");
+            FrameData obj2 = new FrameData(2, "Obj2");
+            mainController.addData(obj1);
+            mainController.addData(obj2);
+        }
+
         String video = mainController.getVideoPath();
         if (video != null) {
             mediaController = new MediaController(video,this);
@@ -67,25 +74,23 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         coluna.setText(mainController.getColunas().toString());
 
         step.setText(mainController.getTempoDivisao().toString());
-
+        loadFrame();
 
         step.setOnKeyPressed( event -> {
-            if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
+            if (event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
                 event.consume();
             }
-
         });
 
         linha.setOnKeyPressed(event -> {
-            if(event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
+            if (event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
                 event.consume();
 
-            }else{
+            } else {
                 Integer value = ValidEntry(linha.getText());
 
                 mainController.setLinhas(value);
             }
-
         });
 
 
@@ -102,12 +107,11 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         });
 
         seekSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            Integer time = mediaController.getCurrentTime();
-            currentFrame = mainController.getData(time);
+            clearFrame();
             loadFrame();
         });
-
     }
+
     @FXML
     private void videoPath(ActionEvent event) { // Para importar o vídeo
         String filePath = IOFiles.getVideoPath().toURI().toString();
@@ -116,10 +120,7 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     }
 
     @FXML
-    private void saveProject(ActionEvent event){ // Para salvar o projeto
-
-
-
+    private void saveProject(ActionEvent event) { // Para salvar o projeto
         Alert alert = new Alert(AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
 
@@ -149,8 +150,6 @@ public class SecondaryController implements Initializable, MediaControllerInterf
                 mediaController = new MediaController(mainController.getVideoPath(), this);
 
             }
-
-
         }
     }
 
@@ -187,30 +186,32 @@ public class SecondaryController implements Initializable, MediaControllerInterf
 
     @FXML
     private void saveFrame(ActionEvent event) {
-        Integer obj1 = Integer.parseInt(object1.getText());
-        Integer obj2 = Integer.parseInt(object2.getText());
+        Integer quadrant1 = Integer.parseInt(object1.getText());
+        Integer quadrant2 = Integer.parseInt(object2.getText());
         Integer time = mediaController.getCurrentTime();
 
-        try {
-            currentFrame = new FrameData(obj1, obj2, time);
-        } catch (Exception e) {
-            currentFrame = null;
-        }
+        // Id deve ser o número da linha da tabela
+        FrameData obj1 = mainController.getData(1);
+        FrameData obj2 = mainController.getData(2);
 
-        if (currentFrame != null) {
-            mainController.addData(currentFrame, time);
-        }
+        obj1.setQuadrant(time, quadrant1);
+        obj2.setQuadrant(time, quadrant2);
     }
 
     private void loadFrame(){
-        if (currentFrame == null) {
-            clearFrame();
-            return;
+        Integer time = mediaController.getCurrentTime();
+
+        // Id deve ser o número da linha da tabela
+        FrameData obj1 = mainController.getData(1);
+        FrameData obj2 = mainController.getData(2);
+
+        if (obj1.getQuadrant(time) != null) {
+            object1.setText(obj1.getQuadrant(time).toString());
         }
-
-        if (currentFrame.getObj1() != null) object1.setText(currentFrame.getObj1().toString());
-        if (currentFrame.getObj2() != null) object2.setText(currentFrame.getObj2().toString());
-
+        
+        if (obj2.getQuadrant(time) != null) {
+            object2.setText(obj2.getQuadrant(time).toString());
+        }
 
     }
 

@@ -38,11 +38,11 @@ public class MainController {
     }
 
     // Sets
-    public void setNomeProjeto(File nomeProjeto){
+    public void setNomeProjeto(File nomeProjeto) {
         if (nomeProjeto == null)return ;
         this.nomeProjeto = nomeProjeto.getName();
     }
-    public void setVideoPath(String videoPath){ this.videoPath = videoPath; }
+    public void setVideoPath(String videoPath) { this.videoPath = videoPath; }
     public void setTempo(Integer tempoDivisao){
         this.tempoDivisao = tempoDivisao;
     }
@@ -65,14 +65,15 @@ public class MainController {
     }
     public Integer getTempoDivisao() { return tempoDivisao; }
 
-    public void addData(FrameData data, Integer timeInSeconds){
-        this.dados.put(timeInSeconds, data);
+    public void addData(FrameData data) {
+        this.dados.put(data.getId(), data);
     }
 
-    public FrameData getData(Integer timeInSeconds){ return dados.get(timeInSeconds); }
+    public FrameData getData(Integer id) { return dados.get(id); }
 
+    public  Map<Integer, FrameData> getDados() {
+        return dados;
+    }
 
-    public String getVideoPath(){return videoPath;}
-
-
+    public String getVideoPath() { return videoPath; }
 }
