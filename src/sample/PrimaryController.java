@@ -33,12 +33,11 @@ public class PrimaryController implements Initializable {
 
         try {
             newProjectButton.setOnAction(evt -> {
-                String filePath = "";
-                File aux = null;
-                aux = IOFiles.getVideoPath();
+                String filePath;
+                File file = IOFiles.getVideoPath();
 
-                if (aux == null){ return; }
-                    filePath = aux.toURI().toString();
+                if( file == null){ return; }
+                    filePath = file.toURI().toString();
                     MainController.shared.setVideoPath(filePath);
                     openSecondaryScene();
             });
@@ -71,6 +70,7 @@ public class PrimaryController implements Initializable {
             Parent newParent = FXMLLoader.load(getClass().getResource("secondary.fxml"));
             Scene scene =  new Scene(newParent);
             root.setScene(scene);
+            root.centerOnScreen();
             root.show();
         }
         catch (IOException e) {
