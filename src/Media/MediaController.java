@@ -118,16 +118,17 @@ public class MediaController {
         }
 
         if (skipBackWard != null) {
-            this.mcInterface.getSkipBackWard().setOnAction( evt -> {
+           skipBackWard.setOnAction( evt -> {
                 skip(this.mcInterface.timeStep(),true);
-
             });
+            skipBackWard.setOnMouseClicked(evt -> updateValues());
         }
 
         if (skipForWard != null) {
             skipForWard.setOnAction( evt -> {
                 skip(this.mcInterface.timeStep(),false);
             });
+            skipForWard.setOnMouseClicked(evt -> updateValues());
         }
 
     }
