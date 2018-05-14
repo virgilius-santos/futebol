@@ -66,6 +66,11 @@ public class MediaController {
         });
     }
 
+    public void closeProject() {
+        mediaPlayer.stop();
+        mediaPlayer.dispose();
+    }
+
     private void configureSlider(Slider slider) {
         if (slider == null) return;
 
