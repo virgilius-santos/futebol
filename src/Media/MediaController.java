@@ -187,8 +187,9 @@ public class MediaController {
     public void skip(Integer step, Boolean backward){
         if (mediaPlayer == null || mcInterface.getSlider() == null) return;
         Integer newStep = (backward) ? -step : step;
-        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(newStep)));
-        mcInterface.getSlider().setValue(mcInterface.getSlider().getValue() + newStep);
+        Duration newDuration = Duration.seconds(newStep);
+        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(newDuration));
+        mcInterface.getSlider().setValue(newDuration.toSeconds()/duration.toSeconds()*100);
         mediaPlayer.pause();
     }
 
@@ -197,7 +198,5 @@ public class MediaController {
         String formatted = StringFuncions.formatTime(mediaPlayer.getCurrentTime(), duration);
         mcInterface.getLabel().setText(formatted);
     }
-
-
 
 }
