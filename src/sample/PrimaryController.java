@@ -1,13 +1,12 @@
 package sample;
 
-import Main.MainController;
+import futAges.Main;
+import Main.MainDataController;
 
-import IO.IOFiles;
-import Media.MediaController;
+import futAges.modal.IO.IOFiles;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -22,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class PrimaryController implements Initializable {
 
+    private MainDataController controller;
     @FXML
     private Button newProjectButton;
     @FXML
@@ -30,6 +30,7 @@ public class PrimaryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        controller = new MainDataController();
 
         try {
             newProjectButton.setOnAction(evt -> {
@@ -37,9 +38,9 @@ public class PrimaryController implements Initializable {
                 File file = IOFiles.getVideoPath();
 
                 if( file == null){ return; }
-                    filePath = file.toURI().toString();
-                    MainController.shared.setVideoPath(filePath);
-                    openSecondaryScene();
+                filePath = file.toURI().toString();
+                controller.setVideoPath(filePath);
+                openSecondaryScene();
             });
 
 
@@ -51,10 +52,10 @@ public class PrimaryController implements Initializable {
 
                     File file = IOFiles.getLoadFilePath();
 
-                    MainController mainController = IOFiles.load(file, MainController.class);
+                    MainDataController mainDataController = IOFiles.load(file, MainDataController.class);
 
-                    if (mainController != null) {
-                        MainController.setMainController(mainController);
+                    if (mainDataController != null) {
+                        controller = (mainDataController);
                         openSecondaryScene();
                     }
                 }

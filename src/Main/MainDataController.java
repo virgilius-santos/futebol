@@ -1,16 +1,14 @@
 package Main;
 //-------------------------------------------------------
 
-import Modal.FrameData;
+import futAges.modal.Entity.FrameData;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 //-------------------------------------------------------
 
-public class MainController {
+public class MainDataController {
 
     private Integer stepDefault;
 
@@ -20,9 +18,7 @@ public class MainController {
     private Integer linhas, colunas; // Variáveis que formam os quadrantes.
     private Map<Integer, FrameData> dados;
 
-    public static MainController shared = new MainController(); //singleton
-
-    private MainController() {
+    public MainDataController() {
         this.stepDefault = 2;
         this.nomeProjeto = "default";
         this.videoPath = null;
@@ -30,11 +26,6 @@ public class MainController {
         this.linhas = 4;
         this.colunas = 8;
         this.dados = new HashMap();
-    }
-
-    public static void setMainController(MainController mainController){
-        if (mainController == null) return;
-        shared = mainController;
     }
 
     // Sets

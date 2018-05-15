@@ -1,7 +1,7 @@
 package Media;
 
 
-import Util.StringFuncions;
+import futAges.modal.Util.StringFuncions;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -194,7 +194,9 @@ public class MediaController {
 
     private void updateTimeStamp(){
         if (mediaPlayer == null || mcInterface.getLabel() == null) return;
-        String formatted = StringFuncions.formatTime(mediaPlayer.getCurrentTime(), duration);
+        String elapsed = StringFuncions.formatTime(mediaPlayer.getCurrentTime());
+        String total = StringFuncions.formatTime(duration);
+        String formatted = String.format("%s/$s",elapsed,total);
         mcInterface.getLabel().setText(formatted);
     }
 
