@@ -1,12 +1,11 @@
-package IO;
+package futAges.modal.IO;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import javafx.stage.FileChooser;
-import sample.Main;
+import futAges.Main;
 
 import java.io.*;
-import java.lang.reflect.Type;
 
 public class IOFiles {
 
