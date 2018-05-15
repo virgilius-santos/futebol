@@ -158,7 +158,7 @@ public class FXMLPlayerViewController implements Initializable {
         if (mediaPlayer == null) return;
         String elapsed = StringFuncions.formatTime(mediaPlayer.getCurrentTime());
         String total = StringFuncions.formatTime(duration);
-        String formatted = String.format("%s/$s",elapsed,total);
+        String formatted = String.format("%s/%s",elapsed,total);
         labelTime.setText(formatted);
     }
 

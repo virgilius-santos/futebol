@@ -33,6 +33,7 @@ public class Screen {
         try {
             parent = loader.load();
         } catch (IOException e) {
+            e.printStackTrace();
             parent = null;
         }
     }

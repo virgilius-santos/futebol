@@ -270,7 +270,7 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     @Override
     public Integer timeStep() {
         Integer value = ValidEntry(step.getText());
-        dataController.setTempo(value);
+        dataController.setTempoDivisao(value);
         return dataController.getTempoDivisao();
     }
 

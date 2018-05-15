@@ -43,11 +43,7 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
         playerViewController.setStepListener((observable, oldValue, newValue) -> {
             int value = StringFuncions.stringToInt(newValue);
-            controller.setTempo(value);
-        });
-
-        playerViewController.setMediaPlayerListener((observable, oldValue, newValue) -> {
-            // TODO
+            controller.setTempoDivisao(value);
         });
 
         initialize(playerView, anchorMediaPlayer);
@@ -67,6 +63,9 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
     @Override
     public void setDataController(DataController dataController) {
         controller = dataController;
+
+        tableController.setData(controller.getDados());
+
         configureMediaPlayerStep();
         configureMediaPlayer();
     }
@@ -82,5 +81,8 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
     private void configureMediaPlayer() {
         playerViewController.setMediaPlayer(controller.getVideoPath());
+        playerViewController.setMediaPlayerListener((observable, oldValue, newValue) -> {
+            tableController.updateCurrentTime((int) newValue.toSeconds());
+        });
     }
 }

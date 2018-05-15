@@ -8,6 +8,10 @@ public class FrameData {
     private String name;
     private Map<Integer, Integer> quadrants;
 
+    public FrameData(Integer id) {
+        this(id,"");
+    }
+
     public FrameData(Integer id, String name) {
 
         this.id = id;

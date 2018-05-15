@@ -34,7 +34,7 @@ public class DataController {
         this.nomeProjeto = nomeProjeto.getName();
     }
     public void setVideoPath(String videoPath) { this.videoPath = videoPath; }
-    public void setTempo(Integer tempoDivisao){
+    public void setTempoDivisao(Integer tempoDivisao){
         this.tempoDivisao = tempoDivisao;
     }
     public void setLinhas(Integer linhas){
