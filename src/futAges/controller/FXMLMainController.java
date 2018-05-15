@@ -1,8 +1,9 @@
 package futAges.controller;
 
+import futAges.controller.screenFrameWork.ControlledScreen;
+import futAges.controller.screenFrameWork.Screen;
 import futAges.modal.IO.IOFiles;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -16,12 +17,15 @@ import java.util.ResourceBundle;
 
 public class FXMLMainController implements Initializable {
 
+    private Screen selectedScreen;
+    private Screen mainPlayerScreen;
+
     @FXML
     private AnchorPane anchorPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        mainPlayerScreen = new Screen(Screen.ScreenPath.MainPlayer);
     }
 
     public void handleMenuItemFileLoad() throws IOException {
@@ -34,20 +38,15 @@ public class FXMLMainController implements Initializable {
         DataController dataController = IOFiles.load(file, DataController.class);
         if (dataController == null) return;
 
-        FXMLLoader loader = new FXMLLoader();
-        String path = "/futAges/view/MainPlayer.fxml";
-        loader.setLocation(FXMLMainPlayerController.class.getResource(path));
-        AnchorPane a = loader.load();
+        if (selectedScreen != null) {
+            ((AnchorPane) selectedScreen.getParent().getParent()).getChildren().remove(selectedScreen.getParent());
+            ((ControlledScreen)selectedScreen.getLoader().getController()).screenDidDisappear();
+        }
 
-        FXMLMainPlayerController mainPlayerController = loader.getController();
-        mainPlayerController.setController(dataController);
-
-        anchorPane.getChildren().add(a);
-        AnchorPane.setTopAnchor(a,0.0);
-        AnchorPane.setBottomAnchor(a,0.0);
-        AnchorPane.setLeftAnchor(a,0.0);
-        AnchorPane.setRightAnchor(a,0.0);
-
+        selectedScreen = mainPlayerScreen;
+        anchorPane.getChildren().addAll(mainPlayerScreen.getParent());
+        ControlledScreen mainPlayerController = mainPlayerScreen.getLoader().getController();
+        mainPlayerController.setDataController(dataController);
     }
 
 
