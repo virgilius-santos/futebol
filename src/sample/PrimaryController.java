@@ -1,7 +1,7 @@
 package sample;
 
 import futAges.Main;
-import Main.MainDataController;
+import futAges.controller.DataController;
 
 import futAges.modal.IO.IOFiles;
 import javafx.fxml.FXML;
@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 
 public class PrimaryController implements Initializable {
 
-    private MainDataController controller;
+    private DataController controller;
     @FXML
     private Button newProjectButton;
     @FXML
@@ -30,7 +30,7 @@ public class PrimaryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        controller = new MainDataController();
+        controller = new DataController();
 
         try {
             newProjectButton.setOnAction(evt -> {
@@ -52,10 +52,10 @@ public class PrimaryController implements Initializable {
 
                     File file = IOFiles.getLoadFilePath();
 
-                    MainDataController mainDataController = IOFiles.load(file, MainDataController.class);
+                    DataController dataController = IOFiles.load(file, DataController.class);
 
-                    if (mainDataController != null) {
-                        controller = (mainDataController);
+                    if (dataController != null) {
+                        controller = (dataController);
                         openSecondaryScene();
                     }
                 }

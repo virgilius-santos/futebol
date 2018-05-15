@@ -1,6 +1,5 @@
 package futAges.controller;
 
-import Main.MainDataController;
 import javafx.fxml.Initializable;
 
 import java.net.URL;

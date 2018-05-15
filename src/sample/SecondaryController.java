@@ -1,7 +1,8 @@
 package sample;
 
 import futAges.Main;
-import Main.MainDataController;
+import futAges.controller.DataController;
+
 import Media.MediaController;
 import futAges.modal.IO.IOFiles;
 
@@ -29,7 +30,7 @@ import java.util.ResourceBundle;
 public class SecondaryController implements Initializable, MediaControllerInterface {
 
     private MediaController mediaController;
-    private MainDataController mainDataController = new MainDataController();
+    private DataController dataController = new DataController();
 
     @FXML
     private MediaView mediaView;
@@ -59,22 +60,22 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     public void initialize(URL location, ResourceBundle resources) {
 
         // Setup data - Inicializar um FrameData para cada linha da tabela
-        if (mainDataController.getDados().isEmpty()) {
+        if (dataController.getDados().isEmpty()) {
             FrameData obj1 = new FrameData(1, "Obj1");
             FrameData obj2 = new FrameData(2, "Obj2");
-            mainDataController.addData(obj1);
-            mainDataController.addData(obj2);
+            dataController.addData(obj1);
+            dataController.addData(obj2);
         }
 
-        String video = mainDataController.getVideoPath();
+        String video = dataController.getVideoPath();
         if (video != null) {
             mediaController = new MediaController(video,this);
         }
 
-        linha.setText(mainDataController.getLinhas().toString());
-        coluna.setText(mainDataController.getColunas().toString());
+        linha.setText(dataController.getLinhas().toString());
+        coluna.setText(dataController.getColunas().toString());
 
-        step.setText(mainDataController.getTempoDivisao().toString());
+        step.setText(dataController.getTempoDivisao().toString());
         loadFrame();
 
         step.setOnKeyPressed( event -> {
@@ -90,7 +91,7 @@ public class SecondaryController implements Initializable, MediaControllerInterf
             } else {
                 Integer value = ValidEntry(linha.getText());
 
-                mainDataController.setLinhas(value);
+                dataController.setLinhas(value);
             }
         });
 
@@ -102,7 +103,7 @@ public class SecondaryController implements Initializable, MediaControllerInterf
             }else{
                 Integer value = ValidEntry(coluna.getText());
 
-                mainDataController.setColunas(value);
+                dataController.setColunas(value);
             }
 
         });
@@ -116,7 +117,7 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     @FXML
     private void videoPath(ActionEvent event) { // Para importar o vídeo
         String filePath = IOFiles.getVideoPath().toURI().toString();
-        mainDataController.setVideoPath(filePath);
+        dataController.setVideoPath(filePath);
         mediaController = new MediaController(filePath, this);
     }
 
@@ -130,8 +131,8 @@ public class SecondaryController implements Initializable, MediaControllerInterf
             // Caminho para salvar o projeto
 
             File file = IOFiles.getSaveFilePath();
-            mainDataController.setNomeProjeto(file);
-            IOFiles.save(file, mainDataController);
+            dataController.setNomeProjeto(file);
+            IOFiles.save(file, dataController);
         }
     }
 
@@ -145,10 +146,10 @@ public class SecondaryController implements Initializable, MediaControllerInterf
 
             File file = IOFiles.getLoadFilePath();
 
-            MainDataController mainDataController = IOFiles.load(file, MainDataController.class);
-            if (mainDataController != null) {
-                this.mainDataController = mainDataController;
-                mediaController = new MediaController(mainDataController.getVideoPath(), this);
+            DataController dataController = IOFiles.load(file, DataController.class);
+            if (dataController != null) {
+                this.dataController = dataController;
+                mediaController = new MediaController(dataController.getVideoPath(), this);
 
             }
         }
@@ -192,8 +193,8 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         Integer time = mediaController.getCurrentTime();
 
         // Id deve ser o número da linha da tabela
-        FrameData obj1 = mainDataController.getData(1);
-        FrameData obj2 = mainDataController.getData(2);
+        FrameData obj1 = dataController.getData(1);
+        FrameData obj2 = dataController.getData(2);
 
         obj1.setQuadrant(time, quadrant1);
         obj2.setQuadrant(time, quadrant2);
@@ -203,8 +204,8 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         Integer time = mediaController.getCurrentTime();
 
         // Id deve ser o número da linha da tabela
-        FrameData obj1 = mainDataController.getData(1);
-        FrameData obj2 = mainDataController.getData(2);
+        FrameData obj1 = dataController.getData(1);
+        FrameData obj2 = dataController.getData(2);
 
         if (obj1.getQuadrant(time) != null) {
             object1.setText(obj1.getQuadrant(time).toString());
@@ -269,8 +270,8 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     @Override
     public Integer timeStep() {
         Integer value = ValidEntry(step.getText());
-        mainDataController.setTempo(value);
-        return mainDataController.getTempoDivisao();
+        dataController.setTempo(value);
+        return dataController.getTempoDivisao();
     }
 
 

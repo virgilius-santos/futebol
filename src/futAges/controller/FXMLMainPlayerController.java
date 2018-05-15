@@ -1,6 +1,6 @@
 package futAges.controller;
 
-import Main.MainDataController;
+import Main.DataController;
 import futAges.modal.Util.StringFuncions;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 public class FXMLMainPlayerController implements Initializable {
 
-    private MainDataController controller;
+    private DataController controller;
 
     @FXML
     private AnchorPane anchorTable;
@@ -68,7 +68,7 @@ public class FXMLMainPlayerController implements Initializable {
 
     }
 
-    public void setController(MainDataController controller) {
+    public void setController(DataController controller) {
         this.controller = controller;
         configureMediaPlayerStep();
         configureMediaPlayer();

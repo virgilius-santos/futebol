@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 //-------------------------------------------------------
 
-public class MainDataController {
+public class DataController {
 
     private Integer stepDefault;
 
@@ -18,7 +18,7 @@ public class MainDataController {
     private Integer linhas, colunas; // Variáveis que formam os quadrantes.
     private Map<Integer, FrameData> dados;
 
-    public MainDataController() {
+    public DataController() {
         this.stepDefault = 2;
         this.nomeProjeto = "default";
         this.videoPath = null;

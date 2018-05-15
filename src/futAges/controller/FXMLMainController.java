@@ -1,6 +1,6 @@
 package futAges.controller;
 
-import Main.MainDataController;
+import Main.DataController;
 import futAges.modal.IO.IOFiles;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,8 +32,8 @@ public class FXMLMainController implements Initializable {
 
         File file = IOFiles.getLoadFilePath();
 
-        MainDataController mainDataController = IOFiles.load(file, MainDataController.class);
-        if (mainDataController == null) return;
+        DataController dataController = IOFiles.load(file, DataController.class);
+        if (dataController == null) return;
 
         FXMLLoader loader = new FXMLLoader();
         String path = "/futAges/view/MainPlayer.fxml";
@@ -41,7 +41,7 @@ public class FXMLMainController implements Initializable {
         AnchorPane a = loader.load();
 
         FXMLMainPlayerController mainPlayerController = loader.getController();
-        mainPlayerController.setController(mainDataController);
+        mainPlayerController.setController(dataController);
 
         anchorPane.getChildren().add(a);
         AnchorPane.setTopAnchor(a,0.0);
