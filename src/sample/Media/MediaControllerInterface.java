@@ -1,4 +1,4 @@
-package Media;
+package sample.Media;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

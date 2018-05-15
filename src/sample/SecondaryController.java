@@ -3,10 +3,10 @@ package sample;
 import futAges.Main;
 import futAges.controller.DataController;
 
-import Media.MediaController;
+import sample.Media.MediaController;
 import futAges.modal.IO.IOFiles;
 
-import Media.MediaControllerInterface;
+import sample.Media.MediaControllerInterface;
 import futAges.modal.Entity.FrameData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

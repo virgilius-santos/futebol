@@ -19,7 +19,7 @@ public class FXMLMainPlayerController implements Initializable {
     @FXML
     private AnchorPane anchorMediaPlayer;
 
-    private FXMLTableController tableController;
+    private FXMLTableViewController tableController;
     private FXMLPlayerViewController playerViewController;
 
     @Override
@@ -38,7 +38,7 @@ public class FXMLMainPlayerController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader();
         String path = "/futAges/view/TableView.fxml";
-        loader.setLocation(FXMLTableController.class.getResource(path));
+        loader.setLocation(FXMLTableViewController.class.getResource(path));
         AnchorPane a = loader.load();
 
         tableController = loader.getController();
