@@ -11,9 +11,11 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.media.MediaView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SecondaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SecondaryController">
     <children>
         <MenuBar layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -38,17 +40,21 @@
         <Button fx:id="btnSkipForward" layoutX="921.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="&gt;&gt;" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="526.0" />
         <Button fx:id="btnPlayPause" layoutX="821.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="72.0" text="Play" AnchorPane.rightAnchor="387.0" AnchorPane.topAnchor="526.0" />
         <Button fx:id="btnSkipBackward" layoutX="751.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="&lt;&lt;" />
-        <TextField fx:id="object1" layoutX="168.0" layoutY="50.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
-        <TextField fx:id="object2" layoutX="168.0" layoutY="108.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
         <TextField fx:id="step" layoutX="611.0" layoutY="526.0" onKeyTyped="#textFielKeyTyped" prefHeight="40.0" prefWidth="100.0" />
-        <Label layoutX="24.0" layoutY="50.0" prefHeight="40.0" prefWidth="123.0" text="Object 1 - Position" />
-        <Label layoutX="24.0" layoutY="108.0" prefHeight="40.0" prefWidth="123.0" text="Object 2 - Position" />
         <TextArea fx:id="obs" layoutX="26.0" layoutY="167.0" prefHeight="336.0" prefWidth="363.0" visible="false" />
         <TextField fx:id="linha" layoutX="136.0" layoutY="568.0" prefHeight="30.0" prefWidth="50.0" />
         <TextField fx:id="coluna" layoutX="138.0" layoutY="623.0" prefHeight="30.0" prefWidth="50.0" />
         <Label layoutX="68.0" layoutY="575.0" text="Line" />
         <Label layoutX="63.0" layoutY="629.0" text="Column" />
-        <Button layoutX="168.0" layoutY="513.0" mnemonicParsing="false" onAction="#saveFrame" text="Save Frame" />
+        <Button layoutX="127.0" layoutY="513.0" mnemonicParsing="false" onAction="#addObject" text="Adicionar objeto" />
         <Label fx:id="timeStamp" layoutX="983.0" layoutY="525.0" prefHeight="30.0" prefWidth="169.0" />
+      <GridPane fx:id="gridPane" layoutX="68.0" layoutY="102.0" prefHeight="278.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+      </GridPane>
+      <Label layoutX="99.0" layoutY="74.0" text="Nome" />
+      <Label layoutX="181.0" layoutY="74.0" text="Quadrante" />
     </children>
 </AnchorPane>

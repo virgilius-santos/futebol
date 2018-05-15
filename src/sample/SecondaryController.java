@@ -10,11 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
@@ -35,9 +37,7 @@ public class SecondaryController implements Initializable, MediaControllerInterf
     @FXML
     private Slider seekSlider;
     @FXML
-    private TextField object1;
-    @FXML
-    private TextField object2;
+    private GridPane gridPane;
     @FXML
     private TextField step;
     @FXML
@@ -56,25 +56,18 @@ public class SecondaryController implements Initializable, MediaControllerInterf
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        // Setup data - Inicializar um FrameData para cada linha da tabela
-        if (mainController.getDados().isEmpty()) {
-            FrameData obj1 = new FrameData(1, "Obj1");
-            FrameData obj2 = new FrameData(2, "Obj2");
-            mainController.addData(obj1);
-            mainController.addData(obj2);
-        }
-
         String video = mainController.getVideoPath();
         if (video != null) {
             mediaController = new MediaController(video,this);
         }
 
+        mainController.getDados().values().forEach(x -> addGridPaneNewRow());
+        loadFrame();
+
         linha.setText(mainController.getLinhas().toString());
         coluna.setText(mainController.getColunas().toString());
 
         step.setText(mainController.getTempoDivisao().toString());
-        loadFrame();
 
         step.setOnKeyPressed( event -> {
             if (event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
@@ -184,40 +177,91 @@ public class SecondaryController implements Initializable, MediaControllerInterf
         }
     }
 
+    private int getRowCount(GridPane pane) {
+        int numRows = pane.getRowConstraints().size();
+        for (int i = 0; i < pane.getChildren().size(); i++) {
+            Node child = pane.getChildren().get(i);
+            if (child.isManaged()) {
+                Integer rowIndex = GridPane.getRowIndex(child);
+                if(rowIndex != null){
+                    numRows = Math.max(numRows,rowIndex+1);
+                }
+            }
+        }
+        return numRows;
+    }
+
+    private void addNewObject(int id) {
+        FrameData obj1 = new FrameData(id, "");
+        mainController.addData(obj1);
+    }
+
+    private int addGridPaneNewRow() {
+        int numberOfRows = getRowCount(gridPane);
+        if (numberOfRows >= 12) { return -1; }
+        TextField name = new TextField();
+        TextField quadrant = new TextField();
+        name.textProperty().addListener((observable, oldValue, newValue) -> {
+            mainController.getData(numberOfRows).setName(newValue);
+        });
+        quadrant.textProperty().addListener((observable, oldValue, newValue) -> {
+            Integer time = mediaController.getCurrentTime();
+            if (!newValue.isEmpty()) {
+                Integer q = Integer.parseInt(newValue);
+                mainController.getData(numberOfRows).setQuadrant(time, q);
+            }
+        });
+        gridPane.add(name, 0, numberOfRows);
+        gridPane.add(quadrant, 1, numberOfRows);
+        return numberOfRows;
+    }
+
     @FXML
-    private void saveFrame(ActionEvent event) {
-        Integer quadrant1 = Integer.parseInt(object1.getText());
-        Integer quadrant2 = Integer.parseInt(object2.getText());
-        Integer time = mediaController.getCurrentTime();
-
-        // Id deve ser o número da linha da tabela
-        FrameData obj1 = mainController.getData(1);
-        FrameData obj2 = mainController.getData(2);
-
-        obj1.setQuadrant(time, quadrant1);
-        obj2.setQuadrant(time, quadrant2);
+    private void addObject(ActionEvent event) {
+        int id = addGridPaneNewRow();
+        if (id == -1 ) return;
+        addNewObject(id);
     }
 
     private void loadFrame(){
         Integer time = mediaController.getCurrentTime();
 
-        // Id deve ser o número da linha da tabela
-        FrameData obj1 = mainController.getData(1);
-        FrameData obj2 = mainController.getData(2);
-
-        if (obj1.getQuadrant(time) != null) {
-            object1.setText(obj1.getQuadrant(time).toString());
+        int id = 0;
+        int numRows = gridPane.getRowConstraints().size();
+        for (int i = 0; i < gridPane.getChildren().size(); i++) {
+            FrameData obj = mainController.getData(id);
+            Node child = gridPane.getChildren().get(i);
+            if (child.isManaged()) {
+                Integer rowIndex = GridPane.getRowIndex(child);
+                if(rowIndex != null) {
+                    if (numRows == rowIndex + 1) {
+                        if (obj.getQuadrant(time) != null) {
+                            ((TextField) child).setText(obj.getQuadrant(time).toString());
+                        }
+                        id++;
+                    } else {
+                        ((TextField)child).setText(obj.getName());
+                    }
+                    numRows = Math.max(numRows,rowIndex + 1);
+                }
+            }
         }
-        
-        if (obj2.getQuadrant(time) != null) {
-            object2.setText(obj2.getQuadrant(time).toString());
-        }
-
     }
 
     private void clearFrame() {
-        object1.clear();
-        object2.clear();
+        int numRows = gridPane.getRowConstraints().size();
+        for (int i = 0; i < gridPane.getChildren().size(); i++) {
+            Node child = gridPane.getChildren().get(i);
+            if (child.isManaged()) {
+                Integer rowIndex = GridPane.getRowIndex(child);
+                if(rowIndex != null) {
+                    if (numRows == rowIndex + 1) {
+                        ((TextField)child).clear();
+                    }
+                    numRows = Math.max(numRows,rowIndex + 1);
+                }
+            }
+        }
     }
 
     private Integer ValidEntry(String value) {
