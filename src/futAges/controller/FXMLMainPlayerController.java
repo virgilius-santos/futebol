@@ -1,6 +1,5 @@
 package futAges.controller;
 
-import Main.DataController;
 import futAges.modal.Util.StringFuncions;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
