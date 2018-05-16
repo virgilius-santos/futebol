@@ -18,16 +18,16 @@ public class StringFuncions {
 
     }
 
-    public static Integer stringToInt(String value) {
+    public static int stringToInt(String value) {
 
-        if (value == null || value.isEmpty()) return null;
+        if (value == null || value.isEmpty()) return 0;
 
         Integer aux;
 
         try {
             aux = Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            return null;
+            return 0;
         }
 
         return aux;

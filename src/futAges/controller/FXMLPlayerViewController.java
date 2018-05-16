@@ -3,7 +3,6 @@ package futAges.controller;
 import futAges.model.Util.StringFuncions;
 import futAges.model.Util.Validation;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,6 +20,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FXMLPlayerViewController implements Initializable {
+
+    public interface PlayerDataSource {
+        void didStepUpdated(String step);
+        String getCurrentStep();
+        void didUpdateDuration(Duration oldValue, Duration newValue);
+        String getFilePath();
+    }
+
+    private PlayerDataSource dataSource;
 
     private MediaPlayer mediaPlayer;
     private Duration duration;
@@ -52,6 +60,8 @@ public class FXMLPlayerViewController implements Initializable {
                 updateValues();
             }
         });
+
+        step.textProperty().addListener( (obs, o, n) -> didStepUpdated(n));
 
     }
 
@@ -173,20 +183,14 @@ public class FXMLPlayerViewController implements Initializable {
         mediaPlayer.pause();
     }
 
-//    void setStepListener(ChangeListener<String> listener){
-//        step.textProperty().addListener(listener);
-//    }
+    void setMediaPlayerDataSource(PlayerDataSource dataSource){
+        if (dataSource == null || dataSource.getFilePath() == null) return;
+        this.dataSource = dataSource;
 
-    void setStep(Integer step) {
-        this.step.setText(String.valueOf(step));
-    }
-
-    void setMediaPlayer(String filePath){
-        if (filePath == null) return;
-
-        Media media = new Media(filePath);
+        Media media = new Media(dataSource.getFilePath());
         mediaPlayer = new MediaPlayer(media);
 
+        step.setText(dataSource.getCurrentStep());
         mediaPlayer.setOnPlaying(() -> {
             if (stopRequested) {
                 mediaPlayer.pause();
@@ -209,19 +213,27 @@ public class FXMLPlayerViewController implements Initializable {
             }
         });
 
-        mediaView.setMediaPlayer(mediaPlayer);
-    }
-
-    void setMediaPlayerListener(ChangeListener<Duration> listener){
         mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
             updateValues();
-            listener.changed(observable, oldValue, newValue);
+            didUpdateDuration(oldValue, newValue);
         });
+
+        mediaView.setMediaPlayer(mediaPlayer);
     }
 
     void closePlayer() {
         if (mediaPlayer == null) return;
         if (mediaPlayer.getStatus() != MediaPlayer.Status.STOPPED) mediaPlayer.stop();
         mediaPlayer.dispose();
+    }
+
+    private void didStepUpdated(String step) {
+        if (dataSource == null) return;
+        dataSource.didStepUpdated(step);
+    }
+
+    private void didUpdateDuration(Duration oldValue, Duration newValue){
+        if (dataSource == null) return;
+        dataSource.didUpdateDuration(oldValue, newValue);
     }
 }

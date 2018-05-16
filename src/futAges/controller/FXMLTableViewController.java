@@ -153,6 +153,8 @@ public class FXMLTableViewController implements Initializable {
     @FXML
     private void addObject() {
         int index = dataSource.createData();
+        if (index == -1) return;
+
         addGridPaneNewRow(index);
         loadFrame(index);
     }

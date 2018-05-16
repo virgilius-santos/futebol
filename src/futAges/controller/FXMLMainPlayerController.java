@@ -2,18 +2,17 @@ package futAges.controller;
 
 import futAges.controller.screenFrameWork.ControlledScreen;
 import futAges.model.Entity.FrameData;
+import futAges.model.Util.StringFuncions;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class FXMLMainPlayerController implements Initializable, ControlledScreen {
 
     private DataController dataController;
-    private List<FrameData> values;
 
     @FXML
     private FXMLTableViewController innerTableViewController;
@@ -27,13 +26,8 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
     @Override
     public void setDataController(DataController dataController) {
-
         this.dataController = dataController;
-        updateValues();
-
         configureTableView();
-
-        configureMediaPlayerStep();
         configureMediaPlayer();
     }
 
@@ -47,20 +41,17 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
         innerTableViewController.setDataSource(new FXMLTableViewController.DataSource() {
             @Override
             public int numberOfItens() {
-                return values.size();
+                return dataController.getDataSize();
             }
 
             @Override
             public FrameData getData(Integer index) {
-                return values.get(index);
+                return dataController.getData(index);
             }
 
             @Override
             public int createData() {
-                int index = values.size();
-                dataController.addData(new FrameData());
-                updateValues();
-                return index;
+                return dataController.addData(new FrameData());
             }
         });
 
@@ -80,23 +71,30 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
         innerTableViewController.reloadFrames();
     }
 
-    private void configureMediaPlayerStep() {
-        innerPlayerViewController.setStep(dataController.getTempoDivisao());
-    }
-
     private void configureMediaPlayer() {
-        innerPlayerViewController.setMediaPlayer(dataController.getVideoPath());
-        innerPlayerViewController.setMediaPlayerListener((observable, oldValue, newValue) ->
-                innerTableViewController.updateCurrentTime( ((Double) newValue.toSeconds()).intValue() )
-        );
+        innerPlayerViewController.setMediaPlayerDataSource(new FXMLPlayerViewController.PlayerDataSource() {
+            @Override
+            public void didStepUpdated(String step) {
+                Integer tempo = StringFuncions.stringToInt(step);
+                dataController.setTempoDivisao(tempo);
+            }
+
+            @Override
+            public String getCurrentStep() {
+                Integer tempo = dataController.getTempoDivisao();
+                return (tempo == null || tempo.equals(0)) ? "" : tempo.toString();
+            }
+
+            @Override
+            public void didUpdateDuration(Duration oldValue, Duration newValue) {
+                innerTableViewController.updateCurrentTime( ((Double) newValue.toSeconds()).intValue() );
+            }
+
+            @Override
+            public String getFilePath() {
+                return dataController.getVideoPath();
+            }
+        });
     }
 
-    private void updateValues(){
-        values = dataController.getDados()
-                .values()
-                .stream().sorted(
-                        (e1, e2) -> (e1.getId() > e2.getId()) ? 1 : ((e1.getId() < e2.getId()) ? -1 : 0)
-                )
-                .collect(Collectors.toList());
-    }
 }
