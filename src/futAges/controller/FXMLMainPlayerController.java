@@ -5,6 +5,8 @@ import futAges.model.Entity.FrameData;
 import futAges.model.Util.StringFuncions;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -14,6 +16,8 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
     private DataController dataController;
 
+    @FXML
+    private AnchorPane innerPlayerView;
     @FXML
     private FXMLTableViewController innerTableViewController;
     @FXML
@@ -29,6 +33,12 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
         this.dataController = dataController;
         configureTableView();
         configureMediaPlayer();
+        innerPlayerView.getScene().setOnKeyPressed( e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                int index = dataController.addData(new FrameData());
+                if (index != -1) innerTableViewController.insert(index);
+            }
+        });
     }
 
     @Override
@@ -49,10 +59,6 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
                 return dataController.getData(index);
             }
 
-            @Override
-            public int createData() {
-                return dataController.addData(new FrameData());
-            }
         });
 
         innerTableViewController.setDataListener(new FXMLTableViewController.DataListener() {

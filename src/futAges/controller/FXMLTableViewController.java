@@ -21,7 +21,6 @@ public class FXMLTableViewController implements Initializable {
     public interface DataSource {
         int numberOfItens();
         FrameData getData(Integer index);
-        int createData();
     }
 
     class Location {
@@ -61,9 +60,14 @@ public class FXMLTableViewController implements Initializable {
     }
 
 
-
     void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    void updateCurrentTime(Integer newTime) {
+        if (currentTime != null && currentTime.equals(newTime)) return;
+        currentTime = newTime;
+        reloadFrames();
     }
 
     private int numberOfItens() {
@@ -78,20 +82,32 @@ public class FXMLTableViewController implements Initializable {
 
     void reloadFrames() {
         for (int index = 0; index < numberOfItens(); index++) {
-            addGridPaneNewRow(index);
             loadFrame(index);
         }
     }
 
-    private void addGridPaneNewRow(int index) {
+    void insert(int index) {
+        loadFrame(index);
+    }
+
+    private void loadFrame(int index) {
+        Location location =  getLocation(index);
+        loadFrame(index, location);
+    }
+
+    private Location getLocation(int index) {
+
+        Location newLocation = textFieldHashMap.get(index);
+        if (newLocation != null) return newLocation;
 
         int columnNameIndex = 0;
         int columnQuadranteIndex = 1;
-
-        textFieldHashMap.put(index, new Location());
+        newLocation = new Location();
+        textFieldHashMap.put(index, newLocation);
 
         addNewTextFieldName(columnNameIndex, index);
         addNewTextQuadrant(columnQuadranteIndex, index);
+        return newLocation;
     }
 
     private void addNewTextFieldName(int column, int index) {
@@ -110,12 +126,6 @@ public class FXMLTableViewController implements Initializable {
 
         textFieldHashMap.get(index).quadrante = quadrantTextField;
         gridPane.add(quadrantTextField, column, index);
-    }
-
-
-    private void loadFrame(int id) {
-        Location location = textFieldHashMap.get(id);
-        loadFrame(id, location);
     }
 
     private void loadFrame(int id, Location location) {
@@ -142,22 +152,5 @@ public class FXMLTableViewController implements Initializable {
         }
 
     }
-
-
-    void updateCurrentTime(Integer newTime) {
-        if (currentTime != null && currentTime.equals(newTime)) return;
-        currentTime = newTime;
-        reloadFrames();
-    }
-
-    @FXML
-    private void addObject() {
-        int index = dataSource.createData();
-        if (index == -1) return;
-
-        addGridPaneNewRow(index);
-        loadFrame(index);
-    }
-
 
 }
