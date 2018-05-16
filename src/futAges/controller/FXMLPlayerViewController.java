@@ -36,6 +36,7 @@ public class FXMLPlayerViewController implements Initializable {
     private boolean stopRequested = false;
     private boolean atEndOfMedia = false;
     private boolean playing = false;
+    private boolean isViewDisable = true;
 
     @FXML
     private MediaView mediaView;
@@ -44,6 +45,10 @@ public class FXMLPlayerViewController implements Initializable {
     @FXML
     private TextField step;
     @FXML
+    private Button btnSkipBackward;
+    @FXML
+    private Button btnSkipForward;
+    @FXML
     private Button btnPlayPause;
     @FXML
     private Label labelTime;
@@ -51,7 +56,6 @@ public class FXMLPlayerViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        seekSlider.setDisable(true);
         seekSlider.valueProperty().addListener(ov -> {
             if (seekSlider.isValueChanging()) {
                 // multiply duration by percentage calculated by slider position
@@ -219,12 +223,14 @@ public class FXMLPlayerViewController implements Initializable {
         });
 
         mediaView.setMediaPlayer(mediaPlayer);
+        disableView(false);
     }
 
     void closePlayer() {
         if (mediaPlayer == null) return;
         if (mediaPlayer.getStatus() != MediaPlayer.Status.STOPPED) mediaPlayer.stop();
         mediaPlayer.dispose();
+        disableView(true);
     }
 
     private void didStepUpdated(String step) {
@@ -235,5 +241,17 @@ public class FXMLPlayerViewController implements Initializable {
     private void didUpdateDuration(Duration oldValue, Duration newValue){
         if (dataSource == null) return;
         dataSource.didUpdateDuration(oldValue, newValue);
+    }
+
+    private void disableView(boolean state){
+        seekSlider.setDisable(state);
+        labelTime.setDisable(state);
+        btnPlayPause.setDisable(state);
+        btnSkipBackward.setDisable(state);
+        btnSkipForward.setDisable(state);
+    }
+
+    public boolean isViewDisable() {
+        return isViewDisable;
     }
 }
