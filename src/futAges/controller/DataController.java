@@ -12,7 +12,7 @@ public class DataController {
 
     private Integer stepDefault;
 
-    private String nomeProjeto;
+    private String projetoPath;
     private String videoPath;
     private Integer tempoDivisao;
     private Integer linhas, colunas; // Variáveis que formam os quadrantes.
@@ -20,7 +20,7 @@ public class DataController {
 
     public DataController() {
         this.stepDefault = 2;
-        this.nomeProjeto = "default";
+        this.projetoPath = null;
         this.videoPath = null;
         this.tempoDivisao = this.stepDefault;
         this.linhas = 4;
@@ -29,9 +29,9 @@ public class DataController {
     }
 
     // Sets
-    public void setNomeProjeto(File nomeProjeto) {
-        if (nomeProjeto == null)return ;
-        this.nomeProjeto = nomeProjeto.getName();
+    public void setProjetoPath(File file) {
+        if (file == null) return;
+        this.projetoPath = file.getPath();
     }
     public void setVideoPath(String videoPath) { this.videoPath = videoPath; }
     public void setTempoDivisao(Integer tempoDivisao){
@@ -45,8 +45,8 @@ public class DataController {
     }
 
     // Gets
-    public String getNomeProjeto(){
-        return nomeProjeto;
+    public String getProjetoPath(){
+        return projetoPath;
     }
     public Integer getLinhas(){
         return  linhas;

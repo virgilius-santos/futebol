@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 public class FXMLMainController implements Initializable {
 
+    private DataController dataController;
     private Screen selectedScreen;
     private Screen mainPlayerScreen;
 
@@ -28,20 +29,60 @@ public class FXMLMainController implements Initializable {
         mainPlayerScreen = new Screen(Screen.ScreenPath.MainPlayer);
     }
 
-    public void handleMenuItemFileLoad() throws IOException {
+    @FXML
+    private void handleMenuItemFileLoad() throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
-
-        File file = IOFiles.getLoadFilePath();
-
-        DataController dataController = IOFiles.load(file, DataController.class);
-        if (dataController == null) return;
 
         if (selectedScreen != null) {
             ((AnchorPane) selectedScreen.getParent().getParent()).getChildren().remove(selectedScreen.getParent());
             ((ControlledScreen)selectedScreen.getLoader().getController()).screenDidDisappear();
         }
+
+        File file = IOFiles.getLoadFilePath();
+
+        dataController = IOFiles.load(file, DataController.class);
+        if (dataController == null) return;
+
+        selectedScreen = mainPlayerScreen;
+        anchorPane.getChildren().addAll(mainPlayerScreen.getParent());
+        ControlledScreen mainPlayerController = mainPlayerScreen.getLoader().getController();
+        mainPlayerController.setDataController(dataController);
+    }
+
+    @FXML
+    private void handleMenuItemFileSaveAs() throws IOException {
+        if (dataController == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.NO) return;
+
+        File file = IOFiles.getSaveFilePath();
+
+        dataController.setProjetoPath(file);
+        IOFiles.save(file, dataController);
+    }
+
+    @FXML
+    private void handleMenuItemFileSave() throws IOException {
+        if (dataController == null) return;
+        if (dataController.getProjetoPath() == null) handleMenuItemFileSaveAs();
+
+        File file = new File(dataController.getProjetoPath());
+        IOFiles.save(file, dataController);
+    }
+
+    @FXML
+    private void handleMenuItemFileNew() throws IOException {
+
+        if (selectedScreen != null) {
+            ((AnchorPane) selectedScreen.getParent().getParent()).getChildren().remove(selectedScreen.getParent());
+            ((ControlledScreen)selectedScreen.getLoader().getController()).screenDidDisappear();
+        }
+
+        dataController = new DataController();
 
         selectedScreen = mainPlayerScreen;
         anchorPane.getChildren().addAll(mainPlayerScreen.getParent());

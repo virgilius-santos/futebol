@@ -15,7 +15,7 @@ public class Validation {
         TextField textField = (TextField) evt.getSource();
         String c = evt.getCharacter();
 
-        if (textField.getText().length() > 5 || !c.matches("\\d*")) {
+        if (!textField.getText().isEmpty() || textField.getText().length() > 5 || !c.matches("\\d*")) {
             evt.consume();
         }
     }

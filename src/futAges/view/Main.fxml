@@ -28,8 +28,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="menuItemFileSave" mnemonicParsing="false" text="Save" />
-                  <MenuItem fx:id="menuItemFileSaveAs" mnemonicParsing="false" text="Save As.." />
+                  <MenuItem fx:id="menuItemFileSave1" mnemonicParsing="false" onAction="#handleMenuItemFileNew" text="New Project" />
+              <MenuItem fx:id="menuItemFileSave" mnemonicParsing="false" onAction="#handleMenuItemFileSave" text="Save" />
+                  <MenuItem fx:id="menuItemFileSaveAs" mnemonicParsing="false" onAction="#handleMenuItemFileSaveAs" text="Save As.." />
                   <MenuItem fx:id="menuItemFileLoad" mnemonicParsing="false" onAction="#handleMenuItemFileLoad" text="Load" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" text="Export Project" />
