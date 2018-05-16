@@ -4,17 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FrameData {
+
+    private static int ids = 0;
+
     private Integer id;
     private String name;
     private Map<Integer, Integer> quadrants;
 
-    public FrameData(Integer id) {
-        this(id,"");
+    public FrameData() {
+        this(null);
     }
 
-    public FrameData(Integer id, String name) {
+    public FrameData(String name) {
 
-        this.id = id;
+        this.id = ids;
+        ids++;
         this.name = name;
         quadrants = new HashMap();
     }

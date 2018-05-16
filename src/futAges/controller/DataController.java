@@ -25,7 +25,12 @@ public class DataController {
         this.tempoDivisao = this.stepDefault;
         this.linhas = 4;
         this.colunas = 8;
+
         this.dados = new HashMap();
+        FrameData obj = new FrameData();
+        this.dados.put(obj.getId(),obj);
+        obj = new FrameData();
+        this.dados.put(obj.getId(), obj);
     }
 
     // Sets

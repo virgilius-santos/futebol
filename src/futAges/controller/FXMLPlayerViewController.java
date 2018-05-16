@@ -215,9 +215,7 @@ public class FXMLPlayerViewController implements Initializable {
     public void setMediaPlayerListener(ChangeListener<Duration> listener){
         mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
             updateValues();
-            int old = (int) oldValue.toSeconds();
-            int act = (int) newValue.toSeconds();
-            if (old != act) listener.changed(observable, oldValue, newValue);
+            listener.changed(observable, oldValue, newValue);
         });
     }
 

@@ -20,14 +20,14 @@ public class StringFuncions {
 
     public static Integer stringToInt(String value) {
 
-        if (value == null || value.isEmpty()) return 0;
+        if (value == null || value.isEmpty()) return null;
 
         Integer aux;
 
         try {
             aux = Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            return 0;
+            return null;
         }
 
         return aux;
