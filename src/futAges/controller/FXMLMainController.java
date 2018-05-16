@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,13 +21,13 @@ public class FXMLMainController implements Initializable {
 
     @FXML
     private FXMLMainPlayerController innerMainPlayerViewController;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
     @FXML
     private void handleMenuItemFileLoad() throws IOException {
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
