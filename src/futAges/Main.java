@@ -17,11 +17,15 @@ public class Main extends Application {
 
         Parent root = (new Screen(Screen.ScreenPath.Main)).getParent();
         Scene scene = new Scene(root);
+        stage.setScene(scene);
         stage.setTitle("AGES - Futebol");
 //        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setMinWidth(stage.getWidth());
         stage.show();
+
+        double height = stage.getHeight();
+        double width = stage.getWidth();
+        stage.setMinWidth(width);
+        stage.setMinHeight(height);
 
     }
 
