@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="450.0" prefWidth="605.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="futAges.controller.FXMLPlayerViewController">
+    <children>
+      <AnchorPane fx:id="mediaViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="585.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+              <MediaView fx:id="mediaView" nodeOrientation="INHERIT" fitHeight="${mediaViewPane.height}" fitWidth="${mediaViewPane.width}"  />
+         </children>
+      </AnchorPane>
+      <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="605.0" spacing="50.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+              <TextField fx:id="step" alignment="CENTER" disable="true" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#textFieldOnKeyPressed" onKeyTyped="#textFieldKeyTyped" prefHeight="34.0" prefWidth="111.0" />
+              <Button fx:id="btnSkipBackward" alignment="CENTER" contentDisplay="CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSteBackWard" onMouseClicked="#onMouseClicked" prefHeight="40.0" prefWidth="40.0" text="&lt;&lt;" />
+              <Button fx:id="btnPlayPause" alignment="CENTER" contentDisplay="CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayPause" onMouseClicked="#onMouseClicked" prefHeight="40.0" prefWidth="72.0" text="Play" />
+              <Button fx:id="btnSkipForward" alignment="CENTER" contentDisplay="CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSteForWard" onMouseClicked="#onMouseClicked" prefHeight="40.0" prefWidth="40.0" text="&gt;&gt;" />
+              <Label fx:id="labelTime" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" text="--:--:-- / --:--:--" textAlignment="CENTER">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding></Label>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+        <Slider id="seekSlider" fx:id="seekSlider" disable="true" layoutX="7.0" layoutY="361.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" onMousePressed="#sliderOnMousePressed" onMouseReleased="#sliderOnMouseReleased" prefHeight="16.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+    </children>
+</AnchorPane>

@@ -1,7 +1,7 @@
-package sample;
+package futAges;
 
+import futAges.controller.screenFrameWork.Screen;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,25 +9,23 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws Exception{
+
         primaryStage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
+
+        Parent root = (new Screen(Screen.ScreenPath.Main)).getParent();
         Scene scene = new Scene(root);
-        stage.setTitle("AGES - Futebol");
-        stage.setResizable(false);
         stage.setScene(scene);
+        stage.setTitle("AGES - Futebol");
         stage.show();
 
-        /**  scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent doubleClicked) {
-        if (doubleClicked.getClickCount() == 2){
-        stage.setFullScreen(true);
-        }
-        }
-        });
-         */
+        double height = stage.getHeight();
+        double width = stage.getWidth();
+        stage.setMinWidth(width);
+        stage.setMinHeight(height);
+
     }
 
     public static void main(String[] args) {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="futAges.controller.FXMLMainController">
+   <center>
+      <AnchorPane fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+          <children>
+              <fx:include fx:id="innerMainPlayerView" source="MainPlayer.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="menuItemFileSave1" mnemonicParsing="false" onAction="#handleMenuItemFileNew" text="New Project" />
+              <MenuItem fx:id="menuItemFileSave" mnemonicParsing="false" onAction="#handleMenuItemFileSave" text="Save" />
+                  <MenuItem fx:id="menuItemFileSaveAs" mnemonicParsing="false" onAction="#handleMenuItemFileSaveAs" text="Save As.." />
+                  <MenuItem fx:id="menuItemFileLoad" mnemonicParsing="false" onAction="#handleMenuItemFileLoad" text="Load" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" text="Export Project" />
+                  <MenuItem fx:id="menuItemFileClose" mnemonicParsing="false" text="Close Project" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

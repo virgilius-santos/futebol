@@ -1,0 +1,73 @@
+
+obj {
+ 	nome = "wilam",
+ 	quadrantes = [key=tempo : String=quandrante ] = ["1:3", "4:3", "3:5"]
+ }
+
+// array de objetos
+arrayFrameData = [ obj1, obj2, obj3 ]
+
+// quantidades de objetos no array de objetos
+qdtObjs = arrayFrameData.count		ex. 3
+
+// dicionario que ira armazenar os dados formatados, 
+//		onde a chave é o tempo em formato de string
+//		e o valor é um array de colunas
+
+dict = Dicionario <Inteiros, Array<Inteiros> >
+
+// inserir a primeira linha
+arrayHeaders = new Array<String>(qtdObs);
+arrayHeaders[0] = "tempo"
+
+
+// percorrer o array de objetos
+for (int idObj = 0; idObj < qdtObjs; idObj++ ) {
+	
+	// pega o obj do array de acordo com o indice
+	Obj obj = arrayFrameData[idObj];
+
+	// pego nome do objeto
+	String nome = obj.nome();
+
+	// inserir o nome na posicao de acorodo com o indice
+	arrayHeaders[idObj] = (nome != null) ? nome : ("obj" + idObj);    		// ["tempo", "wiliam" , null, null ]
+
+	// todos os quadrantes do obj
+	Array quadrantes = obj.quadrantes();
+
+	// para cada quadrante
+	para cada tempo(key:Inteiro) em quadrantes {
+		
+		pega o quadrante do tempo
+		Inteiro quadrante = quadrantes[tempo];
+
+		// com o tempo buscamos as linhas do csv no dicionario
+		Array<Inteiro> arrayLinhaCSV = dict[tempo]
+
+		// se a arrayLinhaCSV nao existe para aquele tempo, ela é criada
+		// 		isso acontece com o primeiro objeto, por exemplo
+		if (arrayLinhaCSV == null) {
+			arrayLinhaCSV = new Array<Inteiros>(qdtObjs);
+			dict[tempo] = arrayLinhaCSV;
+		}
+
+		//nas arrayLinhaCSV, na posicao indicada pelo id do objeto é setado o quadrante
+		arrayLinhaCSV[idObj] = quadrante;
+	}
+
+}
+
+exemplo do resultado
+
+arrayHeaders = ["tempo", "wiliam" , "obj2", "bob" ]
+
+dict = {
+	1:  [ 3, null, 5 ],
+	3:  [ null, 6, null ],
+	6:  [ 7, 7, 7 ],
+}
+
+
+
+
