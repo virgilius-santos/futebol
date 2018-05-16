@@ -30,7 +30,7 @@ public class FXMLTableViewController implements Initializable {
     class Location {
         private TextField name;
         private TextField quadrante;
-        public Location(){}
+        Location(){}
     }
 
 
@@ -49,7 +49,7 @@ public class FXMLTableViewController implements Initializable {
     }
 
 
-    public void setDataListener(DataListener dataListener) {
+    void setDataListener(DataListener dataListener) {
         this.dataListener = dataListener;
     }
 
@@ -65,7 +65,7 @@ public class FXMLTableViewController implements Initializable {
 
 
 
-    public void setDataSource(DataSource dataSource) {
+    void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -79,14 +79,14 @@ public class FXMLTableViewController implements Initializable {
         return dataSource.getData(index);
     }
 
-    public void reloadFrames() {
+    void reloadFrames() {
         for (int index = 0; index < numberOfItens(); index++) {
             addGridPaneNewRow(index);
             loadFrame(index);
         }
     }
 
-    private int addGridPaneNewRow(int index) {
+    private void addGridPaneNewRow(int index) {
 
         int columnNameIndex = 0;
         int columnQuadranteIndex = 1;
@@ -95,16 +95,12 @@ public class FXMLTableViewController implements Initializable {
 
         addNewTextFieldName(columnNameIndex, index);
         addNewTextQuadrant(columnQuadranteIndex, index);
-
-        return index;
     }
 
     private void addNewTextFieldName(int column, int index) {
         TextField nameTextField = new TextField();
-        nameTextField.setOnKeyPressed(evt -> Validation.onKeyPressed(evt));
-        nameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            updateDataListener(index, newValue);
-        });
+        nameTextField.setOnKeyPressed(Validation::onKeyPressed);
+        nameTextField.textProperty().addListener((observable, oldValue, newValue) -> updateDataListener(index, newValue));
 
         textFieldHashMap.get(index).name = nameTextField;
         gridPane.add(nameTextField, column, index);
@@ -112,10 +108,8 @@ public class FXMLTableViewController implements Initializable {
 
     private void addNewTextQuadrant(int column, int index) {
         TextField quadrantTextField = new TextField();
-        quadrantTextField.setOnKeyTyped( evt -> Validation.onKeyTyped(evt));
-        quadrantTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            updateDataListener(index, currentTime, newValue);
-        });
+        quadrantTextField.setOnKeyTyped(Validation::onKeyTyped);
+        quadrantTextField.textProperty().addListener((observable, oldValue, newValue) -> updateDataListener(index, currentTime, newValue));
 
         textFieldHashMap.get(index).quadrante = quadrantTextField;
         gridPane.add(quadrantTextField, column, index);
@@ -130,6 +124,11 @@ public class FXMLTableViewController implements Initializable {
     private void loadFrame(int id, Location location) {
 
         FrameData obj = getData(id);
+        if (obj == null) {
+            location.name.clear();
+            location.quadrante.clear();
+            return;
+        }
 
         Integer quadrante = obj.getQuadrant(currentTime);
         if (quadrante != null) {
@@ -140,7 +139,7 @@ public class FXMLTableViewController implements Initializable {
 
         String name = obj.getName();
         if (name != null) {
-            location.name.setText(name);
+            if (!name.equals(location.name.getText())) location.name.setText(name);
         } else {
             location.name.clear();
         }
@@ -148,18 +147,10 @@ public class FXMLTableViewController implements Initializable {
     }
 
 
-    public void updateCurrentTime(Integer newTime) {
-        if (currentTime != null && currentTime == newTime) return;
+    void updateCurrentTime(Integer newTime) {
+        if (currentTime != null && currentTime.equals(newTime)) return;
         currentTime = newTime;
-//        clearFrame();
         reloadFrames();
-    }
-
-    private void clearFrame() {
-        textFieldHashMap.forEach( (row, location) -> {
-            location.name.clear();
-            location.quadrante.clear();
-        });
     }
 
     @FXML
