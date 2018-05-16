@@ -19,7 +19,6 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("AGES - Futebol");
-//        stage.setResizable(false);
         stage.show();
 
         double height = stage.getHeight();

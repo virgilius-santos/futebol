@@ -22,10 +22,10 @@ import java.util.ResourceBundle;
 public class FXMLPlayerViewController implements Initializable {
 
     public interface PlayerDataSource {
-        void didStepUpdated(String step);
-        String getCurrentStep();
-        void didUpdateDuration(Duration oldValue, Duration newValue);
         String getFilePath();
+        String getCurrentStep();
+        void didStepUpdated(String step);
+        void didUpdateDuration(Duration oldValue, Duration newValue);
     }
 
     private PlayerDataSource dataSource;
