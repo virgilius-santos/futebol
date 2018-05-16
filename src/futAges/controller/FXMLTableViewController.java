@@ -129,16 +129,16 @@ public class FXMLTableViewController implements Initializable {
 
         Integer quadrante = obj.getQuadrant(currentTime);
         if (quadrante != null) {
-            location.quadrante.setText(quadrante.toString());
+            if (!location.name.getText().equals(quadrante.toString())) location.quadrante.setText(quadrante.toString());
         } else {
-            location.quadrante.clear();
+            if (!location.quadrante.getText().isEmpty()) location.quadrante.clear();
         }
 
         String name = obj.getName();
         if (name != null) {
             if (!name.equals(location.name.getText())) location.name.setText(name);
         } else {
-            location.name.clear();
+            if (!location.name.getText().isEmpty()) location.name.clear();
         }
 
     }
@@ -156,4 +156,6 @@ public class FXMLTableViewController implements Initializable {
         addGridPaneNewRow(index);
         loadFrame(index);
     }
+
+
 }

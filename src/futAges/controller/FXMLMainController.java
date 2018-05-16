@@ -1,14 +1,12 @@
 package futAges.controller;
 
 import futAges.controller.screenFrameWork.ControlledScreen;
-import futAges.controller.screenFrameWork.Screen;
 import futAges.model.IO.IOFiles;
 import futAges.view.FileChooser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,15 +16,13 @@ import java.util.ResourceBundle;
 public class FXMLMainController implements Initializable {
 
     private DataController dataController;
-    private Screen selectedScreen;
-    private Screen mainPlayerScreen;
+    private ControlledScreen selectedController;
 
     @FXML
-    private AnchorPane anchorPane;
+    private FXMLMainPlayerController innerMainPlayerViewController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mainPlayerScreen = new Screen(Screen.ScreenPath.MainPlayer);
     }
 
     @FXML
@@ -35,20 +31,14 @@ public class FXMLMainController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
 
-        if (selectedScreen != null) {
-            ((AnchorPane) selectedScreen.getParent().getParent()).getChildren().remove(selectedScreen.getParent());
-            ((ControlledScreen)selectedScreen.getLoader().getController()).screenDidDisappear();
-        }
-
         File file = FileChooser.getLoadFilePath();
-
         dataController = IOFiles.load(file, DataController.class);
         if (dataController == null) return;
 
-        selectedScreen = mainPlayerScreen;
-        anchorPane.getChildren().addAll(mainPlayerScreen.getParent());
-        ControlledScreen mainPlayerController = mainPlayerScreen.getLoader().getController();
-        mainPlayerController.setDataController(dataController);
+        if (selectedController != null) innerMainPlayerViewController.screenDidDisappear();
+
+        selectedController = innerMainPlayerViewController;
+        selectedController.setDataController(dataController);
     }
 
     @FXML
@@ -86,15 +76,10 @@ public class FXMLMainController implements Initializable {
         filePath = file.toURI().toString();
         dataController.setVideoPath(filePath);
 
-        if (selectedScreen != null) {
-            ((AnchorPane) selectedScreen.getParent().getParent()).getChildren().remove(selectedScreen.getParent());
-            ((ControlledScreen)selectedScreen.getLoader().getController()).screenDidDisappear();
-        }
+        if (selectedController != null) innerMainPlayerViewController.screenDidDisappear();
 
-        selectedScreen = mainPlayerScreen;
-        anchorPane.getChildren().addAll(mainPlayerScreen.getParent());
-        ControlledScreen mainPlayerController = mainPlayerScreen.getLoader().getController();
-        mainPlayerController.setDataController(dataController);
+        selectedController = innerMainPlayerViewController;
+        selectedController.setDataController(dataController);
     }
 
 

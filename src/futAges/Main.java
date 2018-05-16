@@ -12,6 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
+
         primaryStage = stage;
 
         Parent root = (new Screen(Screen.ScreenPath.Main)).getParent();
@@ -19,6 +20,7 @@ public class Main extends Application {
         stage.setTitle("AGES - Futebol");
 //        stage.setResizable(false);
         stage.setScene(scene);
+        stage.setMinWidth(stage.getWidth());
         stage.show();
 
     }

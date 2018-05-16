@@ -173,9 +173,9 @@ public class FXMLPlayerViewController implements Initializable {
         mediaPlayer.pause();
     }
 
-    void setStepListener(ChangeListener<String> listener){
-        step.textProperty().addListener(listener);
-    }
+//    void setStepListener(ChangeListener<String> listener){
+//        step.textProperty().addListener(listener);
+//    }
 
     void setStep(Integer step) {
         this.step.setText(String.valueOf(step));
