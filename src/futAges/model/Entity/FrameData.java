@@ -1,4 +1,4 @@
-package futAges.modal.Entity;
+package futAges.model.Entity;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -2,7 +2,7 @@ package futAges.controller;
 
 import futAges.controller.screenFrameWork.ControlledScreen;
 import futAges.controller.screenFrameWork.Screen;
-import futAges.modal.Util.StringFuncions;
+import futAges.model.Util.StringFuncions;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;

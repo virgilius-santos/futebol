@@ -2,13 +2,13 @@ package futAges.controller;
 
 import futAges.controller.screenFrameWork.ControlledScreen;
 import futAges.controller.screenFrameWork.Screen;
-import futAges.modal.IO.IOFiles;
+import futAges.model.IO.IOFiles;
+import futAges.view.FileChooser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class FXMLMainController implements Initializable {
             ((ControlledScreen)selectedScreen.getLoader().getController()).screenDidDisappear();
         }
 
-        File file = IOFiles.getLoadFilePath();
+        File file = FileChooser.getLoadFilePath();
 
         dataController = IOFiles.load(file, DataController.class);
         if (dataController == null) return;
@@ -59,7 +59,7 @@ public class FXMLMainController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
 
-        File file = IOFiles.getSaveFilePath();
+        File file = FileChooser.getSaveFilePath();
 
         dataController.setProjetoPath(file);
         IOFiles.save(file, dataController);
@@ -80,7 +80,7 @@ public class FXMLMainController implements Initializable {
         dataController = new DataController();
 
         String filePath;
-        File file = IOFiles.getVideoPath();
+        File file = FileChooser.getVideoPath();
         if (file == null) return;
 
         filePath = file.toURI().toString();

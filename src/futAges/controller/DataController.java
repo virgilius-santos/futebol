@@ -1,7 +1,7 @@
 package futAges.controller;
 //-------------------------------------------------------
 
-import futAges.modal.Entity.FrameData;
+import futAges.model.Entity.FrameData;
 
 import java.io.File;
 import java.util.HashMap;

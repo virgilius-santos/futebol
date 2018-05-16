@@ -1,4 +1,4 @@
-package futAges.modal.Util;
+package futAges.model.Util;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;

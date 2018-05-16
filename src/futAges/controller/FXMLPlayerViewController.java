@@ -1,7 +1,7 @@
 package futAges.controller;
 
-import futAges.modal.Util.StringFuncions;
-import futAges.modal.Util.Validation;
+import futAges.model.Util.StringFuncions;
+import futAges.model.Util.Validation;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;

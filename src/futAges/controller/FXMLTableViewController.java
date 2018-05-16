@@ -1,8 +1,7 @@
 package futAges.controller;
 
-import futAges.controller.screenFrameWork.ControlledScreen;
-import futAges.modal.Entity.FrameData;
-import futAges.modal.Util.Validation;
+import futAges.model.Entity.FrameData;
+import futAges.model.Util.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
