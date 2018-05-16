@@ -77,12 +77,19 @@ public class FXMLMainController implements Initializable {
     @FXML
     private void handleMenuItemFileNew() throws IOException {
 
+        dataController = new DataController();
+
+        String filePath;
+        File file = IOFiles.getVideoPath();
+        if (file == null) return;
+
+        filePath = file.toURI().toString();
+        dataController.setVideoPath(filePath);
+
         if (selectedScreen != null) {
             ((AnchorPane) selectedScreen.getParent().getParent()).getChildren().remove(selectedScreen.getParent());
             ((ControlledScreen)selectedScreen.getLoader().getController()).screenDidDisappear();
         }
-
-        dataController = new DataController();
 
         selectedScreen = mainPlayerScreen;
         anchorPane.getChildren().addAll(mainPlayerScreen.getParent());
