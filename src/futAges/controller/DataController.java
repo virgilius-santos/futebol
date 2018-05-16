@@ -4,8 +4,7 @@ package futAges.controller;
 import futAges.model.Entity.FrameData;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 //-------------------------------------------------------
 
 public class DataController {
@@ -14,7 +13,7 @@ public class DataController {
     private String videoPath;
     private Integer tempoDivisao;
     private Integer linhas, colunas; // Variáveis que formam os quadrantes.
-    private Map<Integer, FrameData> dados;
+    private ArrayList<FrameData> dados;
 
     DataController() {
         Integer stepDefault = 2;
@@ -24,11 +23,19 @@ public class DataController {
         this.linhas = 4;
         this.colunas = 8;
 
-        this.dados = new HashMap<>();
+        this.dados = new ArrayList<>(10);
         FrameData obj = new FrameData();
-        this.dados.put(obj.getId(),obj);
+        this.dados.add(obj);
         obj = new FrameData();
-        this.dados.put(obj.getId(), obj);
+        this.dados.add(obj);
+    }
+
+    // Adds
+    int addData(FrameData data) {
+        if (this.dados.size() >= 10) return -1;
+        int index = this.dados.size();
+        this.dados.add(data);
+        return index;
     }
 
     // Sets
@@ -70,16 +77,12 @@ public class DataController {
         return tempoDivisao;
     }
 
-    void addData(FrameData data) {
-        this.dados.put(data.getId(), data);
-    }
-
     FrameData getData(Integer id) {
         return dados.get(id);
     }
 
-    Map<Integer, FrameData> getDados() {
-        return dados;
+    int getDataSize() {
+        return dados.size();
     }
 
     String getVideoPath() {
