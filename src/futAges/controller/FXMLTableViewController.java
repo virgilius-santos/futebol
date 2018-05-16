@@ -2,16 +2,13 @@ package futAges.controller;
 
 import futAges.model.Entity.FrameData;
 import futAges.model.Util.Validation;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class FXMLTableViewController implements Initializable {
@@ -154,7 +151,7 @@ public class FXMLTableViewController implements Initializable {
     }
 
     @FXML
-    private void addObject(ActionEvent event) {
+    private void addObject() {
         int index = dataSource.createData();
         addGridPaneNewRow(index);
         loadFrame(index);

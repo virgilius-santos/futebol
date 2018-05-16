@@ -90,7 +90,7 @@ public class FXMLPlayerViewController implements Initializable {
 
     @FXML
     private void sliderOnMouseReleased() {
-        if(playing == true) {
+        if(playing) {
             mediaPlayer.play();
             playing = false;
         }
@@ -138,7 +138,7 @@ public class FXMLPlayerViewController implements Initializable {
         }
     }
 
-    private void updateValues() { ;
+    private void updateValues() {
         if (duration == null) return;
 
         Platform.runLater(() -> {
@@ -173,15 +173,15 @@ public class FXMLPlayerViewController implements Initializable {
         mediaPlayer.pause();
     }
 
-    public void setStepListener(ChangeListener<String> listener){
+    void setStepListener(ChangeListener<String> listener){
         step.textProperty().addListener(listener);
     }
 
-    public void setStep(Integer step) {
+    void setStep(Integer step) {
         this.step.setText(String.valueOf(step));
     }
 
-    public void setMediaPlayer(String filePath){
+    void setMediaPlayer(String filePath){
         if (filePath == null) return;
 
         Media media = new Media(filePath);
@@ -212,14 +212,14 @@ public class FXMLPlayerViewController implements Initializable {
         mediaView.setMediaPlayer(mediaPlayer);
     }
 
-    public void setMediaPlayerListener(ChangeListener<Duration> listener){
+    void setMediaPlayerListener(ChangeListener<Duration> listener){
         mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
             updateValues();
             listener.changed(observable, oldValue, newValue);
         });
     }
 
-    public void closePlayer() {
+    void closePlayer() {
         if (mediaPlayer == null) return;
         if (mediaPlayer.getStatus() != MediaPlayer.Status.STOPPED) mediaPlayer.stop();
         mediaPlayer.dispose();

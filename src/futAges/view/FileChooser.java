@@ -10,8 +10,7 @@ public class FileChooser {
         javafx.stage.FileChooser video = new javafx.stage.FileChooser();
         javafx.stage.FileChooser.ExtensionFilter filter = new javafx.stage.FileChooser.ExtensionFilter("Select the video(*.mp4)","*.mp4","*.flv");
         video.getExtensionFilters().add(filter);
-        File file = video.showOpenDialog(Main.primaryStage);
-        return file;
+        return video.showOpenDialog(Main.primaryStage);
     }
 
     public static File getSaveFilePath(){
@@ -19,8 +18,7 @@ public class FileChooser {
         fileChooser.getExtensionFilters().addAll(
                 new javafx.stage.FileChooser.ExtensionFilter("Text Files", "*.json"));
         //new FileChooser.ExtensionFilter("All Files", "*.*"));
-        File file = fileChooser.showSaveDialog(Main.primaryStage);
-        return file;
+        return fileChooser.showSaveDialog(Main.primaryStage);
     }
 
     public static File getLoadFilePath(){
@@ -29,9 +27,7 @@ public class FileChooser {
                 new javafx.stage.FileChooser.ExtensionFilter("Text Files", "*.json"),
                 new javafx.stage.FileChooser.ExtensionFilter("All Files", "*.*"));
 
-        File file = fileChooser.showOpenDialog(Main.primaryStage);
-
-        return file;
+        return fileChooser.showOpenDialog(Main.primaryStage);
     }
 
 }

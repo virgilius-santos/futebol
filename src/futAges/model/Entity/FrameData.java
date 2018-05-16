@@ -1,7 +1,6 @@
 package futAges.model.Entity;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class FrameData {
 
@@ -9,26 +8,22 @@ public class FrameData {
 
     private Integer id;
     private String name;
-    private Map<Integer, Integer> quadrants;
+    private HashMap<Integer,Integer> quadrants;
 
     public FrameData() {
         this(null);
     }
 
-    public FrameData(String name) {
+    private FrameData(String name) {
 
         this.id = ids;
         ids++;
         this.name = name;
-        quadrants = new HashMap();
+        quadrants = new HashMap<>();
     }
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -39,11 +34,15 @@ public class FrameData {
         this.name = name;
     }
 
-    public Integer getQuadrant(Integer time) {
-        return quadrants.get(time);
+    public Integer getQuadrant(Integer tempo) {
+        return quadrants.get(tempo);
     }
 
-    public void setQuadrant(Integer time, Integer quadrant) {
-        quadrants.put(time, quadrant);
+    public void setQuadrant(Integer tempo, Integer quadrant) {
+        if (quadrant == null) {
+            quadrants.remove(tempo);
+        } else {
+            quadrants.put(tempo, quadrant);
+        }
     }
 }

@@ -21,15 +21,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        /**  scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent doubleClicked) {
-        if (doubleClicked.getClickCount() == 2){
-        stage.setFullScreen(true);
-        }
-        }
-        });
-         */
     }
 
     public static void main(String[] args) {

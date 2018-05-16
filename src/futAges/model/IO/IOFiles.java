@@ -2,8 +2,6 @@ package futAges.model.IO;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import javafx.stage.FileChooser;
-import futAges.Main;
 
 import java.io.*;
 

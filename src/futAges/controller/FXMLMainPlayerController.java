@@ -18,9 +18,6 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
     private DataController controller;
     private List<FrameData> values;
 
-    private Screen tableView;
-    private Screen playerView;
-
     private FXMLTableViewController tableController;
     private FXMLPlayerViewController playerViewController;
 
@@ -35,14 +32,14 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
         initializePlayerView();
     }
 
-    public void initializeTableView() {
-        tableView = new Screen(Screen.ScreenPath.TableView);
+    private void initializeTableView() {
+        Screen tableView = new Screen(Screen.ScreenPath.TableView);
         tableController = tableView.getLoader().getController();
         initialize(tableView, anchorTable);
     }
 
-    public void initializePlayerView() {
-        playerView = new Screen(Screen.ScreenPath.PlayerView);
+    private void initializePlayerView() {
+        Screen playerView = new Screen(Screen.ScreenPath.PlayerView);
         playerViewController = playerView.getLoader().getController();
 
         playerViewController.setStepListener((observable, oldValue, newValue) -> {
@@ -53,7 +50,7 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
         initialize(playerView, anchorMediaPlayer);
     }
 
-    public void initialize(Screen screen, AnchorPane anchor) {
+    private void initialize(Screen screen, AnchorPane anchor) {
 
         AnchorPane a = (AnchorPane) screen.getParent();
 
@@ -124,15 +121,17 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
     private void configureMediaPlayer() {
         playerViewController.setMediaPlayer(controller.getVideoPath());
-        playerViewController.setMediaPlayerListener((observable, oldValue, newValue) -> {
-            tableController.updateCurrentTime( ((Double) newValue.toSeconds()).intValue() );
-        });
+        playerViewController.setMediaPlayerListener((observable, oldValue, newValue) ->
+                tableController.updateCurrentTime( ((Double) newValue.toSeconds()).intValue() )
+        );
     }
 
-    public void updateValues(){
+    private void updateValues(){
         values = controller.getDados()
                 .values()
-                .stream().sorted((e1, e2) -> (e1.getId() > e2.getId()) ? 1 : -1)
+                .stream().sorted(
+                        (e1, e2) -> (e1.getId() > e2.getId()) ? 1 : ((e1.getId() < e2.getId()) ? -1 : 0)
+                )
                 .collect(Collectors.toList());
     }
 }
