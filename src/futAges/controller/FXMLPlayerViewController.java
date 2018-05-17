@@ -225,7 +225,6 @@ public class FXMLPlayerViewController implements Initializable {
 
 
     void closePlayer() {
-        dataSource = null;
         if (mediaPlayer != null) {
             if (mediaPlayer.getStatus() != MediaPlayer.Status.STOPPED) mediaPlayer.stop();
             mediaPlayer.dispose();
