@@ -110,8 +110,6 @@ public class FXMLTableViewController implements Initializable {
 
 
     void cleanTable() {
-        dataSource = null;
-        dataListener = null;
         textFieldHashMap.clear();
         gridPane.getChildren().removeAll(gridPane.getChildren());
     }
