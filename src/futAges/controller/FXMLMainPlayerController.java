@@ -39,7 +39,7 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
             }
 
             @Override
-            public FrameData getData(Integer index) {
+            public FrameData getFrameData(Integer index) {
                 return dataController.getData(index);
             }
 
@@ -47,14 +47,14 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
         innerTableViewController.setDataListener(new FXMLTableViewController.DataListener() {
             @Override
-            public void update(Integer frameId, String nome) {
-                dataController.getData(frameId).setName(nome);
+            public void update(Integer index, String nome) {
+                dataController.getData(index).setName(nome);
             }
 
             @Override
-            public void update(Integer frameId, Integer tempo, String quadrante) {
+            public void update(Integer index, Integer tempo, String quadrante) {
                 Integer q = (quadrante == null || quadrante.isEmpty()) ? null : Integer.parseInt(quadrante);
-                dataController.getData(frameId).setQuadrant(tempo, q);
+                dataController.getData(index).setQuadrant(tempo, q);
             }
         });
 
@@ -88,7 +88,9 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
     @Override
     public void setDataController(DataController dataController) {
         this.dataController = dataController;
+
         innerPlayerViewController.loadMedia();
+        innerTableViewController.loadFrames();
 
         innerPlayerView.getScene().setOnKeyPressed( e -> {
             if (e.getCode() == KeyCode.ENTER) {
@@ -96,13 +98,12 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
                 if (index != -1) innerTableViewController.insert(index);
             }
         });
-
-        innerTableViewController.reloadFrames();
     }
 
     @Override
     public void screenDidDisappear() {
         innerPlayerViewController.closePlayer();
+        innerTableViewController.cleanTable();
     }
 
 

@@ -20,13 +20,33 @@ public class FXMLTableViewController implements Initializable {
 
     public interface DataSource {
         int numberOfItens();
-        FrameData getData(Integer index);
+        FrameData getFrameData(Integer index);
     }
 
     class Location {
         private TextField name;
         private TextField quadrante;
         Location(){}
+
+        void setName(String name) {
+            if (this.name.getText().equals(name)) return;
+            this.name.setText(name);
+        }
+
+        void setQuadrante(String quadrante) {
+            if (this.quadrante.getText().equals(quadrante)) return;
+            this.quadrante.setText(quadrante);
+        }
+
+        void clearName(){
+            if (name.getText().isEmpty()) return;
+            name.clear();
+        }
+
+        void clearQuadrante(){
+            if (quadrante.getText().isEmpty()) return;
+            quadrante.clear();
+        }
     }
 
 
@@ -44,30 +64,24 @@ public class FXMLTableViewController implements Initializable {
 
     }
 
-
+    // Data Listener
     void setDataListener(DataListener dataListener) {
         this.dataListener = dataListener;
     }
 
-    private void updateDataListener(Integer frameId, Integer tempo, String quadrante) {
+    private void updateDataListener(Integer index, Integer tempo, String quadrante) {
         if (dataListener == null) return;
-        dataListener.update(frameId, tempo, quadrante);
+        dataListener.update(index, tempo, quadrante);
     }
 
-    private void updateDataListener(Integer frameId, String nome) {
+    private void updateDataListener(Integer index, String nome) {
         if (dataListener == null) return;
-        dataListener.update(frameId, nome);
+        dataListener.update(index, nome);
     }
 
-
+    // Data source
     void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    void updateCurrentTime(Integer newTime) {
-        if (currentTime != null && currentTime.equals(newTime)) return;
-        currentTime = newTime;
-        reloadFrames();
     }
 
     private int numberOfItens() {
@@ -75,34 +89,78 @@ public class FXMLTableViewController implements Initializable {
         return dataSource.numberOfItens();
     }
 
-    private FrameData getData(Integer index) {
+    private FrameData getFrameData(Integer index) {
         if (dataSource == null) return null;
-        return dataSource.getData(index);
+        return dataSource.getFrameData(index);
     }
 
-    void reloadFrames() {
+    void updateCurrentTime(Integer newTime) {
+        if (currentTime != null && currentTime.equals(newTime)) return;
+        currentTime = newTime;
+        updateFrames();
+    }
+
+    private void updateFrames() {
+        Location location;
+        for (int index = 0; index < numberOfItens(); index++) {
+            location = textFieldHashMap.get(index);
+            loadFrame(index, location);
+        }
+    }
+
+
+    void cleanTable() {
+        textFieldHashMap.clear();
+        gridPane.getChildren().removeAll(gridPane.getChildren());
+    }
+
+    void insert(int index) {
+        Location location = createLocation(index);
+        loadFrame(index, location);
+    }
+
+    void loadFrames() {
         for (int index = 0; index < numberOfItens(); index++) {
             loadFrame(index);
         }
     }
 
-    void insert(int index) {
-        loadFrame(index);
-    }
-
     private void loadFrame(int index) {
-        Location location =  getLocation(index);
+        Location location = createLocation(index);
         loadFrame(index, location);
     }
 
-    private Location getLocation(int index) {
+    private void loadFrame(int id, Location location) {
 
-        Location newLocation = textFieldHashMap.get(index);
-        if (newLocation != null) return newLocation;
+        FrameData frameData = getFrameData(id);
+        if (frameData == null) {
+            location.clearName();
+            location.clearQuadrante();
+            return;
+        }
+
+        Integer quadrante = frameData.getQuadrant(currentTime);
+        if (quadrante != null) {
+            location.setQuadrante(quadrante.toString());
+        } else {
+            location.clearQuadrante();
+        }
+
+        String name = frameData.getName();
+        if (name != null) {
+            location.setName(name);
+        } else {
+            location.clearName();
+        }
+
+    }
+
+    private Location createLocation(int index) {
 
         int columnNameIndex = 0;
         int columnQuadranteIndex = 1;
-        newLocation = new Location();
+
+        Location newLocation = new Location();
         textFieldHashMap.put(index, newLocation);
 
         addNewTextFieldName(columnNameIndex, index);
@@ -126,31 +184,6 @@ public class FXMLTableViewController implements Initializable {
 
         textFieldHashMap.get(index).quadrante = quadrantTextField;
         gridPane.add(quadrantTextField, column, index);
-    }
-
-    private void loadFrame(int id, Location location) {
-
-        FrameData obj = getData(id);
-        if (obj == null) {
-            location.name.clear();
-            location.quadrante.clear();
-            return;
-        }
-
-        Integer quadrante = obj.getQuadrant(currentTime);
-        if (quadrante != null) {
-            if (!location.name.getText().equals(quadrante.toString())) location.quadrante.setText(quadrante.toString());
-        } else {
-            if (!location.quadrante.getText().isEmpty()) location.quadrante.clear();
-        }
-
-        String name = obj.getName();
-        if (name != null) {
-            if (!name.equals(location.name.getText())) location.name.setText(name);
-        } else {
-            if (!location.name.getText().isEmpty()) location.name.clear();
-        }
-
     }
 
 }
