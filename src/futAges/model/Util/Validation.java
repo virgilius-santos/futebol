@@ -2,6 +2,7 @@ package futAges.model.Util;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 
 public class Validation {
 
@@ -18,5 +19,9 @@ public class Validation {
         if (textField.getText().length() > 5 || !c.matches("\\d*")) {
             evt.consume();
         }
+    }
+
+    public static Integer getSeconds(Duration duration){
+        return ((Double) duration.toSeconds()).intValue();
     }
 }

@@ -3,6 +3,7 @@ package futAges.controller;
 import futAges.controller.screenFrameWork.ControlledScreen;
 import futAges.model.Entity.FrameData;
 import futAges.model.Util.StringFuncions;
+import futAges.model.Util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
@@ -25,25 +26,8 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    }
-
-
-    @Override
-    public void setDataController(DataController dataController) {
-        this.dataController = dataController;
         configureTableView();
         configureMediaPlayer();
-        innerPlayerView.getScene().setOnKeyPressed( e -> {
-            if (e.getCode() == KeyCode.ENTER) {
-                int index = dataController.addData(new FrameData());
-                if (index != -1) innerTableViewController.insert(index);
-            }
-        });
-    }
-
-    @Override
-    public void screenDidDisappear() {
-        innerPlayerViewController.closePlayer();
     }
 
     private void configureTableView() {
@@ -74,7 +58,6 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
             }
         });
 
-        innerTableViewController.reloadFrames();
     }
 
     private void configureMediaPlayer() {
@@ -87,13 +70,12 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
             @Override
             public String getCurrentStep() {
-                Integer tempo = dataController.getTempoDivisao();
-                return (tempo == null || tempo.equals(0)) ? "" : tempo.toString();
+                return dataController.getTempoDivisao().toString();
             }
 
             @Override
             public void didUpdateDuration(Duration oldValue, Duration newValue) {
-                innerTableViewController.updateCurrentTime( ((Double) newValue.toSeconds()).intValue() );
+                innerTableViewController.updateCurrentTime(Validation.getSeconds(newValue));
             }
 
             @Override
@@ -102,5 +84,29 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
             }
         });
     }
+
+    @Override
+    public void setDataController(DataController dataController) {
+        this.dataController = dataController;
+        innerPlayerViewController.loadMedia();
+
+        innerPlayerView.getScene().setOnKeyPressed( e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                int index = dataController.addData(new FrameData());
+                if (index != -1) innerTableViewController.insert(index);
+            }
+        });
+
+        innerTableViewController.reloadFrames();
+    }
+
+    @Override
+    public void screenDidDisappear() {
+        innerPlayerViewController.closePlayer();
+    }
+
+
+
+
 
 }

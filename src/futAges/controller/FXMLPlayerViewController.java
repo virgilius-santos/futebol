@@ -32,11 +32,10 @@ public class FXMLPlayerViewController implements Initializable {
 
     private MediaPlayer mediaPlayer;
     private Duration duration;
-    private final boolean repeat = false;
-    private boolean stopRequested = false;
-    private boolean atEndOfMedia = false;
-    private boolean playing = false;
-    private boolean isViewDisable = true;
+    private boolean repeat;
+    private boolean stopRequested;
+    private boolean atEndOfMedia;
+    private boolean playing;
 
     @FXML
     private MediaView mediaView;
@@ -55,6 +54,10 @@ public class FXMLPlayerViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        configureStep();
+    }
+
+    private void configureStep() {
 
         seekSlider.valueProperty().addListener(ov -> {
             if (seekSlider.isValueChanging()) {
@@ -66,7 +69,38 @@ public class FXMLPlayerViewController implements Initializable {
         });
 
         step.textProperty().addListener( (obs, o, n) -> didStepUpdated(n));
+    }
 
+    private void configureMediaPlayer() {
+
+        mediaPlayer.setOnPlaying(() -> {
+            if (stopRequested) {
+                mediaPlayer.pause();
+                stopRequested = false;
+            }
+        });
+
+        mediaPlayer.setOnReady(() -> {
+            seekSlider.setDisable(false);
+            duration = mediaPlayer.getMedia().getDuration();
+            updateValues();
+        });
+
+        mediaPlayer.setCycleCount(repeat ? MediaPlayer.INDEFINITE : 1);
+
+        mediaPlayer.setOnEndOfMedia(() -> {
+            if (!repeat) {
+                stopRequested = true;
+                atEndOfMedia = true;
+            }
+        });
+
+        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
+            updateValues();
+            didUpdateDuration(oldValue, newValue);
+        });
+
+        mediaView.setMediaPlayer(mediaPlayer);
     }
 
     @FXML
@@ -87,7 +121,7 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     @FXML
-    private void onMouseClicked() {
+    private void handleOnMouseClicked() {
         updateValues();
     }
 
@@ -121,6 +155,19 @@ public class FXMLPlayerViewController implements Initializable {
     @FXML
     private void textFieldKeyTyped(KeyEvent event) {
         Validation.onKeyTyped(event);
+    }
+
+
+
+    private void skip(Integer step, Boolean backward) {
+        if (mediaPlayer == null) return;
+        Integer newStep = (backward) ? -step : step;
+        Duration newDuration = mediaPlayer.getCurrentTime().add(Duration.seconds(newStep));
+        if (newDuration.greaterThan(duration)) newDuration = duration;
+        if (newDuration.lessThan(Duration.ZERO)) newDuration = Duration.ZERO;
+        mediaPlayer.seek(newDuration);
+        seekSlider.setValue(newDuration.toSeconds()/(duration.toSeconds())*100);
+        mediaPlayer.pause();
     }
 
     private void playPause(){
@@ -176,61 +223,57 @@ public class FXMLPlayerViewController implements Initializable {
         labelTime.setText(formatted);
     }
 
-    private void skip(Integer step, Boolean backward){
-        if (mediaPlayer == null || seekSlider == null) return;
-        Integer newStep = (backward) ? -step : step;
-        Duration newDuration = mediaPlayer.getCurrentTime().add(Duration.seconds(newStep));
-        if (newDuration.greaterThan(duration)) newDuration = duration;
-        if (newDuration.lessThan(Duration.ZERO)) newDuration = Duration.ZERO;
-        mediaPlayer.seek(newDuration);
-        seekSlider.setValue(newDuration.toSeconds()/(duration.toSeconds())*100);
-        mediaPlayer.pause();
+
+    void closePlayer() {
+        if (mediaPlayer != null) {
+            if (mediaPlayer.getStatus() != MediaPlayer.Status.STOPPED) mediaPlayer.stop();
+            mediaPlayer.dispose();
+        }
+        reset();
+        disableView(true);
     }
 
-    void setMediaPlayerDataSource(PlayerDataSource dataSource){
-        if (dataSource == null || dataSource.getFilePath() == null) return;
-        this.dataSource = dataSource;
-
-        Media media = new Media(dataSource.getFilePath());
+    void loadMedia(){
+        Media media = new Media(getFilePath());
         mediaPlayer = new MediaPlayer(media);
+        configureMediaPlayer();
 
-        step.setText(dataSource.getCurrentStep());
-        mediaPlayer.setOnPlaying(() -> {
-            if (stopRequested) {
-                mediaPlayer.pause();
-                stopRequested = false;
-            }
-        });
-
-        mediaPlayer.setOnReady(() -> {
-            seekSlider.setDisable(false);
-            duration = mediaPlayer.getMedia().getDuration();
-            updateValues();
-        });
-
-        mediaPlayer.setCycleCount(repeat ? MediaPlayer.INDEFINITE : 1);
-
-        mediaPlayer.setOnEndOfMedia(() -> {
-            if (!repeat) {
-                stopRequested = true;
-                atEndOfMedia = true;
-            }
-        });
-
-        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
-            updateValues();
-            didUpdateDuration(oldValue, newValue);
-        });
-
-        mediaView.setMediaPlayer(mediaPlayer);
+        step.setText(getCurrentStep());
         disableView(false);
     }
 
-    void closePlayer() {
-        if (mediaPlayer == null) return;
-        if (mediaPlayer.getStatus() != MediaPlayer.Status.STOPPED) mediaPlayer.stop();
-        mediaPlayer.dispose();
-        disableView(true);
+    private void disableView(boolean state){
+        seekSlider.setDisable(state);
+        btnPlayPause.setDisable(state);
+        btnSkipBackward.setDisable(state);
+        btnSkipForward.setDisable(state);
+        step.setDisable(state);
+    }
+
+    private void reset() {
+        labelTime.setText("--:--:-- / --:--:--");
+        step.setText("");
+        seekSlider.setValue(0);
+        repeat = false;
+        stopRequested = false;
+        atEndOfMedia = false;
+        playing = false;
+    }
+
+
+    // Data source
+    void setMediaPlayerDataSource(PlayerDataSource dataSource){
+        this.dataSource = dataSource;
+    }
+
+    String getFilePath() {
+        if (dataSource == null) return null;
+        return dataSource.getFilePath();
+    }
+
+    String getCurrentStep() {
+        if (dataSource == null) return null;
+        return dataSource.getCurrentStep();
     }
 
     private void didStepUpdated(String step) {
@@ -243,15 +286,6 @@ public class FXMLPlayerViewController implements Initializable {
         dataSource.didUpdateDuration(oldValue, newValue);
     }
 
-    private void disableView(boolean state){
-        seekSlider.setDisable(state);
-        labelTime.setDisable(state);
-        btnPlayPause.setDisable(state);
-        btnSkipBackward.setDisable(state);
-        btnSkipForward.setDisable(state);
-    }
 
-    public boolean isViewDisable() {
-        return isViewDisable;
-    }
+
 }
