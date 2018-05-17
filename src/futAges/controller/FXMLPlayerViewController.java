@@ -246,6 +246,7 @@ public class FXMLPlayerViewController implements Initializable {
     private void disableView(boolean state){
         seekSlider.setDisable(state);
         labelTime.setDisable(state);
+        step.setDisable(state);
         btnPlayPause.setDisable(state);
         btnSkipBackward.setDisable(state);
         btnSkipForward.setDisable(state);
