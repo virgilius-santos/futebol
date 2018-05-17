@@ -95,7 +95,7 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
         innerPlayerView.getScene().setOnKeyPressed( e -> {
             if (e.getCode() == KeyCode.ENTER) {
                 int index = dataController.addData(new FrameData());
-                if (index != -1) innerTableViewController.insert(index);
+                if (index != -1) innerTableViewController.insertRow(index);
             }
         });
     }

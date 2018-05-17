@@ -94,43 +94,43 @@ public class FXMLTableViewController implements Initializable {
         return dataSource.getFrameData(index);
     }
 
+
+
     void updateCurrentTime(Integer newTime) {
         if (currentTime != null && currentTime.equals(newTime)) return;
         currentTime = newTime;
-        updateFrames();
+        updateRows();
     }
-
-    private void updateFrames() {
-        Location location;
-        for (int index = 0; index < numberOfItens(); index++) {
-            location = textFieldHashMap.get(index);
-            loadFrame(index, location);
-        }
-    }
-
 
     void cleanTable() {
         textFieldHashMap.clear();
         gridPane.getChildren().removeAll(gridPane.getChildren());
     }
 
-    void insert(int index) {
-        Location location = createLocation(index);
-        loadFrame(index, location);
-    }
-
     void loadFrames() {
         for (int index = 0; index < numberOfItens(); index++) {
-            loadFrame(index);
+            insertRow(index);
         }
     }
 
-    private void loadFrame(int index) {
-        Location location = createLocation(index);
-        loadFrame(index, location);
+    void insertRow(int index) {
+        Location location = createRow(index);
+        updateRowValue(index, location);
     }
 
-    private void loadFrame(int id, Location location) {
+    private Location getRow(int index) {
+        return textFieldHashMap.get(index);
+    }
+
+    private void updateRows() {
+        Location location;
+        for (int index = 0; index < numberOfItens(); index++) {
+            location = getRow(index);
+            updateRowValue(index, location);
+        }
+    }
+
+    private void updateRowValue(int id, Location location) {
 
         FrameData frameData = getFrameData(id);
         if (frameData == null) {
@@ -155,7 +155,7 @@ public class FXMLTableViewController implements Initializable {
 
     }
 
-    private Location createLocation(int index) {
+    private Location createRow(int index) {
 
         int columnNameIndex = 0;
         int columnQuadranteIndex = 1;
