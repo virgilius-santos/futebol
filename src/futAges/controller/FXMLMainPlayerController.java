@@ -74,7 +74,7 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
             }
 
             @Override
-            public void didUpdateDuration(Duration oldValue, Duration newValue) {
+            public void didUpdateDuration(Duration newValue) {
                 innerTableViewController.updateCurrentTime(Validation.getSeconds(newValue));
             }
 

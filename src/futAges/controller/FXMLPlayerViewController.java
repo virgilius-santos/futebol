@@ -25,7 +25,7 @@ public class FXMLPlayerViewController implements Initializable {
         String getFilePath();
         String getCurrentStep();
         void didStepUpdated(String step);
-        void didUpdateDuration(Duration oldValue, Duration newValue);
+        void didUpdateDuration(Duration newValue);
     }
 
     private PlayerDataSource dataSource;
@@ -68,7 +68,9 @@ public class FXMLPlayerViewController implements Initializable {
             }
         });
 
-        step.textProperty().addListener( (obs, o, n) -> didStepUpdated(n));
+        step.textProperty().addListener( (obs, o, n) ->
+                didStepUpdated(n)
+        );
     }
 
     private void configureMediaPlayer() {
@@ -95,10 +97,7 @@ public class FXMLPlayerViewController implements Initializable {
             }
         });
 
-        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
-            updateValues();
-            didUpdateDuration(oldValue, newValue);
-        });
+        mediaPlayer.currentTimeProperty().addListener(v -> updateValues());
 
         mediaView.setMediaPlayer(mediaPlayer);
     }
@@ -209,8 +208,9 @@ public class FXMLPlayerViewController implements Initializable {
             if (!seekSlider.isDisabled()
                     && duration.greaterThan(Duration.ZERO)
                     && !seekSlider.isValueChanging()) {
-                seekSlider.setValue( currentTime.toMillis() / duration.toMillis() * 100.0);
+                seekSlider.setValue( currentTime.toMillis() / duration.toMillis() * seekSlider.getMax());
             }
+            didUpdateDuration(currentTime);
         });
 
     }
@@ -266,12 +266,12 @@ public class FXMLPlayerViewController implements Initializable {
         this.dataSource = dataSource;
     }
 
-    String getFilePath() {
+    private String getFilePath() {
         if (dataSource == null) return null;
         return dataSource.getFilePath();
     }
 
-    String getCurrentStep() {
+    private String getCurrentStep() {
         if (dataSource == null) return null;
         return dataSource.getCurrentStep();
     }
@@ -281,8 +281,8 @@ public class FXMLPlayerViewController implements Initializable {
         dataSource.didStepUpdated(step);
     }
 
-    private void didUpdateDuration(Duration oldValue, Duration newValue){
+    private void didUpdateDuration(Duration newValue){
         if (dataSource == null) return;
-        dataSource.didUpdateDuration(oldValue, newValue);
+        dataSource.didUpdateDuration(newValue);
     }
 }
