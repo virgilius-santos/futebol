@@ -59,7 +59,10 @@ public class FXMLMainController implements Initializable {
     @FXML
     private void handleMenuItemFileSave() throws IOException {
         if (dataController == null) return;
-        if (dataController.getProjetoPath() == null) handleMenuItemFileSaveAs();
+        if (dataController.getProjetoPath() == null){
+            handleMenuItemFileSaveAs();
+            return;
+        }
 
         File file = new File(dataController.getProjetoPath());
         IOFiles.save(file, dataController);
