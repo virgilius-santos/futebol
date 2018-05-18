@@ -13,7 +13,7 @@ public class ProjectData {
     private Integer linhas, colunas; // Variáveis que formam os quadrantes.
     private final ArrayList<FrameData> dados;
     private String videoMD5;
-
+    private String videoPathMD5;
     public ProjectData() {
         Integer stepDefault = 2;
         this.projetoPath = null;
@@ -96,4 +96,11 @@ public class ProjectData {
 
     public String getVideoMD5() { return videoMD5; }
 
+    public String getVideoPathMD5() {
+        return videoPathMD5;
+    }
+
+    public void setVideoPathMD5(String videoPathMD5) {
+        this.videoPathMD5 = videoPathMD5;
+    }
 }
