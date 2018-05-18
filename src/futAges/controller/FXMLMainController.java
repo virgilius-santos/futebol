@@ -37,6 +37,13 @@ public class FXMLMainController implements Initializable {
         dataController = IOFiles.load(file, DataController.class);
         if (dataController == null) return;
 
+        String filename = file.getName();
+        try {
+            if (dataController.getVideoMD5() != MD5.getMD5Checksum(filename)) return;
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
         if (selectedController != null) innerMainPlayerViewController.screenDidDisappear();
 
         selectedController = innerMainPlayerViewController;
