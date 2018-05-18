@@ -1,64 +1,55 @@
 package futAges.model.Util;
 
-import futAges.controller.DataController;
 import futAges.model.Entity.FrameData;
 
-import java.awt.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Csv {
 
-    private static StringBuilder builder;
+    private static final String KEY_TEMPO = "Tempo;";
+    private static final String KEY_SEMI_COLON = ";";
+    private static final String KEY_BREAK_LINE = "\n";
+    private static final String KEY_EMPTY = "";
 
-    public Csv(){
-        builder = new StringBuilder();
-    }
+    private Csv(){}
 
-    public static String converter(ArrayList<FrameData> dados){
+    public static String converter(List<FrameData> dados){
+        StringBuilder builder = new StringBuilder();
+        TreeMap<Integer, Integer[]> linhas = new TreeMap<>();
         int countObj = dados.size();
 
-        //ArrayList<String> arrayHeaders = new ArrayList<>(countObj+1);
-        //arrayHeaders.add("Tempo");
+        FrameData frameData;
+        String nome;
 
-        builder.append("Tempo;");
-
-        TreeMap<Integer, String> linhas = new TreeMap<>();
-
-
+        builder.append(KEY_TEMPO);
 
         for(int id=0; id<countObj; id++){
-            FrameData frameData = dados.get(id);
-
-            String nome = frameData.getName();
-            builder.append(nome + ";");
-            //arrayHeaders.add(nome);
-
-            Set keys = frameData.getKeys();
-
+            frameData = dados.get(id);
+            nome = frameData.getName();
+            builder.append(nome).append(KEY_SEMI_COLON);
 
             int finalId = id;
-            keys.forEach(k -> {
-                if(finalId == 0){
-                    String q = String.valueOf(frameData.getQuadrant((Integer) k));
-                    String l = k+";"+q+";";
-                    linhas.put((Integer) k, l);
+            frameData.getQuadrants().forEach((tempo,quadrante) -> {
+                if (!linhas.containsKey(tempo)) {
+                    linhas.put(tempo, new Integer[countObj]);
                 }
-                else{
-                    linhas.get(k).concat(frameData.getQuadrant((Integer) k)+";");
-                }
+                linhas.get(tempo)[finalId] = quadrante;
             });
 
         }
-        builder.append("\n");
+        builder.append(KEY_BREAK_LINE);
 
-        Set keys = linhas.keySet();
-        keys.forEach(k -> {
-            System.out.print(linhas.get(k)+"\n");
-            builder.append(linhas.get(k)+"\n");
+        linhas.forEach((key, colunas) -> {
+
+            builder.append(key).append(KEY_SEMI_COLON);
+
+            for (Integer coluna : colunas) {
+                builder.append((coluna == null) ? KEY_EMPTY : coluna.toString())
+                        .append(KEY_SEMI_COLON);
+            }
+
+            builder.append(KEY_BREAK_LINE);
+
         });
 
         return builder.toString();

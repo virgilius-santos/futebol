@@ -44,7 +44,7 @@ public class FrameData {
         quadrants.put(tempo, quadrant);
     }
 
-    public Set getKeys(){
-        return quadrants.keySet();
+    public HashMap<Integer,Integer> getQuadrants(){
+        return (HashMap<Integer, Integer>) quadrants.clone();
     }
 }

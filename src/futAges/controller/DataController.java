@@ -30,6 +30,10 @@ public class DataController {
         this.dados.add(obj);
     }
 
+    ArrayList<FrameData> getDados() {
+        return (ArrayList<FrameData>) dados.clone();
+    }
+
     // Adds
     int addData(FrameData data) {
         if (this.dados.size() >= 10) return -1;
