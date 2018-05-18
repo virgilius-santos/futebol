@@ -1,8 +1,8 @@
 package futAges.controller.screenFrameWork;
 
-import futAges.controller.DataController;
+import futAges.model.Entity.ProjectData;
 
 public interface ControlledScreen {
-    void setDataController(DataController dataController);
+    void setProjectData(ProjectData projectData);
     void screenDidDisappear();
 }

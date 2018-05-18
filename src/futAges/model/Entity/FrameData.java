@@ -1,31 +1,21 @@
 package futAges.model.Entity;
 
 import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeMap;
 
 public class FrameData {
 
     private static int ids = 0;
 
-    private Integer id;
+    private final Integer id;
     private String name;
-    private HashMap<Integer,Integer> quadrants;
+    private final HashMap<Integer,Integer> quadrants;
 
     public FrameData() {
-        this(null);
-    }
-
-    private FrameData(String name) {
 
         this.id = ids;
         ids++;
-        this.name = name;
+        this.name = null;
         quadrants = new HashMap<>();
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getName() {

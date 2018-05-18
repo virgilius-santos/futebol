@@ -2,6 +2,7 @@ package futAges.controller;
 
 import futAges.controller.screenFrameWork.ControlledScreen;
 import futAges.model.Entity.FrameData;
+import futAges.model.Entity.ProjectData;
 import futAges.model.Util.StringFuncions;
 import futAges.model.Util.Validation;
 import javafx.fxml.FXML;
@@ -13,9 +14,9 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FXMLMainPlayerController implements Initializable, ControlledScreen {
+public class FXMLProjectController implements Initializable, ControlledScreen {
 
-    private DataController dataController;
+    private ProjectData projectData;
 
     @FXML
     private AnchorPane innerPlayerView;
@@ -35,12 +36,12 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
         innerTableViewController.setDataSource(new FXMLTableViewController.DataSource() {
             @Override
             public int numberOfItens() {
-                return dataController.getDataSize();
+                return projectData.getDataSize();
             }
 
             @Override
             public FrameData getFrameData(Integer index) {
-                return dataController.getData(index);
+                return projectData.getData(index);
             }
 
         });
@@ -48,13 +49,13 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
         innerTableViewController.setDataListener(new FXMLTableViewController.DataListener() {
             @Override
             public void update(Integer index, String nome) {
-                dataController.getData(index).setName(nome);
+                projectData.getData(index).setName(nome);
             }
 
             @Override
             public void update(Integer index, Integer tempo, String quadrante) {
                 Integer q = (quadrante == null || quadrante.isEmpty()) ? null : Integer.parseInt(quadrante);
-                dataController.getData(index).setQuadrant(tempo, q);
+                projectData.getData(index).setQuadrant(tempo, q);
             }
         });
 
@@ -65,12 +66,12 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
             @Override
             public void didStepUpdated(String step) {
                 Integer tempo = StringFuncions.stringToInt(step);
-                dataController.setTempoDivisao(tempo);
+                projectData.setTempoDivisao(tempo);
             }
 
             @Override
             public String getCurrentStep() {
-                return dataController.getTempoDivisao().toString();
+                return projectData.getTempoDivisao().toString();
             }
 
             @Override
@@ -80,21 +81,21 @@ public class FXMLMainPlayerController implements Initializable, ControlledScreen
 
             @Override
             public String getFilePath() {
-                return dataController.getVideoPath();
+                return projectData.getVideoPath();
             }
         });
     }
 
     @Override
-    public void setDataController(DataController dataController) {
-        this.dataController = dataController;
+    public void setProjectData(ProjectData projectData) {
+        this.projectData = projectData;
 
         innerPlayerViewController.loadMedia();
         innerTableViewController.loadFrames();
 
         innerPlayerView.getScene().setOnKeyPressed( e -> {
             if (e.getCode() == KeyCode.ENTER) {
-                int index = dataController.addData(new FrameData());
+                int index = projectData.addData(new FrameData());
                 if (index != -1) innerTableViewController.insertRow(index);
             }
         });

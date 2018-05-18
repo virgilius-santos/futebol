@@ -16,18 +16,18 @@ public class AgesFileChooser {
         CSV("CSV Files(*.csv)", "*.csv")
         ;
 
-        private String description;
-        private List<String> extensions;
+        private final String description;
+        private final List<String> extensions;
         FileTypes(String description, String... extensions) {
             this.description = description;
             this.extensions = Arrays.asList(extensions);
         }
 
-        public String getDescription() {
+        String getDescription() {
             return description;
         }
 
-        public List<String> getExtensions() {
+        List<String> getExtensions() {
             return extensions;
         }
     }

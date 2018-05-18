@@ -20,12 +20,12 @@ public class Screen {
             valor = valorOpcao;
         }
 
-        public String getValor(){
+        String getValor(){
             return valor;
         }
     }
 
-    private FXMLLoader loader;
+    private final FXMLLoader loader;
     private Parent parent;
 
     public Screen(ScreenPath path) {

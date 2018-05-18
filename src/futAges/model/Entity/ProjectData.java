@@ -1,23 +1,20 @@
-package futAges.controller;
+package futAges.model.Entity;
 //-------------------------------------------------------
-
-import futAges.model.Entity.FrameData;
-import futAges.model.Util.MD5;
 
 import java.io.File;
 import java.util.ArrayList;
 //-------------------------------------------------------
 
-public class DataController {
+public class ProjectData {
 
     private String projetoPath;
     private String videoPath;
     private Integer tempoDivisao;
     private Integer linhas, colunas; // Variáveis que formam os quadrantes.
-    private ArrayList<FrameData> dados;
+    private final ArrayList<FrameData> dados;
     private String videoMD5;
 
-    DataController() {
+    public ProjectData() {
         Integer stepDefault = 2;
         this.projetoPath = null;
         this.videoPath = null;
@@ -32,12 +29,12 @@ public class DataController {
         this.dados.add(obj);
     }
 
-    ArrayList<FrameData> getDados() {
+    public ArrayList<FrameData> getDados() {
         return (ArrayList<FrameData>) dados.clone();
     }
 
     // Adds
-    int addData(FrameData data) {
+    public int addData(FrameData data) {
         if (this.dados.size() >= 10) return -1;
         int index = this.dados.size();
         this.dados.add(data);
@@ -45,58 +42,58 @@ public class DataController {
     }
 
     // Sets
-    void setProjetoPath(File file) {
+    public void setProjetoPath(File file) {
         if (file == null) return;
         this.projetoPath = file.getPath();
     }
 
-    void setVideoPath(String videoPath) {
+    public void setVideoPath(String videoPath) {
         this.videoPath = videoPath;
     }
 
-    void setTempoDivisao(Integer tempoDivisao){
+    public void setTempoDivisao(Integer tempoDivisao){
         this.tempoDivisao = tempoDivisao;
     }
 
-    void setLinhas(Integer linhas){
+    public void setLinhas(Integer linhas){
         this.linhas = linhas;
     }
 
-    void setColunas(Integer colunas){
+    public void setColunas(Integer colunas){
         this.colunas = colunas;
     }
 
-    void setVideoMD5(String videoMD5) { this.videoMD5 = videoMD5; }
+    public void setVideoMD5(String videoMD5) { this.videoMD5 = videoMD5; }
 
     // Gets
-    String getProjetoPath(){
+    public String getProjetoPath(){
         return projetoPath;
     }
 
-    Integer getLinhas(){
+    public Integer getLinhas(){
         return  linhas;
     }
 
-    Integer getColunas(){
+    public Integer getColunas(){
         return  colunas;
     }
 
-    Integer getTempoDivisao() {
+    public Integer getTempoDivisao() {
         return tempoDivisao;
     }
 
-    FrameData getData(Integer id) {
+    public FrameData getData(Integer id) {
         return dados.get(id);
     }
 
-    int getDataSize() {
+    public int getDataSize() {
         return dados.size();
     }
 
-    String getVideoPath() {
+    public String getVideoPath() {
         return videoPath;
     }
 
-    String getVideoMD5() { return videoMD5; }
+    public String getVideoMD5() { return videoMD5; }
 
 }

@@ -53,7 +53,7 @@ public class FXMLTableViewController implements Initializable {
     private DataListener dataListener;
     private DataSource dataSource;
 
-    private HashMap<Integer, Location> textFieldHashMap = new HashMap<>();
+    private final HashMap<Integer, Location> textFieldHashMap = new HashMap<>();
     private Integer currentTime;
 
     @FXML

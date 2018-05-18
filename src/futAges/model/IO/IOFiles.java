@@ -2,13 +2,12 @@ package futAges.model.IO;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import futAges.model.Util.Csv;
 
 import java.io.*;
 
 public class IOFiles {
 
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
     public static <T> void saveJsonFile(File file, T dados){
 

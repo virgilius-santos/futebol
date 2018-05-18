@@ -25,12 +25,12 @@ public class MD5 {
 
     public static String getMD5Checksum(String filename) throws Exception {
         byte[] b = createChecksum(filename);
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < b.length; i++) {
-            result += Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1);
+        for (byte aB : b) {
+            result.append(Integer.toString((aB & 0xff) + 0x100, 16).substring(1));
         }
-        return result;
+        return result.toString();
     }
 
 }

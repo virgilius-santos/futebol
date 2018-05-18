@@ -1,5 +1,6 @@
 package futAges.controller;
 
+import futAges.model.Entity.ProjectData;
 import futAges.view.AgesFileChooser.FileTypes;
 import futAges.controller.screenFrameWork.ControlledScreen;
 import futAges.model.IO.IOFiles;
@@ -18,11 +19,11 @@ import java.util.ResourceBundle;
 
 public class FXMLMainController implements Initializable {
 
-    private DataController dataController;
+    private ProjectData projectData;
     private ControlledScreen selectedController;
 
     @FXML
-    private FXMLMainPlayerController innerMainPlayerViewController;
+    private FXMLProjectController innerMainPlayerViewController;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -35,25 +36,25 @@ public class FXMLMainController implements Initializable {
         if (alert.getResult() == ButtonType.NO) return;
 
         File file = AgesFileChooser.chooseFileToOpen(FileTypes.JSON);
-        dataController = IOFiles.loadJsonFile(file, DataController.class);
-        if (dataController == null) return;
+        projectData = IOFiles.loadJsonFile(file, ProjectData.class);
+        if (projectData == null) return;
 
         String filename = file.getName();
         try {
-            if (dataController.getVideoMD5() != MD5.getMD5Checksum(filename)) return;
+            if (!projectData.getVideoMD5().equals(MD5.getMD5Checksum(filename))) return;
         } catch(Exception e) {
             e.printStackTrace();
         }
 
-        if (selectedController != null) innerMainPlayerViewController.screenDidDisappear();
+        if (selectedController != null) selectedController.screenDidDisappear();
 
         selectedController = innerMainPlayerViewController;
-        selectedController.setDataController(dataController);
+        selectedController.setProjectData(projectData);
     }
 
     @FXML
     private void handleMenuItemFileSaveAs() throws IOException {
-        if (dataController == null) return;
+        if (projectData == null) return;
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Project", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
@@ -61,26 +62,26 @@ public class FXMLMainController implements Initializable {
 
         File file = AgesFileChooser.chooseFileToSave(FileTypes.JSON);
 
-        dataController.setProjetoPath(file);
-        IOFiles.saveJsonFile(file, dataController);
+        projectData.setProjetoPath(file);
+        IOFiles.saveJsonFile(file, projectData);
     }
 
     @FXML
     private void handleMenuItemFileSave() throws IOException {
-        if (dataController == null) return;
-        if (dataController.getProjetoPath() == null){
+        if (projectData == null) return;
+        if (projectData.getProjetoPath() == null){
             handleMenuItemFileSaveAs();
             return;
         }
 
-        File file = new File(dataController.getProjetoPath());
-        IOFiles.saveJsonFile(file, dataController);
+        File file = new File(projectData.getProjetoPath());
+        IOFiles.saveJsonFile(file, projectData);
     }
 
     @FXML
     private void handleMenuItemFileNew() throws IOException {
 
-        dataController = new DataController();
+        projectData = new ProjectData();
 
         String filePath;
         File file = AgesFileChooser.chooseFileToOpen(FileTypes.VIDEO);
@@ -90,23 +91,23 @@ public class FXMLMainController implements Initializable {
 
         String filename = file.getName();
         try {
-            dataController.setVideoMD5(MD5.getMD5Checksum(filename));
+            projectData.setVideoMD5(MD5.getMD5Checksum(filename));
         }
         catch(Exception e) {
             e.printStackTrace();
         }
 
-        dataController.setVideoPath(filePath);
+        projectData.setVideoPath(filePath);
 
-        if (selectedController != null) innerMainPlayerViewController.screenDidDisappear();
+        if (selectedController != null) selectedController.screenDidDisappear();
 
         selectedController = innerMainPlayerViewController;
-        selectedController.setDataController(dataController);
+        selectedController.setProjectData(projectData);
     }
 
     @FXML
     private void handleMenuItemFileExport() throws IOException {
-        if (dataController == null) return;
+        if (projectData == null) return;
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Export Project", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
@@ -115,7 +116,7 @@ public class FXMLMainController implements Initializable {
         File file = AgesFileChooser.chooseFileToSave(FileTypes.CSV);
         if (file == null) return;
 
-        String csv = Csv.converter(dataController.getDados());
+        String csv = Csv.converter(projectData.getDados());
 
         IOFiles.saveCsvFile(file, csv);
     }
