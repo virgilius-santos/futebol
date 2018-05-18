@@ -2,10 +2,7 @@ package futAges.model.Util;
 
 import futAges.model.Entity.FrameData;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Csv {
 
@@ -18,7 +15,7 @@ public class Csv {
 
     public static String converter(List<FrameData> dados){
         StringBuilder builder = new StringBuilder();
-        HashMap<Integer, Integer[]> linhas = new HashMap<>();
+        TreeMap<Integer, Integer[]> linhas = new TreeMap<>();
         int countObj = dados.size();
 
         FrameData frameData;
@@ -42,17 +39,13 @@ public class Csv {
         }
         builder.append(KEY_BREAK_LINE);
 
-        linhas
-                .entrySet()
-                .stream()
-                .sorted(Comparator.comparing(Map.Entry::getKey))
-                .forEach(set -> {
+        linhas.forEach((key, colunas) -> {
 
-            builder.append(set.getKey()).append(KEY_SEMI_COLON);
+            builder.append(key).append(KEY_SEMI_COLON);
 
-            for (Integer celula : set.getValue()) {
-                builder.append((celula == null) ? KEY_EMPTY : celula.toString());
-                builder.append(KEY_SEMI_COLON);
+            for (Integer coluna : colunas) {
+                builder.append((coluna == null) ? KEY_EMPTY : coluna.toString())
+                        .append(KEY_SEMI_COLON);
             }
 
             builder.append(KEY_BREAK_LINE);
