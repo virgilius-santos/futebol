@@ -1,14 +1,15 @@
 package futAges.controller;
 
+import futAges.view.AgesFileChooser.FileTypes;
 import futAges.controller.screenFrameWork.ControlledScreen;
 import futAges.model.IO.IOFiles;
+import futAges.model.Util.Csv;
+import futAges.view.AgesFileChooser;
 import futAges.model.Util.MD5;
-import futAges.view.FileChooser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,8 +34,8 @@ public class FXMLMainController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
 
-        File file = FileChooser.getLoadFilePath();
-        dataController = IOFiles.load(file, DataController.class);
+        File file = AgesFileChooser.chooseFileToOpen(FileTypes.JSON);
+        dataController = IOFiles.loadJsonFile(file, DataController.class);
         if (dataController == null) return;
 
         String filename = file.getName();
@@ -58,10 +59,10 @@ public class FXMLMainController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
 
-        File file = FileChooser.getSaveFilePath();
+        File file = AgesFileChooser.chooseFileToSave(FileTypes.JSON);
 
         dataController.setProjetoPath(file);
-        IOFiles.save(file, dataController);
+        IOFiles.saveJsonFile(file, dataController);
     }
 
     @FXML
@@ -73,7 +74,7 @@ public class FXMLMainController implements Initializable {
         }
 
         File file = new File(dataController.getProjetoPath());
-        IOFiles.save(file, dataController);
+        IOFiles.saveJsonFile(file, dataController);
     }
 
     @FXML
@@ -82,7 +83,7 @@ public class FXMLMainController implements Initializable {
         dataController = new DataController();
 
         String filePath;
-        File file = FileChooser.getVideoPath();
+        File file = AgesFileChooser.chooseFileToOpen(FileTypes.VIDEO);
         if (file == null) return;
 
         filePath = file.toURI().toString();
@@ -103,5 +104,20 @@ public class FXMLMainController implements Initializable {
         selectedController.setDataController(dataController);
     }
 
+    @FXML
+    private void handleMenuItemFileExport() throws IOException {
+        if (dataController == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Export Project", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.NO) return;
+
+        File file = AgesFileChooser.chooseFileToSave(FileTypes.CSV);
+        if (file == null) return;
+
+        String csv = Csv.converter(dataController.getDados());
+
+        IOFiles.saveCsvFile(file, csv);
+    }
 
 }

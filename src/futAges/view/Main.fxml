@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -21,7 +22,7 @@
                   <MenuItem fx:id="menuItemFileSaveAs" mnemonicParsing="false" onAction="#handleMenuItemFileSaveAs" text="Save As.." />
                   <MenuItem fx:id="menuItemFileLoad" mnemonicParsing="false" onAction="#handleMenuItemFileLoad" text="Load" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" text="Export Project" />
+                  <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" onAction="#handleMenuItemFileExport" text="Export Project" />
                   <MenuItem fx:id="menuItemFileClose" mnemonicParsing="false" text="Close Project" />
             </items>
           </Menu>

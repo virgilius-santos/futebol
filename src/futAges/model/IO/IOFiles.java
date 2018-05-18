@@ -2,6 +2,7 @@ package futAges.model.IO;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import futAges.model.Util.Csv;
 
 import java.io.*;
 
@@ -9,31 +10,43 @@ public class IOFiles {
 
     private static Gson gson = new Gson();
 
-    public static <T> void save(File file, T object){
-        if(file == null || object == null) return;
+    public static <T> void saveJsonFile(File file, T dados){
+
+        if(file == null || dados == null) return;
+
         if ( !file.getName().toLowerCase().contains(".json")){
             file = new File(file+".json");
         }
-            String jsonString = gson.toJson(object);
-            FileWriter arquivo;
 
-            try {
+        String json = gson.toJson(dados);
 
-                arquivo = new FileWriter(file);
+        save(file, json);
+    }
 
-                arquivo.write(jsonString);
+    public static void saveCsvFile(File file, String dados){
 
-                arquivo.close();
+        if(file == null || dados == null) return;
 
-            } catch (IOException i) {
-                System.err.println(i.getMessage());
-            }
+        if ( !file.getName().toLowerCase().contains(".csv")){
+            file = new File(file+".csv");
+        }
 
+        save(file, dados);
+    }
+
+    private static void save(File file, String dados) {
+        FileWriter arquivo;
+        try {
+            arquivo = new FileWriter(file);
+            arquivo.write(dados);
+            arquivo.close();
+        } catch (IOException i) {
+            System.err.println(i.getMessage());
+        }
     }
 
 
-
-    public static <T> T load(File file, Class<T> type){
+    public static <T> T loadJsonFile(File file, Class<T> type){
 
         if (file == null) return null;
         T obj = null;

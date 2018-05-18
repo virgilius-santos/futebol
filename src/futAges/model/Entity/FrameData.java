@@ -1,6 +1,8 @@
 package futAges.model.Entity;
 
 import java.util.HashMap;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class FrameData {
 
@@ -39,10 +41,14 @@ public class FrameData {
     }
 
     public void setQuadrant(Integer tempo, Integer quadrant) {
-        if (quadrant == null) {
+        if (quadrant == null && quadrants.containsKey(tempo)) {
             quadrants.remove(tempo);
-        } else {
+        } else if (quadrant != null) {
             quadrants.put(tempo, quadrant);
         }
+    }
+
+    public HashMap<Integer,Integer> getQuadrants(){
+        return (HashMap<Integer, Integer>) quadrants.clone();
     }
 }
