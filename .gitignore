@@ -15,3 +15,7 @@ hs_err_pid*
 
 out/*
 
+
+\.idea/sonarlint/
+
+\.idea/workspace.xml
