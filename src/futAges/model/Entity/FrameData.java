@@ -41,7 +41,11 @@ public class FrameData {
     }
 
     public void setQuadrant(Integer tempo, Integer quadrant) {
-        quadrants.put(tempo, quadrant);
+        if (quadrant == null && quadrants.containsKey(tempo)) {
+            quadrants.remove(tempo);
+        } else if (quadrant != null) {
+            quadrants.put(tempo, quadrant);
+        }
     }
 
     public HashMap<Integer,Integer> getQuadrants(){
