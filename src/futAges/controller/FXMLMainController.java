@@ -39,11 +39,13 @@ public class FXMLMainController implements Initializable {
         projectData = IOFiles.loadJsonFile(file, ProjectData.class);
         if (projectData == null) return;
 
-        String filename = file.getName();
+        String filename = projectData.getVideoPathMD5();
         try {
-            if (!projectData.getVideoMD5().equals(MD5.getMD5Checksum(filename))) return;
+            String md5 = MD5.getMD5Checksum(filename);
+            if (!projectData.getVideoMD5().equals(md5)) return;
         } catch(Exception e) {
             e.printStackTrace();
+            return;
         }
 
         if (selectedController != null) selectedController.screenDidDisappear();
@@ -89,9 +91,9 @@ public class FXMLMainController implements Initializable {
 
         filePath = file.toURI().toString();
 
-        String filename = file.getName();
         try {
-            projectData.setVideoMD5(MD5.getMD5Checksum(filename));
+            projectData.setVideoMD5(MD5.getMD5Checksum(file.getAbsolutePath()));
+            projectData.setVideoPathMD5(file.getAbsolutePath());
         }
         catch(Exception e) {
             e.printStackTrace();

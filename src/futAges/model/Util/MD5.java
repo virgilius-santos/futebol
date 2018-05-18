@@ -5,21 +5,27 @@ import java.security.MessageDigest;
 
 public class MD5 {
 
-    private static byte[] createChecksum(String filename) throws Exception {
-        InputStream fis = new FileInputStream(filename);
+    private static byte[] createChecksum(String filename) {
+        MessageDigest complete = null;
+        try (InputStream fis = new FileInputStream(filename)) {
 
-        byte[] buffer = new byte[1024];
-        MessageDigest complete = MessageDigest.getInstance("MD5");
-        int numRead;
+            byte[] buffer = new byte[1024];
+            complete = MessageDigest.getInstance("MD5");
+            int numRead;
 
-        do {
-            numRead = fis.read(buffer);
-            if (numRead > 0) {
-                complete.update(buffer, 0, numRead);
-            }
-        } while (numRead != -1);
+            do {
+                numRead = fis.read(buffer);
+                if (numRead > 0) {
+                    complete.update(buffer, 0, numRead);
+                }
+            } while (numRead != -1);
 
-        fis.close();
+            fis.close();
+
+        } catch (Exception e) {
+
+        } finally {
+        }
         return complete.digest();
     }
 
