@@ -2,6 +2,7 @@ package futAges.controller;
 
 import futAges.controller.screenFrameWork.ControlledScreen;
 import futAges.model.IO.IOFiles;
+import futAges.model.Util.MD5;
 import futAges.view.FileChooser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -78,6 +79,15 @@ public class FXMLMainController implements Initializable {
         if (file == null) return;
 
         filePath = file.toURI().toString();
+
+        String filename = file.getName();
+        try {
+            dataController.setVideoMD5(MD5.getMD5Checksum(filename));
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
         dataController.setVideoPath(filePath);
 
         if (selectedController != null) innerMainPlayerViewController.screenDidDisappear();

@@ -2,6 +2,7 @@ package futAges.controller;
 //-------------------------------------------------------
 
 import futAges.model.Entity.FrameData;
+import futAges.model.Util.MD5;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class DataController {
     private Integer tempoDivisao;
     private Integer linhas, colunas; // Variáveis que formam os quadrantes.
     private ArrayList<FrameData> dados;
+    private String videoMD5;
 
     DataController() {
         Integer stepDefault = 2;
@@ -60,6 +62,8 @@ public class DataController {
         this.colunas = colunas;
     }
 
+    void setVideoMD5(String videoMD5) { this.videoMD5 = videoMD5; }
+
     // Gets
     String getProjetoPath(){
         return projetoPath;
@@ -88,4 +92,7 @@ public class DataController {
     String getVideoPath() {
         return videoPath;
     }
+
+    String getVideoMD5() { return videoMD5; }
+
 }
