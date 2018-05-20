@@ -1,4 +1,4 @@
-package futAges.model.Util;
+package main.java.model.Util;
 
 import javafx.util.Duration;
 

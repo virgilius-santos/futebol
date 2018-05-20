@@ -1,6 +1,6 @@
-package futAges.model.Util;
+package main.java.model.Util;
 
-import futAges.model.Entity.FrameData;
+import main.java.model.Entity.FrameData;
 
 import java.util.*;
 

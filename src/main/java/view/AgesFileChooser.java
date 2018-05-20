@@ -1,6 +1,6 @@
-package futAges.view;
+package main.java.view;
 
-import futAges.Main;
+import main.java.Main;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 

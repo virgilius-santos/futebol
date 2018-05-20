@@ -1,6 +1,6 @@
-package futAges;
+package main.java;
 
-import futAges.controller.screenFrameWork.Screen;
+import main.java.controller.screenFrameWork.Screen;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

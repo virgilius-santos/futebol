@@ -1,4 +1,4 @@
-package futAges.model.IO;
+package main.java.model.IO;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
