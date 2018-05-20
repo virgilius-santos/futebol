@@ -1,6 +1,6 @@
-package main.java.view;
+package view;
 
-import main.java.Main;
+import main.Main;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 

@@ -1,6 +1,7 @@
-package main.java;
+package main;
 
-import main.java.controller.screenFrameWork.Screen;
+import controller.screenFrameWork.Screen;
+import controller.screenFrameWork.Screen.ScreenPath;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,8 +15,10 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
 
         primaryStage = stage;
+        Screen screen = new Screen(ScreenPath.Main);
+        if (screen == null) return;
 
-        Parent root = (new Screen(Screen.ScreenPath.Main)).getParent();
+        Parent root = screen.getParent();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("AGES - Futebol");

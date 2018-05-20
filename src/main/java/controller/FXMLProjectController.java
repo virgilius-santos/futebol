@@ -1,10 +1,10 @@
-package main.java.controller;
+package controller;
 
-import main.java.controller.screenFrameWork.ControlledScreen;
-import main.java.model.Entity.FrameData;
-import main.java.model.Entity.ProjectData;
-import main.java.model.Util.StringFuncions;
-import main.java.model.Util.Validation;
+import controller.screenFrameWork.ControlledScreen;
+import model.Entity.FrameData;
+import model.Entity.ProjectData;
+import model.Util.StringFuncions;
+import model.Util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;

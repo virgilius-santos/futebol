@@ -1,4 +1,4 @@
-package main.java.controller.screenFrameWork;
+package controller.screenFrameWork;
 
 import javafx.fxml.FXMLLoader;
 
@@ -9,10 +9,7 @@ import java.io.IOException;
 public class Screen {
 
     public enum ScreenPath {
-    Main("/futAges/view/Main.fxml"),
-    MainPlayer("/futAges/view/MainPlayer.fxml"),
-    PlayerView("/futAges/view/PlayerView.fxml"),
-    TableView("/futAges/view/TableView.fxml");
+    Main("/view/Main.fxml");
 
         private final String valor;
 
@@ -29,10 +26,11 @@ public class Screen {
     private Parent parent;
 
     public Screen(ScreenPath path) {
-        loader = new FXMLLoader(getClass().getResource(path.getValor()));
+        String string = path.getValor();
+        loader = new FXMLLoader(getClass().getResource(string));
         try {
             parent = loader.load();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             parent = null;
         }

@@ -1,7 +1,7 @@
-package main.java.controller;
+package controller;
 
-import main.java.model.Entity.FrameData;
-import main.java.model.Util.Validation;
+import model.Entity.FrameData;
+import model.Util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;

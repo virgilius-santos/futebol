@@ -1,11 +1,11 @@
-package main.java.controller;
+package controller;
 
-import main.java.model.Entity.ProjectData;
-import main.java.controller.screenFrameWork.ControlledScreen;
-import main.java.model.IO.IOFiles;
-import main.java.model.Util.Csv;
-import main.java.view.AgesFileChooser;
-import main.java.model.Util.MD5;
+import model.Entity.ProjectData;
+import controller.screenFrameWork.ControlledScreen;
+import model.IO.IOFiles;
+import model.Util.Csv;
+import view.AgesFileChooser;
+import model.Util.MD5;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;

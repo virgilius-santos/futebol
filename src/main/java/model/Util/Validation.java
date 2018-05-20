@@ -1,4 +1,4 @@
-package main.java.model.Util;
+package model.Util;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;

@@ -1,4 +1,4 @@
-package main.java.model.Util;
+package model.Util;
 
 import javafx.util.Duration;
 

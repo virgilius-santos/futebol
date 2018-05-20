@@ -1,4 +1,4 @@
-package main.java.model.IO;
+package model.IO;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;

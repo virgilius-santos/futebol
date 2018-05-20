@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLTableViewController">
+   <children>
+      <Label layoutX="128.0" layoutY="28.0" text="Quadrante" />
+      <Label layoutX="39.0" layoutY="28.0" text="Nome" />
+      <GridPane fx:id="gridPane" layoutX="20.0" layoutY="56.0" minWidth="-Infinity" prefHeight="278.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

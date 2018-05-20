@@ -1,7 +1,7 @@
-package main.java.controller;
+package controller;
 
-import main.java.model.Util.StringFuncions;
-import main.java.model.Util.Validation;
+import model.Util.StringFuncions;
+import model.Util.Validation;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

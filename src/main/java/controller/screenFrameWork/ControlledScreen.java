@@ -1,6 +1,6 @@
-package main.java.controller.screenFrameWork;
+package controller.screenFrameWork;
 
-import main.java.model.Entity.ProjectData;
+import model.Entity.ProjectData;
 
 public interface ControlledScreen {
     void setProjectData(ProjectData projectData);

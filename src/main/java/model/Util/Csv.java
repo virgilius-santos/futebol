@@ -1,6 +1,6 @@
-package main.java.model.Util;
+package model.Util;
 
-import main.java.model.Entity.FrameData;
+import model.Entity.FrameData;
 
 import java.util.*;
 
