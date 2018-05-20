@@ -1,10 +1,10 @@
-package futAges.controller;
+package main.java.controller;
 
-import futAges.controller.screenFrameWork.ControlledScreen;
-import futAges.model.Entity.FrameData;
-import futAges.model.Entity.ProjectData;
-import futAges.model.Util.StringFuncions;
-import futAges.model.Util.Validation;
+import main.java.controller.screenFrameWork.ControlledScreen;
+import main.java.model.Entity.FrameData;
+import main.java.model.Entity.ProjectData;
+import main.java.model.Util.StringFuncions;
+import main.java.model.Util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;

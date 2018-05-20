@@ -1,7 +1,7 @@
-package futAges.controller;
+package main.java.controller;
 
-import futAges.model.Util.StringFuncions;
-import futAges.model.Util.Validation;
+import main.java.model.Util.StringFuncions;
+import main.java.model.Util.Validation;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

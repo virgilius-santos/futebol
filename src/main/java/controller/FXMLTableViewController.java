@@ -1,7 +1,7 @@
-package futAges.controller;
+package main.java.controller;
 
-import futAges.model.Entity.FrameData;
-import futAges.model.Util.Validation;
+import main.java.model.Entity.FrameData;
+import main.java.model.Util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;

@@ -1,6 +1,6 @@
-package futAges.controller.screenFrameWork;
+package main.java.controller.screenFrameWork;
 
-import futAges.model.Entity.ProjectData;
+import main.java.model.Entity.ProjectData;
 
 public interface ControlledScreen {
     void setProjectData(ProjectData projectData);

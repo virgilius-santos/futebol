@@ -1,4 +1,4 @@
-package futAges.controller.screenFrameWork;
+package main.java.controller.screenFrameWork;
 
 import javafx.fxml.FXMLLoader;
 

@@ -1,12 +1,11 @@
-package futAges.controller;
+package main.java.controller;
 
-import futAges.model.Entity.ProjectData;
-import futAges.view.AgesFileChooser.FileTypes;
-import futAges.controller.screenFrameWork.ControlledScreen;
-import futAges.model.IO.IOFiles;
-import futAges.model.Util.Csv;
-import futAges.view.AgesFileChooser;
-import futAges.model.Util.MD5;
+import main.java.model.Entity.ProjectData;
+import main.java.controller.screenFrameWork.ControlledScreen;
+import main.java.model.IO.IOFiles;
+import main.java.model.Util.Csv;
+import main.java.view.AgesFileChooser;
+import main.java.model.Util.MD5;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -54,7 +53,7 @@ public class FXMLMainController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
 
-        File file = AgesFileChooser.chooseFileToOpen(FileTypes.JSON);
+        File file = AgesFileChooser.chooseFileToOpen(AgesFileChooser.FileTypes.JSON);
         projectData = IOFiles.loadJsonFile(file, ProjectData.class);
         if (projectData == null) return;
 
@@ -81,7 +80,7 @@ public class FXMLMainController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
 
-        File file = AgesFileChooser.chooseFileToSave(FileTypes.JSON);
+        File file = AgesFileChooser.chooseFileToSave(AgesFileChooser.FileTypes.JSON);
 
         projectData.setProjetoPath(file);
         IOFiles.saveJsonFile(file, projectData);
@@ -105,7 +104,7 @@ public class FXMLMainController implements Initializable {
         projectData = new ProjectData();
 
         String filePath;
-        File file = AgesFileChooser.chooseFileToOpen(FileTypes.VIDEO);
+        File file = AgesFileChooser.chooseFileToOpen(AgesFileChooser.FileTypes.VIDEO);
         if (file == null) return;
 
         filePath = file.toURI().toString();
@@ -136,7 +135,7 @@ public class FXMLMainController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
 
-        File file = AgesFileChooser.chooseFileToSave(FileTypes.CSV);
+        File file = AgesFileChooser.chooseFileToSave(AgesFileChooser.FileTypes.CSV);
         if (file == null) return;
 
         String csv = Csv.converter(projectData.getDados());
