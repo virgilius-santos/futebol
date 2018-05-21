@@ -1,6 +1,6 @@
 package controller;
 
-import controller.screenFrameWork.ControlledScreen;
+import controller.FXMLMainController.ControlledScreen;
 import model.Entity.FrameData;
 import model.Entity.ProjectData;
 import model.Util.Conversion;

@@ -1,7 +1,6 @@
 package controller;
 
 import model.Entity.ProjectData;
-import controller.screenFrameWork.ControlledScreen;
 import model.IO.IOFiles;
 import model.Util.Conversion;
 import view.AgesFileChooser;
@@ -16,6 +15,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FXMLMainController implements Initializable {
+
+    public interface ControlledScreen {
+        void setProjectData(ProjectData projectData);
+        void screenDidDisappear();
+    }
 
     private ProjectData projectData;
     private ControlledScreen selectedController;
