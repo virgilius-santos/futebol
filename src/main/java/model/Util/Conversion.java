@@ -59,6 +59,10 @@ public class Conversion {
         return builder.toString();
     }
 
+    public static Integer getSeconds(Duration duration){
+        return ((Double) duration.toSeconds()).intValue();
+    }
+
     public static String formatTime(Duration duration){
 
         int elapsedSeconds = ((int) duration.toSeconds()) % 60;

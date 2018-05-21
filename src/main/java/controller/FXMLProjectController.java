@@ -4,7 +4,6 @@ import controller.FXMLMainController.ControlledScreen;
 import model.Entity.FrameData;
 import model.Entity.ProjectData;
 import model.Util.Conversion;
-import model.Util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
@@ -76,7 +75,7 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
 
             @Override
             public void didUpdateDuration(Duration newValue) {
-                innerTableViewController.updateCurrentTime(Validation.getSeconds(newValue));
+                innerTableViewController.updateCurrentTime(Conversion.getSeconds(newValue));
             }
 
             @Override

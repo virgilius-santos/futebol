@@ -20,8 +20,4 @@ public class Validation {
             evt.consume();
         }
     }
-
-    public static Integer getSeconds(Duration duration){
-        return ((Double) duration.toSeconds()).intValue();
-    }
 }
