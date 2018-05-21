@@ -3,7 +3,7 @@ package controller;
 import controller.screenFrameWork.ControlledScreen;
 import model.Entity.FrameData;
 import model.Entity.ProjectData;
-import model.Util.StringFuncions;
+import model.Util.Conversion;
 import model.Util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,7 +65,7 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
         innerPlayerViewController.setMediaPlayerDataSource(new FXMLPlayerViewController.PlayerDataSource() {
             @Override
             public void didStepUpdated(String step) {
-                Integer tempo = StringFuncions.stringToInt(step);
+                Integer tempo = Conversion.stringToInt(step);
                 projectData.setTempoDivisao(tempo);
             }
 
@@ -81,7 +81,7 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
 
             @Override
             public String getFilePath() {
-                return projectData.getVideoPath();
+                return "file:" + projectData.getVideoFile().toString();
             }
         });
     }

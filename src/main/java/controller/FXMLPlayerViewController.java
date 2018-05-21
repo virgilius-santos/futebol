@@ -1,6 +1,6 @@
 package controller;
 
-import model.Util.StringFuncions;
+import model.Util.Conversion;
 import model.Util.Validation;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -104,7 +104,7 @@ public class FXMLPlayerViewController implements Initializable {
 
     @FXML
     private void handleSteBackWard() throws IOException {
-        int set = StringFuncions.stringToInt(step.getText());
+        int set = Conversion.stringToInt(step.getText());
         skip(set,true);
     }
 
@@ -115,7 +115,7 @@ public class FXMLPlayerViewController implements Initializable {
 
     @FXML
     private void handleSteForWard() throws IOException {
-        int set = StringFuncions.stringToInt(step.getText());
+        int set = Conversion.stringToInt(step.getText());
         skip(set,false);
     }
 
@@ -218,8 +218,8 @@ public class FXMLPlayerViewController implements Initializable {
 
     private void updateTimeStamp(){
         if (mediaPlayer == null) return;
-        String elapsed = StringFuncions.formatTime(mediaPlayer.getCurrentTime());
-        String total = StringFuncions.formatTime(duration);
+        String elapsed = Conversion.formatTime(mediaPlayer.getCurrentTime());
+        String total = Conversion.formatTime(duration);
         String formatted = String.format("%s/%s",elapsed,total);
         labelTime.setText(formatted);
     }

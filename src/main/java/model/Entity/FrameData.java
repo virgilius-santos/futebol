@@ -4,16 +4,10 @@ import java.util.HashMap;
 
 public class FrameData {
 
-    private static int ids = 0;
-
-    private final Integer id;
     private String name;
     private final HashMap<Integer,Integer> quadrants;
 
     public FrameData() {
-
-        this.id = ids;
-        ids++;
         this.name = null;
         quadrants = new HashMap<>();
     }

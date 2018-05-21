@@ -7,26 +7,25 @@ import java.util.ArrayList;
 
 public class ProjectData {
 
-    private String projetoPath;
-    private String videoPath;
-    private Integer tempoDivisao;
-    private Integer linhas, colunas; // Variáveis que formam os quadrantes.
-    private final ArrayList<FrameData> dados;
     private String videoMD5;
-    private String videoPathMD5;
-    public ProjectData() {
+    private File videoFile;
+    private File projetoFile;
+
+    private Integer tempoDivisao;
+//    private Integer linhas, colunas; // Variáveis que formam os quadrantes.
+    private final ArrayList<FrameData> dados;
+
+    public ProjectData(File videoFile) {
         Integer stepDefault = 2;
-        this.projetoPath = null;
-        this.videoPath = null;
+        this.projetoFile = null;
+        this.videoFile = videoFile;
         this.tempoDivisao = stepDefault;
-        this.linhas = 4;
-        this.colunas = 8;
+//        this.linhas = 4;
+//        this.colunas = 8;
 
         this.dados = new ArrayList<>(10);
-        FrameData obj = new FrameData();
-        this.dados.add(obj);
-        obj = new FrameData();
-        this.dados.add(obj);
+        this.dados.add(new FrameData());
+        this.dados.add(new FrameData());
     }
 
     public ArrayList<FrameData> getDados() {
@@ -42,41 +41,40 @@ public class ProjectData {
     }
 
     // Sets
-    public void setProjetoPath(File file) {
-        if (file == null) return;
-        this.projetoPath = file.getPath();
+    public void setProjetoFile(File file) {
+        this.projetoFile = file;
     }
 
-    public void setVideoPath(String videoPath) {
-        this.videoPath = videoPath;
+    public void setVideoFile(File videoFile) {
+        this.videoFile = videoFile;
     }
 
     public void setTempoDivisao(Integer tempoDivisao){
         this.tempoDivisao = tempoDivisao;
     }
 
-    public void setLinhas(Integer linhas){
-        this.linhas = linhas;
-    }
+//    public void setLinhas(Integer linhas){
+//        this.linhas = linhas;
+//    }
 
-    public void setColunas(Integer colunas){
-        this.colunas = colunas;
-    }
+//    public void setColunas(Integer colunas){
+//        this.colunas = colunas;
+//    }
 
     public void setVideoMD5(String videoMD5) { this.videoMD5 = videoMD5; }
 
     // Gets
-    public String getProjetoPath(){
-        return projetoPath;
+    public File getProjetoFile(){
+        return projetoFile;
     }
 
-    public Integer getLinhas(){
-        return  linhas;
-    }
+//    public Integer getLinhas(){
+//        return  linhas;
+//    }
 
-    public Integer getColunas(){
-        return  colunas;
-    }
+//    public Integer getColunas(){
+//        return  colunas;
+//    }
 
     public Integer getTempoDivisao() {
         return tempoDivisao;
@@ -90,17 +88,10 @@ public class ProjectData {
         return dados.size();
     }
 
-    public String getVideoPath() {
-        return videoPath;
+    public File getVideoFile() {
+        return videoFile;
     }
 
     public String getVideoMD5() { return videoMD5; }
 
-    public String getVideoPathMD5() {
-        return videoPathMD5;
-    }
-
-    public void setVideoPathMD5(String videoPathMD5) {
-        this.videoPathMD5 = videoPathMD5;
-    }
 }

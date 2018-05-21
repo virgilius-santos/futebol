@@ -1,4 +1,4 @@
-package controller.screenFrameWork;
+package model.IO;
 
 import javafx.fxml.FXMLLoader;
 
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 
-public class Screen {
+public class ScreenLoader {
 
     public enum ScreenPath {
     Main("/view/Main.fxml");
@@ -25,15 +25,13 @@ public class Screen {
     private final FXMLLoader loader;
     private Parent parent;
 
-    public Screen(ScreenPath path) {
+    public ScreenLoader(ScreenPath path) throws IOException {
         String string = path.getValor();
+
         loader = new FXMLLoader(getClass().getResource(string));
-        try {
-            parent = loader.load();
-        } catch (Exception e) {
-            e.printStackTrace();
-            parent = null;
-        }
+
+        parent = loader.load();
+
     }
 
     public FXMLLoader getLoader() {

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
    <center>
-      <AnchorPane fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
-          <children>
-              <fx:include fx:id="innerMainPlayerView" source="MainPlayer.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-          </children>
-      </AnchorPane>
+       <AnchorPane fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+           <fx:include fx:id="innerMainPlayerView" source="MainPlayer.fxml" AnchorPane.bottomAnchor="0.0"
+                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+       </AnchorPane>
    </center>
    <top>
       <MenuBar BorderPane.alignment="CENTER">

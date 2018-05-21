@@ -1,7 +1,7 @@
 package main;
 
-import controller.screenFrameWork.Screen;
-import controller.screenFrameWork.Screen.ScreenPath;
+import model.IO.ScreenLoader;
+import model.IO.ScreenLoader.ScreenPath;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,9 +14,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
+
         primaryStage = stage;
-        Screen screen = new Screen(ScreenPath.Main);
-        if (screen == null) return;
+        ScreenLoader screen = new ScreenLoader(ScreenPath.Main);
 
         Parent root = screen.getParent();
         Scene scene = new Scene(root);

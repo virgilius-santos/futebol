@@ -3,9 +3,8 @@ package controller;
 import model.Entity.ProjectData;
 import controller.screenFrameWork.ControlledScreen;
 import model.IO.IOFiles;
-import model.Util.Csv;
+import model.Util.Conversion;
 import view.AgesFileChooser;
-import model.Util.MD5;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -57,9 +56,8 @@ public class FXMLMainController implements Initializable {
         projectData = IOFiles.loadJsonFile(file, ProjectData.class);
         if (projectData == null) return;
 
-        String filename = projectData.getVideoPathMD5();
         try {
-            String md5 = MD5.getMD5Checksum(filename);
+            String md5 = Conversion.getMD5Checksum(projectData.getVideoFile());
             if (!projectData.getVideoMD5().equals(md5)) return;
         } catch(Exception e) {
             e.printStackTrace();
@@ -82,42 +80,37 @@ public class FXMLMainController implements Initializable {
 
         File file = AgesFileChooser.chooseFileToSave(AgesFileChooser.FileTypes.JSON);
 
-        projectData.setProjetoPath(file);
+        projectData.setProjetoFile(file);
         IOFiles.saveJsonFile(file, projectData);
     }
 
     @FXML
     private void handleMenuItemFileSave() throws IOException {
         if (projectData == null) return;
-        if (projectData.getProjetoPath() == null){
+        if (projectData.getProjetoFile() == null){
             handleMenuItemFileSaveAs();
             return;
         }
 
-        File file = new File(projectData.getProjetoPath());
-        IOFiles.saveJsonFile(file, projectData);
+        IOFiles.saveJsonFile(projectData.getProjetoFile(), projectData);
     }
 
     @FXML
     private void handleMenuItemFileNew() throws IOException {
 
-        projectData = new ProjectData();
-
-        String filePath;
         File file = AgesFileChooser.chooseFileToOpen(AgesFileChooser.FileTypes.VIDEO);
         if (file == null) return;
 
-        filePath = file.toURI().toString();
-
+        String md5;
         try {
-            projectData.setVideoMD5(MD5.getMD5Checksum(file.getAbsolutePath()));
-            projectData.setVideoPathMD5(file.getAbsolutePath());
-        }
-        catch(Exception e) {
+            md5 = Conversion.getMD5Checksum(file);
+        } catch(Exception e) {
             e.printStackTrace();
+            return;
         }
 
-        projectData.setVideoPath(filePath);
+        projectData = new ProjectData(file);
+        projectData.setVideoMD5(md5);
 
         if (selectedController != null) selectedController.screenDidDisappear();
 
@@ -138,7 +131,7 @@ public class FXMLMainController implements Initializable {
         File file = AgesFileChooser.chooseFileToSave(AgesFileChooser.FileTypes.CSV);
         if (file == null) return;
 
-        String csv = Csv.converter(projectData.getDados());
+        String csv = Conversion.converter(projectData.getDados());
 
         IOFiles.saveCsvFile(file, csv);
     }
