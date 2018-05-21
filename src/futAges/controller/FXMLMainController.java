@@ -46,13 +46,12 @@ public class FXMLMainController implements Initializable {
                     projectData = null;
                 }else return;
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-            @FXML
+    @FXML
     private void handleMenuItemFileLoad() throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO);
