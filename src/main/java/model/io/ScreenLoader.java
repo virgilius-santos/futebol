@@ -1,4 +1,4 @@
-package model.IO;
+package model.io;
 
 import javafx.fxml.FXMLLoader;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ScreenLoader {
 
     public enum ScreenPath {
-    Main("/view/Main.fxml");
+    MAIN("/view/Main.fxml");
 
         private final String valor;
 

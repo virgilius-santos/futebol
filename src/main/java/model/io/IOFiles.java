@@ -1,13 +1,17 @@
-package model.IO;
+package model.io;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class IOFiles {
 
     private static final Gson gson = new Gson();
+
+    private IOFiles(){}
 
     public static <T> void saveJsonFile(File file, T dados){
 
@@ -34,13 +38,10 @@ public class IOFiles {
     }
 
     private static void save(File file, String dados) {
-        FileWriter arquivo;
-        try {
-            arquivo = new FileWriter(file);
+        try (FileWriter arquivo = new FileWriter(file)) {
             arquivo.write(dados);
-            arquivo.close();
         } catch (IOException i) {
-            System.err.println(i.getMessage());
+            Logger.getGlobal().log(Level.ALL, i.getMessage());
         }
     }
 
@@ -50,19 +51,13 @@ public class IOFiles {
         if (file == null) return null;
         T obj = null;
 
-        FileReader arquivo;
-
-        try {
-
-            arquivo = new FileReader(file);
+        try (FileReader arquivo = new FileReader(file)) {
 
             JsonReader reader = new JsonReader(arquivo);
-
             obj = gson.fromJson(reader, type);
-            arquivo.close();
 
         } catch (IOException i) {
-            System.err.println(i.getMessage());
+            Logger.getGlobal().log(Level.ALL, i.getMessage());
         }
 
         return obj;

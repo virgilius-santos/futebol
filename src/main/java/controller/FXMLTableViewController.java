@@ -1,7 +1,7 @@
 package controller;
 
-import model.Entity.FrameData;
-import model.Util.Validation;
+import model.entity.FrameData;
+import model.util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -61,7 +61,7 @@ public class FXMLTableViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // do nothing
     }
 
     // Data Listener

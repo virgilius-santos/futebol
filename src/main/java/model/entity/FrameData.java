@@ -1,6 +1,7 @@
-package model.Entity;
+package model.entity;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class FrameData {
 
@@ -32,7 +33,7 @@ public class FrameData {
         }
     }
 
-    public HashMap<Integer,Integer> getQuadrants(){
-        return (HashMap<Integer, Integer>) quadrants.clone();
+    public Map<Integer,Integer> getQuadrants(){
+        return (Map<Integer, Integer>) quadrants.clone();
     }
 }

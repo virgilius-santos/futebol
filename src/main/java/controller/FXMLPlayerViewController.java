@@ -1,7 +1,7 @@
 package controller;
 
-import model.Util.Conversion;
-import model.Util.Validation;
+import model.util.Conversion;
+import model.util.Validation;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -109,7 +109,7 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     @FXML
-    private void handlePlayPause() throws IOException {
+    private void handlePlayPause() {
         playPause();
     }
 

@@ -1,7 +1,7 @@
 package main;
 
-import model.IO.ScreenLoader;
-import model.IO.ScreenLoader.ScreenPath;
+import model.io.ScreenLoader;
+import model.io.ScreenLoader.ScreenPath;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +16,7 @@ public class Main extends Application {
 
 
         primaryStage = stage;
-        ScreenLoader screen = new ScreenLoader(ScreenPath.Main);
+        ScreenLoader screen = new ScreenLoader(ScreenPath.MAIN);
 
         Parent root = screen.getParent();
         Scene scene = new Scene(root);

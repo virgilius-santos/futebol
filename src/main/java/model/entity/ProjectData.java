@@ -1,8 +1,9 @@
-package model.Entity;
+package model.entity;
 //-------------------------------------------------------
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 //-------------------------------------------------------
 
 public class ProjectData {
@@ -12,7 +13,7 @@ public class ProjectData {
     private File projetoFile;
 
     private Integer tempoDivisao;
-//    private Integer linhas, colunas; // Variáveis que formam os quadrantes.
+    private Integer linhas, colunas; // Variáveis que formam os quadrantes.
     private final ArrayList<FrameData> dados;
 
     public ProjectData(File videoFile) {
@@ -20,16 +21,16 @@ public class ProjectData {
         this.projetoFile = null;
         this.videoFile = videoFile;
         this.tempoDivisao = stepDefault;
-//        this.linhas = 4;
-//        this.colunas = 8;
+        this.linhas = 4;
+        this.colunas = 8;
 
         this.dados = new ArrayList<>(10);
         this.dados.add(new FrameData());
         this.dados.add(new FrameData());
     }
 
-    public ArrayList<FrameData> getDados() {
-        return (ArrayList<FrameData>) dados.clone();
+    public List<FrameData> getDados() {
+        return (List<FrameData>) dados.clone();
     }
 
     // Adds
@@ -53,13 +54,13 @@ public class ProjectData {
         this.tempoDivisao = tempoDivisao;
     }
 
-//    public void setLinhas(Integer linhas){
-//        this.linhas = linhas;
-//    }
+    public void setLinhas(Integer linhas){
+        this.linhas = linhas;
+    }
 
-//    public void setColunas(Integer colunas){
-//        this.colunas = colunas;
-//    }
+    public void setColunas(Integer colunas){
+        this.colunas = colunas;
+    }
 
     public void setVideoMD5(String videoMD5) { this.videoMD5 = videoMD5; }
 
@@ -68,13 +69,13 @@ public class ProjectData {
         return projetoFile;
     }
 
-//    public Integer getLinhas(){
-//        return  linhas;
-//    }
+    public Integer getLinhas(){
+        return  linhas;
+    }
 
-//    public Integer getColunas(){
-//        return  colunas;
-//    }
+    public Integer getColunas(){
+        return  colunas;
+    }
 
     public Integer getTempoDivisao() {
         return tempoDivisao;

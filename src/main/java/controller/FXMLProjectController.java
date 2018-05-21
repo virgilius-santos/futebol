@@ -1,9 +1,9 @@
 package controller;
 
 import controller.FXMLMainController.ControlledScreen;
-import model.Entity.FrameData;
-import model.Entity.ProjectData;
-import model.Util.Conversion;
+import model.entity.FrameData;
+import model.entity.ProjectData;
+import model.util.Conversion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;

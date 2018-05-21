@@ -1,12 +1,11 @@
-package model.Util;
+package model.util;
 
 import javafx.util.Duration;
-import model.Entity.FrameData;
+import model.entity.FrameData;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -16,6 +15,8 @@ public class Conversion {
     private static final String KEY_SEMI_COLON = ";";
     private static final String KEY_BREAK_LINE = "\n";
     private static final String KEY_EMPTY = "";
+
+    private Conversion(){}
 
     public static String converter(List<FrameData> dados){
         StringBuilder builder = new StringBuilder();
@@ -93,7 +94,7 @@ public class Conversion {
 
     }
 
-    private static byte[] createChecksum(File file) throws Exception {
+    private static byte[] createChecksum(File file) throws IOException, NoSuchAlgorithmException {
         MessageDigest complete;
         try (InputStream fis = new FileInputStream(file)) {
 
@@ -108,13 +109,11 @@ public class Conversion {
                 }
             } while (numRead != -1);
 
-            fis.close();
-
         }
         return complete.digest();
     }
 
-    public static String getMD5Checksum(File file) throws Exception {
+    public static String getMD5Checksum(File file) throws IOException, NoSuchAlgorithmException {
         byte[] b = createChecksum(file);
         StringBuilder result = new StringBuilder();
 

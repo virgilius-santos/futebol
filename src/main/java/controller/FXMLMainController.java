@@ -1,8 +1,8 @@
 package controller;
 
-import model.Entity.ProjectData;
-import model.IO.IOFiles;
-import model.Util.Conversion;
+import model.entity.ProjectData;
+import model.io.IOFiles;
+import model.util.Conversion;
 import view.AgesFileChooser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FXMLMainController implements Initializable {
 
@@ -26,8 +28,10 @@ public class FXMLMainController implements Initializable {
 
     @FXML
     private FXMLProjectController innerMainPlayerViewController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // do nothing
     }
 
     @FXML
@@ -64,7 +68,7 @@ public class FXMLMainController implements Initializable {
             String md5 = Conversion.getMD5Checksum(projectData.getVideoFile());
             if (!projectData.getVideoMD5().equals(md5)) return;
         } catch(Exception e) {
-            e.printStackTrace();
+            Logger.getGlobal().log(Level.ALL, e.getMessage());
             return;
         }
 
@@ -109,7 +113,7 @@ public class FXMLMainController implements Initializable {
         try {
             md5 = Conversion.getMD5Checksum(file);
         } catch(Exception e) {
-            e.printStackTrace();
+            Logger.getGlobal().log(Level.ALL, e.getMessage());
             return;
         }
 
