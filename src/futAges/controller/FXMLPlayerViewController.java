@@ -37,6 +37,7 @@ public class FXMLPlayerViewController implements Initializable {
     private boolean atEndOfMedia;
     private boolean playing;
 
+
     @FXML
     private MediaView mediaView;
     @FXML
@@ -166,11 +167,11 @@ public class FXMLPlayerViewController implements Initializable {
         if (newDuration.lessThan(Duration.ZERO)) newDuration = Duration.ZERO;
         mediaPlayer.seek(newDuration);
         seekSlider.setValue(newDuration.toSeconds()/(duration.toSeconds())*100);
+        btnPlayPause.setText("Play");
         mediaPlayer.pause();
     }
 
     private void playPause(){
-
         MediaPlayer.Status status = mediaPlayer.getStatus();
 
         if (status == MediaPlayer.Status.UNKNOWN  || status == MediaPlayer.Status.HALTED) {
@@ -184,15 +185,17 @@ public class FXMLPlayerViewController implements Initializable {
                 || status == MediaPlayer.Status.STOPPED
                 || timeRemaing < 1.0) {
 
-            // rewind the movie if we're sitting at the end
+                // rewind the movie if we're sitting at the end
             if (atEndOfMedia || timeRemaing < 1.0) {
                 mediaPlayer.seek(mediaPlayer.getStartTime());
                 atEndOfMedia = false;
             }
+
             btnPlayPause.setText("Pause");
             mediaPlayer.play();
 
         } else {
+
             btnPlayPause.setText("Play");
             mediaPlayer.pause();
         }
@@ -237,7 +240,7 @@ public class FXMLPlayerViewController implements Initializable {
         Media media = new Media(getFilePath());
         mediaPlayer = new MediaPlayer(media);
         configureMediaPlayer();
-
+        btnPlayPause.setText("Play");
         step.setText(getCurrentStep());
         disableView(false);
     }
