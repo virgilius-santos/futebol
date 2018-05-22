@@ -29,7 +29,6 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     private PlayerDataSource dataSource;
-
     private MediaPlayer mediaPlayer;
     private Duration duration;
     private boolean repeat;
@@ -173,7 +172,6 @@ public class FXMLPlayerViewController implements Initializable {
 
     private void playPause(){
         MediaPlayer.Status status = mediaPlayer.getStatus();
-
         if (status == MediaPlayer.Status.UNKNOWN  || status == MediaPlayer.Status.HALTED) {
             // don't do anything in these states
             return;
