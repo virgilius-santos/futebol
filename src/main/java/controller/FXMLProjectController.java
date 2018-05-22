@@ -80,7 +80,7 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
 
             @Override
             public String getFilePath() {
-                return "file:" + projectData.getVideoFile().toString();
+                return projectData.getVideoURI();
             }
         });
     }

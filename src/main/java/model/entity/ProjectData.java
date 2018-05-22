@@ -2,6 +2,7 @@ package model.entity;
 //-------------------------------------------------------
 
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 //-------------------------------------------------------
@@ -9,7 +10,7 @@ import java.util.List;
 public class ProjectData {
 
     private String videoMD5;
-    private File videoFile;
+    private URI videoURI;
     private File projetoFile;
 
     private Integer tempoDivisao;
@@ -19,7 +20,7 @@ public class ProjectData {
     public ProjectData(File videoFile) {
         Integer stepDefault = 2;
         this.projetoFile = null;
-        this.videoFile = videoFile;
+        this.videoURI = videoFile.toURI();
         this.tempoDivisao = stepDefault;
         this.linhas = 4;
         this.colunas = 8;
@@ -47,7 +48,7 @@ public class ProjectData {
     }
 
     public void setVideoFile(File videoFile) {
-        this.videoFile = videoFile;
+        this.videoURI = videoFile.toURI();
     }
 
     public void setTempoDivisao(Integer tempoDivisao){
@@ -90,7 +91,11 @@ public class ProjectData {
     }
 
     public File getVideoFile() {
-        return videoFile;
+        return new File(videoURI);
+    }
+
+    public String getVideoURI() {
+        return videoURI.toString();
     }
 
     public String getVideoMD5() { return videoMD5; }
