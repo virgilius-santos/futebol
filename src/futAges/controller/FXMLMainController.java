@@ -29,11 +29,10 @@ public class FXMLMainController implements Initializable {
     }
 
     @FXML
-    private void handleMenuItemFileClose() throws IOException {
+    private void handleMenuItemFileClose() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Close Project", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.NO) return;
-        try {
             if(projectData == null) {
                 System.exit(0);
             }
@@ -46,9 +45,6 @@ public class FXMLMainController implements Initializable {
                     projectData = null;
                 }else return;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
