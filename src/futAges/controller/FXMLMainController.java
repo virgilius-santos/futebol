@@ -29,6 +29,25 @@ public class FXMLMainController implements Initializable {
     }
 
     @FXML
+    private void handleMenuItemFileClose() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Close Project", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.NO) return;
+            if(projectData == null) {
+                System.exit(0);
+            }
+            else {
+                String msg = "Você irá perder todas as informações não salvas, \nDeseja prosseguir com o fechamento do projeto?";
+                Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, msg, ButtonType.YES, ButtonType.NO);
+                alert2.showAndWait();
+                if(alert2.getResult() == ButtonType.YES) {
+                    selectedController.screenDidDisappear();
+                    projectData = null;
+                }else return;
+            }
+    }
+
+    @FXML
     private void handleMenuItemFileLoad() throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Load Project", ButtonType.YES, ButtonType.NO);
@@ -106,6 +125,8 @@ public class FXMLMainController implements Initializable {
         selectedController = innerMainPlayerViewController;
         selectedController.setProjectData(projectData);
     }
+
+
 
     @FXML
     private void handleMenuItemFileExport() throws IOException {

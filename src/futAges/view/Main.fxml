@@ -23,7 +23,7 @@
                   <MenuItem fx:id="menuItemFileLoad" mnemonicParsing="false" onAction="#handleMenuItemFileLoad" text="Load" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" onAction="#handleMenuItemFileExport" text="Export Project" />
-                  <MenuItem fx:id="menuItemFileClose" mnemonicParsing="false" text="Close Project" />
+                  <MenuItem fx:id="menuItemFileClose" mnemonicParsing="false" onAction="#handleMenuItemFileClose" text="Close Project" />
             </items>
           </Menu>
         </menus>
