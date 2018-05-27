@@ -19,3 +19,7 @@ out/*
 \.idea/sonarlint/
 
 \.idea/workspace.xml
+
+target/
+
+\.idea/libraries/
