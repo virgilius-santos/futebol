@@ -6,6 +6,7 @@ import model.util.Conversion;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -113,13 +114,19 @@ public class ProjectDataTest {
         ArrayList<FrameData> dados = new ArrayList<>(10);
         dados.add(new FrameData());
         dados.add(new FrameData());
-        assertEquals(dados, projectData.getDados());
+        List<FrameData> actual = projectData.getDados();
+        assertEquals(dados.size(), actual.size());
+        assertEquals(dados.get(0).getName(), actual.get(0).getName());
+        assertEquals(dados.get(1).getName(), actual.get(1).getName());
+        assertEquals(dados.get(0).getQuadrants().size(), actual.get(0).getQuadrants().size());
+        assertEquals(dados.get(1).getQuadrants().size(), actual.get(1).getQuadrants().size());
     }
 
     @org.junit.Test
     public void getData() throws Exception {
         FrameData frameData = new FrameData();
-        assertEquals(frameData, projectData.getData(0));
+        assertEquals(frameData.getName(), projectData.getData(0).getName());
+        assertEquals(frameData.getQuadrants().size(), projectData.getData(0).getQuadrants().size());
     }
 
     @org.junit.Test
