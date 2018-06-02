@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
    <center>
        <AnchorPane fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
-           <fx:include fx:id="innerMainPlayerView" source="MainPlayer.fxml" AnchorPane.bottomAnchor="0.0"
-                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+          <children>
+              <fx:include fx:id="innerMainPlayerView" source="MainPlayer.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
        </AnchorPane>
    </center>
    <top>
@@ -20,9 +23,13 @@
                   <MenuItem fx:id="menuItemFileLoad" mnemonicParsing="false" onAction="#handleMenuItemFileLoad" text="Load" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" onAction="#handleMenuItemFileExport" text="Export Project" />
-                  <MenuItem fx:id="menuItemFileClose" mnemonicParsing="false" onAction="#handleMenuItemFileClose" text="Close Project" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Campinho">
+               <items>
+                  <MenuItem fx:id="menuItemCampinho" mnemonicParsing="false" onAction="#handleMenuItemOpenCampinho" text="Open" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

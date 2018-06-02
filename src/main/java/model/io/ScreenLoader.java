@@ -9,7 +9,8 @@ import java.io.IOException;
 public class ScreenLoader {
 
     public enum ScreenPath {
-    MAIN("/view/Main.fxml");
+    MAIN("/view/Main.fxml"),
+    SOCCERFIELD("/view/campinho.fxml");
 
         private final String valor;
 

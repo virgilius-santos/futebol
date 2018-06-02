@@ -1,9 +1,13 @@
 package controller;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.media.MediaException;
 import model.entity.ProjectData;
 import model.io.IOFiles;
+import model.io.ScreenLoader;
 import model.util.Conversion;
 import model.util.Validation;
 import javafx.fxml.FXML;
@@ -262,5 +266,19 @@ public class FXMLMainController implements Initializable {
         this.selectedController = selectedController;
         this.selectedController.setProjectData(projectData);
     }
+
+    @FXML
+
+    private void handleMenuItemOpenCampinho() throws IOException {
+
+        ScreenLoader screen = new ScreenLoader(ScreenLoader.ScreenPath.SOCCERFIELD);
+        Parent root = screen.getParent();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
 
 }
