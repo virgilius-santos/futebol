@@ -1,7 +1,8 @@
 package controller;
 
 
-
+import javafx.scene.input.KeyEvent;
+import model.util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -55,6 +56,16 @@ public class FXMLCampinhoController implements Initializable {
         }
 
     }
+    @FXML
+    private void textFieldOnKeyPressed(KeyEvent event) {
+        Validation.onKeyPressed(event);
+    }
+
+    @FXML
+    private void textFieldKeyTyped(KeyEvent event) {
+        Validation.onKeyTyped(event);
+    }
+
 
 
 }

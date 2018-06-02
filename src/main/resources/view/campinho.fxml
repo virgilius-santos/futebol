@@ -14,8 +14,8 @@
       </ImageView>
       <Label fx:id="rows" layoutX="59.0" layoutY="10.0" prefHeight="19.0" prefWidth="55.0" text="Linhas" />
       <Label fx:id="Columns" layoutX="307.0" layoutY="10.0" prefHeight="19.0" prefWidth="55.0" text="Colunas" />
-      <TextField fx:id="nbRows" layoutX="114.0" layoutY="7.0" />
-      <TextField fx:id="nbColumns" layoutX="373.0" layoutY="7.0" />
+      <TextField fx:id="nbRows" layoutX="114.0" layoutY="7.0" onKeyPressed="#textFieldOnKeyPressed" onKeyTyped="#textFieldKeyTyped" />
+      <TextField fx:id="nbColumns" layoutX="373.0" layoutY="7.0" onKeyPressed="#textFieldOnKeyPressed" onKeyTyped="#textFieldKeyTyped" />
       <AnchorPane layoutX="37.0" layoutY="57.0" maxHeight="336.0" maxWidth="525.0" minHeight="325.0" minWidth="511.0" prefHeight="325.0" prefWidth="525.0">
          <children>
             <GridPane fx:id="gridPane" gridLinesVisible="true" maxHeight="336.0" maxWidth="511.0" minHeight="323.0" minWidth="511.0" prefHeight="336.0" prefWidth="511.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
