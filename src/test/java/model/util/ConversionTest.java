@@ -6,7 +6,7 @@ import model.entity.FrameData;
 import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ConversionTest {
 
@@ -24,11 +24,6 @@ public class ConversionTest {
     public void getSeconds() throws Exception {
         Duration duration = new Duration(1000);
         assertEquals((Integer) 1, Conversion.getSeconds(duration));
-    }
-
-    @org.junit.Test
-    public void formatTime() throws Exception {
-
     }
 
     @org.junit.Test
@@ -53,6 +48,17 @@ public class ConversionTest {
                 "0;8;15;\n" +
                 "2;10;12;\n";
         assertEquals(csv, Conversion.converter(dados));
+    }
+    @org.junit.Test
+    public void formatTime() throws Exception {
+        Duration d1 = new Duration(2000);
+        Duration d2 = new Duration(3123);
+        Duration d3 = new Duration(60000);
+        Duration d4 = new Duration(3600000);
+        assertEquals("00:02", Conversion.formatTime(d1));
+        assertEquals("00:03", Conversion.formatTime(d2));
+        assertEquals("01:00", Conversion.formatTime(d3));
+        assertEquals("01:00:00", Conversion.formatTime(d4));
     }
 
 }
