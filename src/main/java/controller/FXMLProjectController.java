@@ -97,6 +97,9 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
                 int index = projectData.addData(new FrameData());
                 if (index != -1) innerTableViewController.insertRow(index);
             }
+            if(e.getCode() == KeyCode.TAB){
+                innerTableViewController.changeFocus();
+            }
         });
     }
 

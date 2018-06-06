@@ -47,6 +47,10 @@ public class FXMLTableViewController implements Initializable {
             if (quadrante.getText().isEmpty()) return;
             quadrante.clear();
         }
+
+        void setFocus(){
+            quadrante.requestFocus();
+        }
     }
 
 
@@ -184,6 +188,11 @@ public class FXMLTableViewController implements Initializable {
 
         textFieldHashMap.get(index).quadrante = quadrantTextField;
         gridPane.add(quadrantTextField, column, index);
+    }
+
+    public void changeFocus(){
+
+
     }
 
 }
