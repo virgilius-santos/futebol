@@ -54,24 +54,24 @@ public class ProjectDataTest {
 
     @org.junit.Test
     public void getColunas() throws Exception {
-        assertEquals((Integer) 8, projectData.getColunas());
+        assertEquals((Integer) 8, projectData.getColumns());
     }
 
     @org.junit.Test
     public void setColunas() throws Exception {
-        projectData.setColunas(9);
-        assertEquals((Integer) 9, projectData.getColunas());
+        projectData.setColumns(9);
+        assertEquals((Integer) 9, projectData.getColumns());
     }
 
     @org.junit.Test
     public void getLinhas() throws Exception {
-        assertEquals((Integer) 4, projectData.getLinhas());
+        assertEquals((Integer) 4, projectData.getLines());
     }
 
     @org.junit.Test
     public void setLinhas() throws Exception {
-        projectData.setLinhas(5);
-        assertEquals((Integer) 5, projectData.getLinhas());
+        projectData.setLines(5);
+        assertEquals((Integer) 5, projectData.getLines());
     }
 
     @org.junit.Test

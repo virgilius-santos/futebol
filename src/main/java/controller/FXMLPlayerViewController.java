@@ -153,7 +153,7 @@ public class FXMLPlayerViewController implements Initializable {
 
     @FXML
     private void textFieldKeyTyped(KeyEvent event) {
-        Validation.onKeyTyped(event);
+        Validation.onKeyTyped(event, 6);
     }
 
 

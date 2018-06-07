@@ -269,7 +269,7 @@ public class FXMLMainController implements Initializable {
 
     @FXML
 
-    private void handleMenuItemOpenCampinho() throws IOException {
+    private void handleMenuItemOpenField() throws IOException {
 
         ScreenLoader screen = new ScreenLoader(ScreenLoader.ScreenPath.SOCCERFIELD);
         Parent root = screen.getParent();

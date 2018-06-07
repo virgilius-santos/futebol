@@ -10,7 +10,7 @@ public class ScreenLoader {
 
     public enum ScreenPath {
     MAIN("/view/Main.fxml"),
-    SOCCERFIELD("/view/campinho.fxml");
+    SOCCERFIELD("/view/Field.fxml");
 
         private final String valor;
 

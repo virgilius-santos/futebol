@@ -1,9 +1,9 @@
 package controller;
 
 
-import javafx.scene.Node;
+import controller.FXMLMainController.ControlledScreen;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
+import model.entity.ProjectData;
 import model.util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,12 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import sun.management.snmp.jvmmib.JvmMemManagerEntryMeta;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import model.util.Conversion;
 
-public class FXMLCampinhoController implements Initializable {
+public class FXMLFieldController implements Initializable, ControlledScreen {
 
     @FXML
     private TextField nbRowsField;
@@ -35,16 +34,11 @@ public class FXMLCampinhoController implements Initializable {
     }
 
     private void clearGridPane() {
-        while (gridPane.getRowConstraints().size() > 0) {
-            gridPane.getRowConstraints().remove(0);
-        }
-
-        while (gridPane.getColumnConstraints().size() > 0) {
-            gridPane.getColumnConstraints().remove(0);
-        }
+        gridPane.getRowConstraints().clear();
+        gridPane.getColumnConstraints().clear();
     }
 
-    private void addGridRowsAndColums() {
+    private void addGridRowsAndColumns() {
         for (int i = 0; i < linesQnt ; i++) {
             RowConstraints rConstraint = new RowConstraints();
             rConstraint.setPrefHeight(gridPane.getHeight() / linesQnt);
@@ -61,17 +55,15 @@ public class FXMLCampinhoController implements Initializable {
     }
 
     private void setLinesQuantity(String text) {
-        if (text.isEmpty()) { return; }
-        linesQnt = Integer.parseInt(text);
+        linesQnt = Conversion.stringToInt(text);
         clearGridPane();
-        addGridRowsAndColums();
+        addGridRowsAndColumns();
     }
 
     private void setColumnsQuantity(String text) {
-        if (text.isEmpty()) { return; }
-        columnsQnt = Integer.parseInt(text);
+        columnsQnt = Conversion.stringToInt(text);
         clearGridPane();
-        addGridRowsAndColums();
+        addGridRowsAndColumns();
     }
 
     @FXML
@@ -81,6 +73,15 @@ public class FXMLCampinhoController implements Initializable {
 
     @FXML
     private void textFieldKeyTyped(KeyEvent event) {
-        Validation.onKeyTyped(event);
+        Validation.onKeyTyped(event, 2);
     }
+
+    @Override
+    public void setProjectData(ProjectData projectData) {
+        linesQnt = projectData.getLines();
+        columnsQnt = projectData.getColumns();
+    }
+
+    @Override
+    public void screenDidDisappear() { }
 }

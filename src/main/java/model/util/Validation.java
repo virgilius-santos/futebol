@@ -18,11 +18,11 @@ public class Validation {
         }
     }
 
-    public static void onKeyTyped(KeyEvent evt) {
+    public static void onKeyTyped(KeyEvent evt, int length) {
         TextField textField = (TextField) evt.getSource();
         String c = evt.getCharacter();
 
-        if (textField.getText().length() > 5 || !c.matches("\\d*")) {
+        if (textField.getText().length() > length - 1 || !c.matches("\\d*")) {
             evt.consume();
         }
     }

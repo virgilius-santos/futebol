@@ -25,9 +25,9 @@
                   <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" onAction="#handleMenuItemFileExport" text="Export Project" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Campinho">
+            <Menu mnemonicParsing="false" text="Field">
                <items>
-                  <MenuItem fx:id="menuItemCampinho" mnemonicParsing="false" onAction="#handleMenuItemOpenCampinho" text="Open" />
+                  <MenuItem fx:id="menuItemField" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="Open" />
                </items>
             </Menu>
         </menus>
