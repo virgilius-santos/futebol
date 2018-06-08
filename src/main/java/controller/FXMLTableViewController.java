@@ -172,6 +172,7 @@ public class FXMLTableViewController implements Initializable {
         TextField nameTextField = new TextField();
         nameTextField.setOnKeyPressed(Validation::onKeyPressed);
         nameTextField.textProperty().addListener((observable, oldValue, newValue) -> updateDataListener(index, newValue));
+        nameTextField.setFocusTraversable(false);
 
         textFieldHashMap.get(index).name = nameTextField;
         gridPane.add(nameTextField, column, index);
