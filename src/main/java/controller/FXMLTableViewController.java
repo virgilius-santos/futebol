@@ -47,10 +47,6 @@ public class FXMLTableViewController implements Initializable {
             if (quadrante.getText().isEmpty()) return;
             quadrante.clear();
         }
-
-        void receiveFocus(){
-            quadrante.requestFocus();
-        }
     }
 
 
