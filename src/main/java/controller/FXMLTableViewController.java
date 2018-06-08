@@ -48,7 +48,7 @@ public class FXMLTableViewController implements Initializable {
             quadrante.clear();
         }
 
-        void setFocus(){
+        void receiveFocus(){
             quadrante.requestFocus();
         }
     }
@@ -176,6 +176,7 @@ public class FXMLTableViewController implements Initializable {
         TextField nameTextField = new TextField();
         nameTextField.setOnKeyPressed(Validation::onKeyPressed);
         nameTextField.textProperty().addListener((observable, oldValue, newValue) -> updateDataListener(index, newValue));
+        nameTextField.setFocusTraversable(false);
 
         textFieldHashMap.get(index).name = nameTextField;
         gridPane.add(nameTextField, column, index);
@@ -188,11 +189,6 @@ public class FXMLTableViewController implements Initializable {
 
         textFieldHashMap.get(index).quadrante = quadrantTextField;
         gridPane.add(quadrantTextField, column, index);
-    }
-
-    public void changeFocus(){
-
-
     }
 
 }

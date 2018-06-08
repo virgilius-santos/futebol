@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -96,9 +97,6 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
             if (e.getCode() == KeyCode.ENTER) {
                 int index = projectData.addData(new FrameData());
                 if (index != -1) innerTableViewController.insertRow(index);
-            }
-            if(e.getCode() == KeyCode.TAB){
-                innerTableViewController.changeFocus();
             }
         });
     }
