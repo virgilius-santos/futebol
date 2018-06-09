@@ -46,7 +46,8 @@ public class FXMLMainController implements Initializable {
     }
 
     private ProjectData projectData;
-    private ControlledScreen selectedController;
+    private ControlledScreen projectScreen;
+    private ControlledScreen soccerFieldScreen;
 
     @FXML
     private FXMLProjectController innerMainPlayerViewController;
@@ -54,6 +55,36 @@ public class FXMLMainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // do nothing
+    }
+
+    /**
+     * abre a tela de visualização do campinho
+     */
+    @FXML
+    private void handleMenuItemOpenField() {
+
+        try {
+            if (projectData == null) throw new Exception("Primeiro abra/carregue um projeto");
+
+            ScreenLoader screen = new ScreenLoader(ScreenLoader.ScreenPath.SOCCERFIELD);
+
+            if (soccerFieldScreen != null) soccerFieldScreen.screenDidDisappear();
+            soccerFieldScreen = screen.getLoader().getController();
+            soccerFieldScreen.setProjectData(projectData);
+
+            Parent root = screen.getParent();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            // erro na leitura do fxml
+            Logger.getGlobal().log(Level.ALL, e.getMessage());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
     /** abre um novo projeto a partir da seleçao de um video
@@ -161,7 +192,7 @@ public class FXMLMainController implements Initializable {
         alert.showAndWait();
         if(alert.getResult() == ButtonType.NO) return;
 
-        selectedController.screenDidDisappear();
+        projectScreen.screenDidDisappear();
         projectData = null;
 
         System.exit(0);
@@ -261,23 +292,11 @@ public class FXMLMainController implements Initializable {
      * @param projectData eh o projeto que sera usado durante a exibicao
      */
     private void setSelectedController(ControlledScreen selectedController, ProjectData projectData) {
-        if (this.selectedController != null) this.selectedController.screenDidDisappear();
+        if (this.soccerFieldScreen != null) soccerFieldScreen.screenDidDisappear();
+        if (this.projectScreen != null) this.projectScreen.screenDidDisappear();
         this.projectData = projectData;
-        this.selectedController = selectedController;
-        this.selectedController.setProjectData(projectData);
-    }
-
-    @FXML
-
-    private void handleMenuItemOpenField() throws IOException {
-
-        ScreenLoader screen = new ScreenLoader(ScreenLoader.ScreenPath.SOCCERFIELD);
-        Parent root = screen.getParent();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
+        this.projectScreen = selectedController;
+        this.projectScreen.setProjectData(projectData);
     }
 
 

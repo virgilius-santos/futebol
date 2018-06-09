@@ -3,6 +3,7 @@ package controller;
 
 import controller.FXMLMainController.ControlledScreen;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import model.entity.ProjectData;
 import model.util.Validation;
 import javafx.fxml.FXML;
@@ -24,8 +25,9 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
     @FXML
     private GridPane gridPane;
 
-    private int linesQnt = 0;
-    private int columnsQnt = 0;
+    private Integer linesQnt = 0;
+    private Integer columnsQnt = 0;
+    private ProjectData projectData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,12 +58,14 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
 
     private void setLinesQuantity(String text) {
         linesQnt = Conversion.stringToInt(text);
+        projectData.setLines(linesQnt);
         clearGridPane();
         addGridRowsAndColumns();
     }
 
     private void setColumnsQuantity(String text) {
         columnsQnt = Conversion.stringToInt(text);
+        projectData.setColumns(columnsQnt);
         clearGridPane();
         addGridRowsAndColumns();
     }
@@ -78,10 +82,20 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
 
     @Override
     public void setProjectData(ProjectData projectData) {
+        this.projectData = projectData;
+
         linesQnt = projectData.getLines();
         columnsQnt = projectData.getColumns();
+
+        nbRowsField.setText(linesQnt.toString());
+        nbColumnsField.setText(columnsQnt.toString());
+
+        addGridRowsAndColumns();
     }
 
     @Override
-    public void screenDidDisappear() { }
+    public void screenDidDisappear() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        stage.close();
+    }
 }
