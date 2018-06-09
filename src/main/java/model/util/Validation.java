@@ -2,8 +2,13 @@ package model.util;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+
+import java.io.File;
 
 public class Validation {
+
+    static class MediaException extends Exception {}
 
     private Validation(){}
 
@@ -19,6 +24,15 @@ public class Validation {
 
         if (textField.getText().length() > 5 || !c.matches("\\d*")) {
             evt.consume();
+        }
+    }
+
+    public static void isValidateVideo(String uri) throws MediaException {
+
+        try {
+            new Media(uri);
+        } catch (Exception e) {
+            throw new MediaException();
         }
     }
 }
