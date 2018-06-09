@@ -19,7 +19,7 @@ public class ProjectDataTest {
     public void setUp() throws Exception {
         File file = new File("VideoA.mp4");
         projectData = new ProjectData(file);
-        projectData.setVideoMD5(Conversion.getMD5Checksum(file));
+        projectData.setVideoMD5(Conversion.getMD5CheckSum(file));
         projectData.setProjetoFile(new File("teste.json"));
         IOFiles.saveJsonFile(projectData.getProjetoFile(), projectData);
         projectData.setTempoDivisao(2);
@@ -40,13 +40,13 @@ public class ProjectDataTest {
 
     @org.junit.Test
     public void getVideoMD5() throws Exception {
-        String md5 = Conversion.getMD5Checksum(projectData.getVideoFile());
+        String md5 = Conversion.getMD5CheckSum(projectData.getVideoFile());
         assertEquals(md5, projectData.getVideoMD5());
     }
 
     @org.junit.Test
     public void setVideoMD5() throws Exception {
-        String md5 = Conversion.getMD5Checksum(projectData.getVideoFile());
+        String md5 = Conversion.getMD5CheckSum(projectData.getVideoFile());
         projectData.setVideoMD5(md5);
         assertEquals(md5, projectData.getVideoMD5());
 

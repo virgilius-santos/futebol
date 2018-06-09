@@ -8,7 +8,6 @@ import javafx.scene.media.MediaException;
 import model.entity.ProjectData;
 import model.io.IOFiles;
 import model.io.ScreenLoader;
-import model.util.Conversion;
 import model.util.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +22,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static model.util.Conversion.getMD5Checksum;
+import static model.util.Conversion.convertToCSV;
+import static model.util.Conversion.getMD5CheckSum;
 import static model.util.Validation.isValidateVideo;
 import static view.AgesFileChooser.*;
 
@@ -103,7 +103,7 @@ public class FXMLMainController implements Initializable {
 
             ProjectData data = new ProjectData(file);
 
-            md5 = getMD5Checksum(file);
+            md5 = getMD5CheckSum(file);
             data.setVideoMD5(md5);
 
             setSelectedController(innerMainPlayerViewController, data);
@@ -213,7 +213,7 @@ public class FXMLMainController implements Initializable {
 
             isValidateVideo(projectData.getVideoURI());
 
-            md5 = getMD5Checksum(projectData.getVideoFile());
+            md5 = getMD5CheckSum(projectData.getVideoFile());
             if (!projectData.getVideoMD5().equals(md5)) throw new MD5Exception();
 
             if (projectData.getProjetoFile() != null) {
@@ -279,7 +279,7 @@ public class FXMLMainController implements Initializable {
         File file = chooseFileToSave(FileTypes.CSV);
         if (file == null) return;
 
-        String csv = Conversion.converter(projectData.getDados());
+        String csv = convertToCSV(projectData.getDados());
 
         IOFiles.saveCsvFile(file, csv);
     }
