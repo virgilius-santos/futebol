@@ -68,16 +68,25 @@ public class FXMLMainController implements Initializable {
 
             ScreenLoader screen = new ScreenLoader(ScreenLoader.ScreenPath.SOCCERFIELD);
 
-            if (soccerFieldScreen != null) soccerFieldScreen.screenDidDisappear();
-            soccerFieldScreen = screen.getLoader().getController();
-            soccerFieldScreen.setProjectData(projectData);
-
             Parent root = screen.getParent();
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setResizable(false);
+
+            stage.setOnShown(evt -> {
+                if (soccerFieldScreen != null) soccerFieldScreen.screenDidDisappear();
+                soccerFieldScreen = screen.getLoader().getController();
+                soccerFieldScreen.setProjectData(projectData);
+            });
+
+            stage.setOnCloseRequest(evt -> {
+                soccerFieldScreen = null;
+            });
+
             stage.show();
+
+
         } catch (IOException e) {
             // erro na leitura do fxml
             Logger.getGlobal().log(Level.ALL, e.getMessage());
