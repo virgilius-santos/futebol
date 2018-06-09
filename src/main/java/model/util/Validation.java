@@ -8,7 +8,7 @@ import java.io.File;
 
 public class Validation {
 
-    static class MediaException extends Exception {}
+    public static class MediaException extends Exception {}
 
     private Validation(){}
 

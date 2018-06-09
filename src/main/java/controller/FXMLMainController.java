@@ -102,7 +102,7 @@ public class FXMLMainController implements Initializable {
             }
             
             setSelectedController(innerMainPlayerViewController, projectData);
-        } catch (MediaException|MD5Exception e) {
+        } catch (Validation.MediaException|MD5Exception e) {
             handleFileFindVideoFile(projectData);
         }  catch (Exception e) {
             Logger.getGlobal().log(Level.ALL, e.getMessage());
