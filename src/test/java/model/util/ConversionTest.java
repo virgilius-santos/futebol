@@ -30,7 +30,7 @@ public class ConversionTest {
     public void getMD5Checksum() throws Exception {
         File video = new File("VideoA.mp4");
         String md5 = "a0e9d74b6ed985e3cfaa42df337d7f36";
-        assertEquals(md5, Conversion.getMD5Checksum(video));
+        assertEquals(md5, Conversion.getMD5CheckSum(video));
     }
 
     @org.junit.Test
@@ -47,7 +47,7 @@ public class ConversionTest {
         String csv = "Tempo;Bob;Bola;\n" +
                 "0;8;15;\n" +
                 "2;10;12;\n";
-        assertEquals(csv, Conversion.converter(dados));
+        assertEquals(csv, Conversion.convertToCSV(dados));
     }
     @org.junit.Test
     public void formatTime() {

@@ -104,7 +104,7 @@ public class FXMLTableViewController implements Initializable {
 
     void cleanTable() {
         textFieldHashMap.clear();
-        gridPane.getChildren().removeAll(gridPane.getChildren());
+        gridPane.getChildren().clear();
     }
 
     void loadFrames() {
