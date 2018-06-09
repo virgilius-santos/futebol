@@ -1,13 +1,11 @@
 package controller;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.media.MediaException;
 import model.entity.ProjectData;
 import model.io.IOFiles;
 import model.util.Conversion;
 import model.util.Validation;
-import view.AgesFileChooser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -16,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +25,16 @@ import static view.AgesFileChooser.*;
 
 public class FXMLMainController implements Initializable {
 
-    class MD5Exception extends Exception {}
+    private class MD5Exception extends Exception {
+        private static final long serialVersionUID = 844737862139211806L;
+    }
+    private class GenericException extends Exception {
+        private static final long serialVersionUID = 4451357718847766601L;
+
+        GenericException(String msg){
+            super(msg);
+        }
+    }
 
     public interface ControlledScreen {
         void setProjectData(ProjectData projectData);
@@ -42,6 +50,98 @@ public class FXMLMainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // do nothing
+    }
+
+    /** abre um novo projeto a partir da seleçao de um video
+     *
+     */
+    @FXML
+    private void handleMenuItemFileNew() {
+
+        File file;
+        String md5;
+        try {
+            file = chooseFileToOpen(FileTypes.VIDEO);
+            if (file == null) throw new GenericException("arquivo de video nao encontrado");
+
+            isValidateVideo(file.toURI().toString());
+
+            ProjectData data = new ProjectData(file);
+
+            md5 = getMD5Checksum(file);
+            data.setVideoMD5(md5);
+
+            setSelectedController(innerMainPlayerViewController, data);
+
+        } catch(MediaException e) {
+            String msg = "Formato Invalido";
+            Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.NO);
+            alert.showAndWait();
+        }catch(GenericException|NoSuchAlgorithmException|IOException|Validation.MediaException e) {
+            Logger.getGlobal().log(Level.ALL, e.getMessage());
+        }
+    }
+
+    /**
+     * abre um novo projeto a partir de um arquivo json
+     * Excessao gerada caso o projeto esteja corrompido
+     * Excessao gerada se o MD5 do video nao é igual ao MD5 armazenado
+     */
+    @FXML
+    private void handleMenuItemFileLoad() {
+
+        File file;
+        try {
+
+            file = chooseFileToOpen(FileTypes.JSON);
+            if (file == null) return;
+
+            ProjectData data = IOFiles.loadJsonFile(file, ProjectData.class);
+            if (data == null) throw new GenericException("arquivo de projeto invalido");
+
+            handleValidateProjectData(data);
+        }  catch (GenericException e) {
+            Logger.getGlobal().log(Level.ALL, e.getMessage());
+        }
+    }
+
+
+    /**
+     * salva um projeto no endereco definido previamente
+     * caso nao exista o arquivo chama o metodo save as...
+     */
+    @FXML
+    private void handleMenuItemFileSave() {
+        if (projectData == null) return;
+
+        if (projectData.getProjetoFile() == null){
+            handleMenuItemFileSaveAs();
+            return;
+        }
+
+        IOFiles.saveJsonFile(projectData.getProjetoFile(), projectData);
+    }
+
+    /**
+     * abre a caixa de selecao e permite salvar um projeto no formato JSon
+     */
+    @FXML
+    private void handleMenuItemFileSaveAs() {
+        if (projectData == null) return;
+
+        File file = chooseFileToSave(FileTypes.JSON);
+        if (file == null) return;
+
+        projectData.setProjetoFile(file);
+        IOFiles.saveJsonFile(file, projectData);
+    }
+
+    /**
+     * acao do menu item exportar
+     */
+    @FXML
+    private void handleMenuItemFileExport() {
+        export(this.projectData);
     }
 
     /**
@@ -65,30 +165,14 @@ public class FXMLMainController implements Initializable {
     }
 
     /**
-     * abre um novo projeto a partir de um arquivo json
-     * Excessao gerada caso o projeto esteja corrompido
-     * Excessao gerada se o MD5 do video nao é igual ao MD5 armazenado
+     * valida o formato do video
+     * valida o md5 do video
+     * salva o projeto se existir um diretorio para isso
+     * chama o metodo para visualizar o projeto
+     *
+     * @param projectData objeto com os dados do projeto
      */
-    @FXML
-    private void handleMenuItemFileLoad() {
-
-        File file;
-        ProjectData projectData;
-        try {
-
-            file = chooseFileToOpen(FileTypes.JSON);
-            if (file == null) return;
-
-            projectData = IOFiles.loadJsonFile(file, ProjectData.class);
-            if (projectData == null) throw new Exception("arquivo de projeto invalido");
-
-            handleFileOpenProjectData(projectData);
-        }  catch (Exception e) {
-            Logger.getGlobal().log(Level.ALL, e.getMessage());
-        }
-    }
-
-    private void handleFileOpenProjectData(ProjectData projectData){
+    private void handleValidateProjectData(ProjectData projectData){
         String md5;
         try {
 
@@ -100,16 +184,24 @@ public class FXMLMainController implements Initializable {
             if (projectData.getProjetoFile() != null) {
                 IOFiles.saveJsonFile(projectData.getProjetoFile(), projectData);
             }
-            
+
             setSelectedController(innerMainPlayerViewController, projectData);
         } catch (Validation.MediaException|MD5Exception e) {
-            handleFileFindVideoFile(projectData);
+            handleFindVideoFile(projectData);
         }  catch (Exception e) {
             Logger.getGlobal().log(Level.ALL, e.getMessage());
         }
     }
 
-    private void handleFileFindVideoFile( ProjectData projectData) {
+    /**
+     * informa q o video é invalido
+     * abre opcao para o usuario:
+     * - exportar os dados do projeto caso nao posssua o video original
+     * - localizar o video original
+     *
+     * @param projectData objeto com os dados do projeto
+     */
+    private void handleFindVideoFile( ProjectData projectData) {
         String msg = "Arquivo de video Invalido, \npode localizar o arquivo do video \nou exportar dados do projeto";
         ButtonType localizar = new ButtonType("Localizar", ButtonBar.ButtonData.YES);
         ButtonType exportar = new ButtonType("Exportar", ButtonBar.ButtonData.NO);
@@ -124,51 +216,37 @@ public class FXMLMainController implements Initializable {
             File file;
             try {
                 file = chooseFileToOpen(FileTypes.VIDEO);
-                if (file == null) throw new Exception("Arquivo nao selecionado");
+                if (file == null) throw new GenericException("Arquivo nao selecionado");
 
                 projectData.setVideoFile(file);
-                handleFileOpenProjectData(projectData);
+                handleValidateProjectData(projectData);
 
-            } catch (Exception e) {
+            } catch (GenericException e) {
                 Logger.getGlobal().log(Level.ALL, e.getMessage());
             }
 
             return;
         }
 
-        export(projectData);
-
+        if(alert.getResult() == localizar) {
+            export(projectData);
+        }
     }
 
-    /** abre um novo projeto a partir da seleçao de um video
+    /**
+     * Permite que o usuario escolha um local para salvar os dados do projeto em csv
      *
+     * @param projectData objeto com os dados do projeto
      */
-    @FXML
-    private void handleMenuItemFileNew() {
+    private void export(ProjectData projectData){
+        if (projectData == null) return;
 
-        File file;
-        String md5;
-        ProjectData projectData;
-        try {
-            file = chooseFileToOpen(FileTypes.VIDEO);
-            if (file == null) throw new Exception("arquivo de video nao encontrado");
+        File file = chooseFileToSave(FileTypes.CSV);
+        if (file == null) return;
 
-            isValidateVideo(file.toURI().toString());
+        String csv = Conversion.converter(projectData.getDados());
 
-            projectData = new ProjectData(file);
-
-            md5 = getMD5Checksum(file);
-            projectData.setVideoMD5(md5);
-
-            setSelectedController(innerMainPlayerViewController, projectData);
-
-        } catch(MediaException e) {
-            String msg = "Formato Invalido";
-            Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.NO);
-            alert.showAndWait();
-        }catch(Exception e) {
-            Logger.getGlobal().log(Level.ALL, e.getMessage());
-        }
+        IOFiles.saveCsvFile(file, csv);
     }
 
 
@@ -183,57 +261,6 @@ public class FXMLMainController implements Initializable {
         this.projectData = projectData;
         this.selectedController = selectedController;
         this.selectedController.setProjectData(projectData);
-    }
-
-    /**
-     * abre a caixa de selecao e permite salvar um projeto no formato JSon
-     */
-    @FXML
-    private void handleMenuItemFileSaveAs() {
-        if (projectData == null) return;
-
-        File file = chooseFileToSave(FileTypes.JSON);
-        if (file == null) return;
-
-        projectData.setProjetoFile(file);
-        IOFiles.saveJsonFile(file, projectData);
-    }
-
-
-    /**
-     * salva um projeto no endereco definido previamente
-     * caso nao exista o arquivo chama o metodo save as...
-     */
-    @FXML
-    private void handleMenuItemFileSave() {
-        if (projectData == null) return;
-
-        if (projectData.getProjetoFile() == null){
-            handleMenuItemFileSaveAs();
-            return;
-        }
-
-        IOFiles.saveJsonFile(projectData.getProjetoFile(), projectData);
-    }
-
-
-    /**
-     * caso exista um projeto em andamento, permite exportar esse projeto no formato csv
-     */
-    @FXML
-    private void handleMenuItemFileExport() {
-        export(this.projectData);
-    }
-
-    private void export(ProjectData projectData){
-        if (projectData == null) return;
-
-        File file = chooseFileToSave(FileTypes.CSV);
-        if (file == null) return;
-
-        String csv = Conversion.converter(projectData.getDados());
-
-        IOFiles.saveCsvFile(file, csv);
     }
 
 }
