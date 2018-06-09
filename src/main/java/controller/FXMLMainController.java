@@ -1,9 +1,12 @@
 package controller;
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.media.MediaException;
 import model.entity.ProjectData;
 import model.io.IOFiles;
 import model.util.Conversion;
+import model.util.Validation;
 import view.AgesFileChooser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,9 +20,13 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static model.util.Conversion.getMD5Checksum;
+import static model.util.Validation.isValidateVideo;
 import static view.AgesFileChooser.*;
 
 public class FXMLMainController implements Initializable {
+
+    class MD5Exception extends Exception {}
 
     public interface ControlledScreen {
         void setProjectData(ProjectData projectData);
@@ -65,7 +72,6 @@ public class FXMLMainController implements Initializable {
     @FXML
     private void handleMenuItemFileLoad() {
 
-        String md5;
         File file;
         ProjectData projectData;
         try {
@@ -76,15 +82,63 @@ public class FXMLMainController implements Initializable {
             projectData = IOFiles.loadJsonFile(file, ProjectData.class);
             if (projectData == null) throw new Exception("arquivo de projeto invalido");
 
-            md5 = Conversion.getMD5Checksum(projectData.getVideoFile());
-            if (!projectData.getVideoMD5().equals(md5)) throw new Exception("md5 video nao confere");
-
-            setSelectedController(innerMainPlayerViewController, projectData);
-        } catch(Exception e) {
+            handleFileOpenProjectData(projectData);
+        }  catch (Exception e) {
             Logger.getGlobal().log(Level.ALL, e.getMessage());
         }
     }
 
+    private void handleFileOpenProjectData(ProjectData projectData){
+        String md5;
+        try {
+
+            isValidateVideo(projectData.getVideoURI());
+
+            md5 = getMD5Checksum(projectData.getVideoFile());
+            if (!projectData.getVideoMD5().equals(md5)) throw new MD5Exception();
+
+            if (projectData.getProjetoFile() != null) {
+                IOFiles.saveJsonFile(projectData.getProjetoFile(), projectData);
+            }
+            
+            setSelectedController(innerMainPlayerViewController, projectData);
+        } catch (MediaException|MD5Exception e) {
+            handleFileFindVideoFile(projectData);
+        }  catch (Exception e) {
+            Logger.getGlobal().log(Level.ALL, e.getMessage());
+        }
+    }
+
+    private void handleFileFindVideoFile( ProjectData projectData) {
+        String msg = "Arquivo de video Invalido, \npode localizar o arquivo do video \nou exportar dados do projeto";
+        ButtonType localizar = new ButtonType("Localizar", ButtonBar.ButtonData.YES);
+        ButtonType exportar = new ButtonType("Exportar", ButtonBar.ButtonData.NO);
+        Alert alert = new Alert(Alert.AlertType.ERROR, msg,
+                ButtonType.CANCEL,
+                localizar,
+                exportar);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.CANCEL) return;
+
+        if(alert.getResult() == localizar) {
+            File file;
+            try {
+                file = chooseFileToOpen(FileTypes.VIDEO);
+                if (file == null) throw new Exception("Arquivo nao selecionado");
+
+                projectData.setVideoFile(file);
+                handleFileOpenProjectData(projectData);
+
+            } catch (Exception e) {
+                Logger.getGlobal().log(Level.ALL, e.getMessage());
+            }
+
+            return;
+        }
+
+        export(projectData);
+
+    }
 
     /** abre um novo projeto a partir da seleçao de um video
      *
@@ -99,14 +153,20 @@ public class FXMLMainController implements Initializable {
             file = chooseFileToOpen(FileTypes.VIDEO);
             if (file == null) throw new Exception("arquivo de video nao encontrado");
 
+            isValidateVideo(file.toURI().toString());
+
             projectData = new ProjectData(file);
 
-            md5 = Conversion.getMD5Checksum(file);
+            md5 = getMD5Checksum(file);
             projectData.setVideoMD5(md5);
 
             setSelectedController(innerMainPlayerViewController, projectData);
 
-        } catch(Exception e) {
+        } catch(MediaException e) {
+            String msg = "Formato Invalido";
+            Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.NO);
+            alert.showAndWait();
+        }catch(Exception e) {
             Logger.getGlobal().log(Level.ALL, e.getMessage());
         }
     }
@@ -162,6 +222,10 @@ public class FXMLMainController implements Initializable {
      */
     @FXML
     private void handleMenuItemFileExport() {
+        export(this.projectData);
+    }
+
+    private void export(ProjectData projectData){
         if (projectData == null) return;
 
         File file = chooseFileToSave(FileTypes.CSV);
