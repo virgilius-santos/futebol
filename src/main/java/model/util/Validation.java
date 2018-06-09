@@ -4,11 +4,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 
-import java.io.File;
-
 public class Validation {
 
-    public static class MediaException extends Exception {}
+    public static class MediaException extends Exception {
+        private static final long serialVersionUID = -8821628573703324193L;
+    }
 
     private Validation(){}
 

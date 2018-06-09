@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class ConversionTest {
 
     @org.junit.Test
-    public void stringToInt() throws Exception {
+    public void stringToInt() {
         assertEquals(0, Conversion.stringToInt("abc"));
         assertEquals(0, Conversion.stringToInt(null));
         assertEquals(0, Conversion.stringToInt(""));
@@ -21,7 +21,7 @@ public class ConversionTest {
     }
 
     @org.junit.Test
-    public void getSeconds() throws Exception {
+    public void getSeconds() {
         Duration duration = new Duration(1000);
         assertEquals((Integer) 1, Conversion.getSeconds(duration));
     }
@@ -34,7 +34,7 @@ public class ConversionTest {
     }
 
     @org.junit.Test
-    public void converter() throws Exception {
+    public void converter() {
         ArrayList<FrameData> dados = new ArrayList<>(10);
         dados.add(new FrameData());
         dados.add(new FrameData());
@@ -50,7 +50,7 @@ public class ConversionTest {
         assertEquals(csv, Conversion.converter(dados));
     }
     @org.junit.Test
-    public void formatTime() throws Exception {
+    public void formatTime() {
         Duration d1 = new Duration(2000);
         Duration d2 = new Duration(3123);
         Duration d3 = new Duration(60000);

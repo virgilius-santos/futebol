@@ -10,7 +10,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
