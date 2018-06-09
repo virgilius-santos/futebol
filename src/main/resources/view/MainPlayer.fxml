@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLProjectController">
-    <SplitPane dividerPositions="0.2996870109546166" minHeight="-Infinity" minWidth="-Infinity"
-               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-               AnchorPane.topAnchor="0.0">
-        <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
-            <fx:include source="TableView.fxml" fx:id="innerTableView" AnchorPane.bottomAnchor="0.0"
-                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-        </AnchorPane>
-        <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
-            <fx:include source="PlayerView.fxml" fx:id="innerPlayerView" AnchorPane.bottomAnchor="0.0"
-                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-        </AnchorPane>
-    </SplitPane>
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#handleOnKeyRelease" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLProjectController">
+   <children>
+       <SplitPane dividerPositions="0.2996870109546166" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <items>
+              <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
+                 <children>
+                     <fx:include fx:id="innerTableView" source="TableView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                 </children>
+              </AnchorPane>
+              <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
+                 <children>
+                     <fx:include fx:id="innerPlayerView" source="PlayerView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                 </children>
+              </AnchorPane>
+          </items>
+       </SplitPane>
+   </children>
 </AnchorPane>

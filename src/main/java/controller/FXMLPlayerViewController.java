@@ -15,7 +15,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -103,7 +102,7 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     @FXML
-    private void handleSteBackWard() {
+    void handleSteBackWard() {
         int set = Conversion.stringToInt(step.getText());
         skip(set,true);
     }
@@ -114,7 +113,7 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     @FXML
-    private void handleSteForWard() {
+    void handleSteForWard() {
         int set = Conversion.stringToInt(step.getText());
         skip(set,false);
     }
@@ -155,7 +154,6 @@ public class FXMLPlayerViewController implements Initializable {
     private void textFieldKeyTyped(KeyEvent event) {
         Validation.onKeyTyped(event, 6);
     }
-
 
 
     private void skip(Integer step, Boolean backward) {

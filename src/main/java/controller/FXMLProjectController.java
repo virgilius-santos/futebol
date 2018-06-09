@@ -1,6 +1,7 @@
 package controller;
 
 import controller.FXMLMainController.ControlledScreen;
+import javafx.scene.input.KeyEvent;
 import model.entity.FrameData;
 import model.entity.ProjectData;
 import model.util.Conversion;
@@ -18,8 +19,6 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
     private ProjectData projectData;
 
     @FXML
-    private AnchorPane innerPlayerView;
-    @FXML
     private FXMLTableViewController innerTableViewController;
     @FXML
     private FXMLPlayerViewController innerPlayerViewController;
@@ -28,6 +27,17 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
     public void initialize(URL location, ResourceBundle resources) {
         configureTableView();
         configureMediaPlayer();
+    }
+
+    @FXML
+    private void handleOnKeyRelease(KeyEvent e){
+
+        if (e.getCode() == KeyCode.LEFT && projectData != null){
+            innerPlayerViewController.handleSteBackWard();
+        }
+        if (e.getCode() == KeyCode.RIGHT && projectData != null){
+            innerPlayerViewController.handleSteForWard();
+        }
     }
 
     private void configureTableView() {
@@ -92,12 +102,6 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
         innerPlayerViewController.loadMedia();
         innerTableViewController.loadFrames();
 
-        innerPlayerView.getScene().setOnKeyPressed( e -> {
-            if (e.getCode() == KeyCode.ENTER) {
-                int index = projectData.addData(new FrameData());
-                if (index != -1) innerTableViewController.insertRow(index);
-            }
-        });
     }
 
     @Override
