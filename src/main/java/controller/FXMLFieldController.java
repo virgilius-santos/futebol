@@ -72,7 +72,8 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
     @Override
     public void screenDidDisappear() {
         Stage stage = (Stage) gridPane.getScene().getWindow();
-        stage.close();
+        stage.show();
+        stage.toFront();
     }
 
     private void setLinesQuantity(String text) {

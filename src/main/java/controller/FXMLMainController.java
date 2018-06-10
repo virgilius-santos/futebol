@@ -66,6 +66,11 @@ public class FXMLMainController implements Initializable {
         try {
             if (projectData == null) throw new Exception("Primeiro abra/carregue um projeto");
 
+            if (soccerFieldScreen != null) {
+                soccerFieldScreen.screenDidDisappear();
+                return;
+            }
+
             ScreenLoader screen = new ScreenLoader(ScreenLoader.ScreenPath.SOCCERFIELD);
 
             Parent root = screen.getParent();
@@ -75,14 +80,11 @@ public class FXMLMainController implements Initializable {
             stage.setResizable(false);
 
             stage.setOnShown(evt -> {
-                if (soccerFieldScreen != null) soccerFieldScreen.screenDidDisappear();
                 soccerFieldScreen = screen.getLoader().getController();
                 soccerFieldScreen.setProjectData(projectData);
             });
 
-            stage.setOnCloseRequest(evt -> {
-                soccerFieldScreen = null;
-            });
+            stage.setOnCloseRequest(evt -> soccerFieldScreen = null);
 
             stage.show();
 
