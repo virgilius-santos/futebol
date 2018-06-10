@@ -30,14 +30,22 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
     }
 
     @FXML
-    private void handleOnKeyRelease(KeyEvent e){
+    private void handleOnKeyPressed(KeyEvent e){
+        if (projectData == null) return;
+        switch (e.getCode()){
+            case ENTER:
+                int index = projectData.addData(new FrameData());
+                if (index != -1) innerTableViewController.insertRow(index);
+                break;
+            case LEFT:
+                innerPlayerViewController.handleSteBackWard();
+                break;
+            case RIGHT:
+                innerPlayerViewController.handleSteForWard();
+                break;
 
-        if (e.getCode() == KeyCode.LEFT && projectData != null){
-            innerPlayerViewController.handleSteBackWard();
         }
-        if (e.getCode() == KeyCode.RIGHT && projectData != null){
-            innerPlayerViewController.handleSteForWard();
-        }
+
     }
 
     private void configureTableView() {
