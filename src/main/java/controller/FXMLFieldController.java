@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.entity.ProjectData;
@@ -132,7 +134,8 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
                 label.setTextAlignment(TextAlignment.CENTER);
                 label.setAlignment(Pos.CENTER);
 
-                label.setTextFill(Color.web("#bf0000"));
+                label.setTextFill(Color.web("#ffffff"));
+                label.setFont(Font.font("Comic Sans", FontWeight.BOLD, 20));
 
                 labels.add(label);
                 gridPane.getChildren().add(label);
