@@ -103,7 +103,7 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     @FXML
-    private void handleSteBackWard() throws IOException {
+    private void handleSteBackWard() {
         int set = Conversion.stringToInt(step.getText());
         skip(set,true);
     }
@@ -114,7 +114,7 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     @FXML
-    private void handleSteForWard() throws IOException {
+    private void handleSteForWard() {
         int set = Conversion.stringToInt(step.getText());
         skip(set,false);
     }
@@ -153,7 +153,7 @@ public class FXMLPlayerViewController implements Initializable {
 
     @FXML
     private void textFieldKeyTyped(KeyEvent event) {
-        Validation.onKeyTyped(event);
+        Validation.onKeyTyped(event, 6);
     }
 
 

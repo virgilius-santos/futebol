@@ -18,7 +18,7 @@ public class Conversion {
 
     private Conversion(){}
 
-    public static String converter(List<FrameData> dados){
+    public static String convertToCSV(List<FrameData> dados){
         StringBuilder builder = new StringBuilder();
         TreeMap<Integer, Integer[]> linhas = new TreeMap<>();
         int countObj = dados.size();
@@ -113,7 +113,7 @@ public class Conversion {
         return complete.digest();
     }
 
-    public static String getMD5Checksum(File file) throws IOException, NoSuchAlgorithmException {
+    public static String getMD5CheckSum(File file) throws IOException, NoSuchAlgorithmException {
         byte[] b = createChecksum(file);
         StringBuilder result = new StringBuilder();
 

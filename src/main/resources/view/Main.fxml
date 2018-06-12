@@ -10,20 +10,26 @@
        </AnchorPane>
    </center>
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem fx:id="menuItemFileSave1" mnemonicParsing="false" onAction="#handleMenuItemFileNew" text="New Project" />
-              <MenuItem fx:id="menuItemFileSave" mnemonicParsing="false" onAction="#handleMenuItemFileSave" text="Save" />
-                  <MenuItem fx:id="menuItemFileSaveAs" mnemonicParsing="false" onAction="#handleMenuItemFileSaveAs" text="Save As.." />
-                  <MenuItem fx:id="menuItemFileLoad" mnemonicParsing="false" onAction="#handleMenuItemFileLoad" text="Load" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" onAction="#handleMenuItemFileExport" text="Export Project" />
-                  <MenuItem fx:id="menuItemFileClose" mnemonicParsing="false" onAction="#handleMenuItemFileClose" text="Close Project" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem fx:id="menuItemFileNew" mnemonicParsing="false" onAction="#handleMenuItemFileNew"
+                         text="New Project"/>
+               <MenuItem fx:id="menuItemFileSave" mnemonicParsing="false" onAction="#handleMenuItemFileSave"
+                         text="Save"/>
+               <MenuItem fx:id="menuItemFileSaveAs" mnemonicParsing="false" onAction="#handleMenuItemFileSaveAs"
+                         text="Save As.."/>
+               <MenuItem fx:id="menuItemFileLoad" mnemonicParsing="false" onAction="#handleMenuItemFileLoad"
+                         text="Load"/>
+               <SeparatorMenuItem mnemonicParsing="false"/>
+               <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" onAction="#handleMenuItemFileExport"
+                         text="Export Project"/>
+               <MenuItem fx:id="menuItemFileClose" mnemonicParsing="false" onAction="#handleMenuItemFileClose"
+                         text="Close Project"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Field">
+               <MenuItem fx:id="menuItemField" mnemonicParsing="false" onAction="#handleMenuItemOpenField"
+                         text="Open"/>
+           </Menu>
+       </MenuBar>
    </top>
 </BorderPane>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.FXMLFieldController">
+    <ImageView fitHeight="365.0" fitWidth="600.0" layoutX="-6.0" layoutY="35.0" pickOnBounds="true"
+               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               AnchorPane.topAnchor="35.0">
+        <Image url="@../images/soccerField.jpg"/>
+    </ImageView>
+    <Label layoutX="59.0" layoutY="10.0" prefHeight="19.0" prefWidth="55.0" text="Lines"/>
+    <Label layoutX="307.0" layoutY="10.0" prefHeight="19.0" prefWidth="55.0" text="Columns"/>
+    <TextField fx:id="nbRowsField" layoutX="114.0" layoutY="7.0" onKeyPressed="#textFieldOnKeyPressed"
+               onKeyTyped="#textFieldKeyTyped"/>
+    <TextField fx:id="nbColumnsField" layoutX="373.0" layoutY="7.0" onKeyPressed="#textFieldOnKeyPressed"
+               onKeyTyped="#textFieldKeyTyped"/>
+    <AnchorPane layoutX="37.0" layoutY="57.0" maxHeight="336.0" maxWidth="525.0" minHeight="325.0" minWidth="511.0"
+                prefHeight="325.0" prefWidth="525.0">
+        <GridPane fx:id="gridPane" gridLinesVisible="true" maxHeight="336.0" maxWidth="511.0" minHeight="323.0"
+                  minWidth="511.0" prefHeight="325.0" prefWidth="525.0" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+            </rowConstraints>
+        </GridPane>
+    </AnchorPane>
+</AnchorPane>

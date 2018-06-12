@@ -104,7 +104,7 @@ public class FXMLTableViewController implements Initializable {
 
     void cleanTable() {
         textFieldHashMap.clear();
-        gridPane.getChildren().removeAll(gridPane.getChildren());
+        gridPane.getChildren().clear();
     }
 
     void loadFrames() {
@@ -180,7 +180,7 @@ public class FXMLTableViewController implements Initializable {
 
     private void addNewTextQuadrant(int column, int index) {
         TextField quadrantTextField = new TextField();
-        quadrantTextField.setOnKeyTyped(Validation::onKeyTyped);
+        quadrantTextField.setOnKeyTyped(evt -> Validation.onKeyTyped(evt, 6));
         quadrantTextField.textProperty().addListener((observable, oldValue, newValue) -> updateDataListener(index, currentTime, newValue));
 
         textFieldHashMap.get(index).quadrante = quadrantTextField;

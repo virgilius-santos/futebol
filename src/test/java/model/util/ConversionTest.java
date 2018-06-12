@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class ConversionTest {
 
     @org.junit.Test
-    public void stringToInt() throws Exception {
+    public void stringToInt() {
         assertEquals(0, Conversion.stringToInt("abc"));
         assertEquals(0, Conversion.stringToInt(null));
         assertEquals(0, Conversion.stringToInt(""));
@@ -21,7 +21,7 @@ public class ConversionTest {
     }
 
     @org.junit.Test
-    public void getSeconds() throws Exception {
+    public void getSeconds() {
         Duration duration = new Duration(1000);
         assertEquals((Integer) 1, Conversion.getSeconds(duration));
     }
@@ -30,11 +30,11 @@ public class ConversionTest {
     public void getMD5Checksum() throws Exception {
         File video = new File("VideoA.mp4");
         String md5 = "a0e9d74b6ed985e3cfaa42df337d7f36";
-        assertEquals(md5, Conversion.getMD5Checksum(video));
+        assertEquals(md5, Conversion.getMD5CheckSum(video));
     }
 
     @org.junit.Test
-    public void converter() throws Exception {
+    public void converter() {
         ArrayList<FrameData> dados = new ArrayList<>(10);
         dados.add(new FrameData());
         dados.add(new FrameData());
@@ -47,10 +47,10 @@ public class ConversionTest {
         String csv = "Tempo;Bob;Bola;\n" +
                 "0;8;15;\n" +
                 "2;10;12;\n";
-        assertEquals(csv, Conversion.converter(dados));
+        assertEquals(csv, Conversion.convertToCSV(dados));
     }
     @org.junit.Test
-    public void formatTime() throws Exception {
+    public void formatTime() {
         Duration d1 = new Duration(2000);
         Duration d2 = new Duration(3123);
         Duration d3 = new Duration(60000);

@@ -4,11 +4,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 
-import java.io.File;
-
 public class Validation {
 
-    public static class MediaException extends Exception {}
+    public static class MediaException extends Exception {
+        private static final long serialVersionUID = -8821628573703324193L;
+    }
 
     private Validation(){}
 
@@ -18,11 +18,11 @@ public class Validation {
         }
     }
 
-    public static void onKeyTyped(KeyEvent evt) {
+    public static void onKeyTyped(KeyEvent evt, int length) {
         TextField textField = (TextField) evt.getSource();
         String c = evt.getCharacter();
 
-        if (textField.getText().length() > 5 || !c.matches("\\d*")) {
+        if (textField.getText().length() > length - 1 || !c.matches("\\d*")) {
             evt.consume();
         }
     }
