@@ -30,6 +30,9 @@ public class IOFilesTest {
         projectData.getData(1).setQuadrant(0, 16);
     }
 
+    /**
+     * Testa se os dados salvos no arquivo JSON correspondem aos dados que realmente deveriam ser salvos.
+     */
     @org.junit.Test
     public void saveJsonFile() throws Exception {
         String pathname = "teste.json";
@@ -53,6 +56,9 @@ public class IOFilesTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Testa se os dados salvos no arquivo CSV correspondem aos dados que realmente deveriam ser salvos.
+     */
     @org.junit.Test
     public void saveCsvFile() throws Exception {
         String pathname = "teste.csv";
@@ -75,6 +81,10 @@ public class IOFilesTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Testa se o carregamento dos dados que foram salvos em arquivo JSON correspondem aos dados do projeto
+     * salvos como uma lista de FrameDatas.
+     */
     @org.junit.Test
     public void loadJsonFile() throws Exception {
         String pathname = "teste.json";
