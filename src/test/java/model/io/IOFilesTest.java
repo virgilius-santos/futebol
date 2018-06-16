@@ -23,7 +23,7 @@ public class IOFilesTest {
     public void setUp() throws Exception {
         File file = new File("VideoA.mp4");
         projectData = new ProjectData(file);
-        projectData.setVideoMD5(Conversion.getMD5Checksum(file));
+        projectData.setVideoMD5(Conversion.getMD5CheckSum(file));
         projectData.getData(0).setName("Jogador");
         projectData.getData(1).setName("Bola");
         projectData.getData(0).setQuadrant(0,15);
@@ -64,7 +64,7 @@ public class IOFilesTest {
         String pathname = "teste.csv";
         File teste = new File(pathname);
         projectData.setProjetoFile(teste);
-        String csv = Conversion.converter(projectData.getDados());
+        String csv = Conversion.convertToCSV(projectData.getDados());
         IOFiles.saveCsvFile(projectData.getProjetoFile(), csv);
         Path path = Paths.get(pathname);
         String actual = "";
