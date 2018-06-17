@@ -1,6 +1,8 @@
 package controller;
 
 import controller.FXMLMainController.ControlledScreen;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import model.entity.FrameData;
 import model.entity.ProjectData;
@@ -18,10 +20,11 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
 
     private ProjectData projectData;
 
+    final KeyCombination keyCombLeft = new KeyCodeCombination(KeyCode.LEFT, KeyCombination.ALT_DOWN);
+    final KeyCombination keyCombRight = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.ALT_DOWN);
+    
     @FXML
     private FXMLTableViewController innerTableViewController;
-    @FXML
-    private AnchorPane innerTableView;
     @FXML
     private FXMLPlayerViewController innerPlayerViewController;
 
@@ -43,17 +46,15 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
         }
 
     }
+
     @FXML
     private void handleOnKeyReleased(KeyEvent e){
         if (projectData == null) return;
-        switch (e.getCode()){
-            case LEFT:
-                innerPlayerViewController.handleSteBackWard();
-                break;
-            case RIGHT:
-                innerPlayerViewController.handleSteForWard();
-                break;
 
+        if (keyCombLeft.match(e)) {
+            innerPlayerViewController.handleSteBackWard();
+        } else if (keyCombRight.match(e)) {
+            innerPlayerViewController.handleSteForWard();
         }
 
     }
