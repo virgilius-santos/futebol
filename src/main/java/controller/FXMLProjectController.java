@@ -22,7 +22,7 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
 
     final KeyCombination keyCombLeft = new KeyCodeCombination(KeyCode.LEFT, KeyCombination.ALT_DOWN);
     final KeyCombination keyCombRight = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.ALT_DOWN);
-    
+
     @FXML
     private FXMLTableViewController innerTableViewController;
     @FXML

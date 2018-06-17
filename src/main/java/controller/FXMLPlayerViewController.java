@@ -168,6 +168,7 @@ public class FXMLPlayerViewController implements Initializable {
         seekSlider.setValue(newDuration.toSeconds()/(duration.toSeconds())*100);
         btnPlayPause.setText("Play");
         mediaPlayer.pause();
+        updateValues();
     }
 
     private void playPause(){
