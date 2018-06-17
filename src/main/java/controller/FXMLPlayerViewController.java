@@ -70,6 +70,8 @@ public class FXMLPlayerViewController implements Initializable {
         step.textProperty().addListener( (obs, o, n) ->
                 didStepUpdated(n)
         );
+
+
     }
 
     private void configureMediaPlayer() {
@@ -239,6 +241,7 @@ public class FXMLPlayerViewController implements Initializable {
         btnPlayPause.setText("Play");
         step.setText(getCurrentStep());
         disableView(false);
+
     }
 
     private void disableView(boolean state){

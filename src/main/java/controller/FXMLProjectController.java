@@ -21,12 +21,15 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
     @FXML
     private FXMLTableViewController innerTableViewController;
     @FXML
+    private AnchorPane innerTableView;
+    @FXML
     private FXMLPlayerViewController innerPlayerViewController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         configureTableView();
         configureMediaPlayer();
+
     }
 
     @FXML
@@ -37,6 +40,13 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
                 int index = projectData.addData(new FrameData());
                 if (index != -1) innerTableViewController.insertRow(index);
                 break;
+        }
+
+    }
+    @FXML
+    private void handleOnKeyReleased(KeyEvent e){
+        if (projectData == null) return;
+        switch (e.getCode()){
             case LEFT:
                 innerPlayerViewController.handleSteBackWard();
                 break;
