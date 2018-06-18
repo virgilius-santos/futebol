@@ -22,8 +22,8 @@ public class ProjectData {
         this.projetoFile = null;
         this.videoURI = videoFile.toURI();
         this.tempoDivisao = stepDefault;
-        this.lines = 10;
-        this.columns = 10;
+        this.lines = 2;
+        this.columns = 4;
 
         this.dados = new ArrayList<>(10);
         this.dados.add(new FrameData());

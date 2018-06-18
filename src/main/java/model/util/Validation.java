@@ -1,5 +1,6 @@
 package model.util;
 
+import javafx.event.EventType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
@@ -20,9 +21,14 @@ public class Validation {
 
     public static void onKeyTyped(KeyEvent evt, int length) {
         TextField textField = (TextField) evt.getSource();
+
+        String selectedText = textField.getSelectedText();
+        String text =  textField.getText();
         String c = evt.getCharacter();
 
-        if (textField.getText().length() > length - 1 || !c.matches("\\d*")) {
+        int loadLength = text.length() - selectedText.length();
+
+        if (loadLength >= length || !c.matches("\\d*")) {
             evt.consume();
         }
     }

@@ -38,14 +38,13 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
 
     private List<Label> labelList = new LinkedList<>();
 
-    private double width = 65;
-    private double height = 65;
     private ProjectData projectData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         nbRowsField.textProperty().addListener((observable, oldValue, newValue) -> setLinesQuantity(newValue));
         nbColumnsField.textProperty().addListener((observable, oldValue, newValue) -> setColumnsQuantity(newValue));
+//        addGridRowsAndColumns();
     }
 
     @FXML
@@ -55,15 +54,14 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
 
     @FXML
     private void textFieldKeyTyped(KeyEvent event) {
-        Validation.onKeyTyped(event, 2);
+        Validation.onKeyTyped(event, 1);
     }
 
     @Override
     public void setProjectData(ProjectData projectData) {
-        this.projectData = projectData;
+        if (projectData == null) return;
 
-        width = gridPane.getWidth() / projectData.getColumns();
-        height = gridPane.getHeight() / projectData.getLines();
+        this.projectData = projectData;
 
         nbRowsField.setText(projectData.getLines().toString());
         nbColumnsField.setText(projectData.getColumns().toString());
@@ -99,13 +97,13 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
         clearGridPane();
         createLabelList();
 
-        for (int i = 0; i < projectData.getLines() ; i++) {
+        for (int i = 0; i < getLines() ; i++) {
             RowConstraints rConstraint = new RowConstraints();
             rConstraint.setVgrow(Priority.ALWAYS);
             gridPane.getRowConstraints().add(rConstraint);
         }
 
-        for (int i = 0; i < projectData.getColumns(); i++) {
+        for (int i = 0; i < getColumns(); i++) {
             ColumnConstraints cConstraint = new ColumnConstraints();
             cConstraint.setHgrow(Priority.ALWAYS);
             gridPane.getColumnConstraints().add(cConstraint);
@@ -118,8 +116,8 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
         Label label;
         int indice = 1;
 
-        for (int i = 0; i < projectData.getLines() ; i++) {
-            for (int j = 0; j < projectData.getColumns(); j++) {
+        for (int i = 0; i < getLines() ; i++) {
+            for (int j = 0; j < getColumns(); j++) {
                 label = new Label(String.valueOf(indice));
                 indice++;
 
@@ -129,8 +127,8 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
                 GridPane.setValignment(label, VPos.CENTER);
                 GridPane.setFillWidth(label, true);
 
-                label.setMinSize(width, height);
-                label.setMaxSize(width, height);
+                label.setMinSize(getWidth(), getHeight());
+                label.setMaxSize(getWidth(), getHeight());
                 label.setTextAlignment(TextAlignment.CENTER);
                 label.setAlignment(Pos.CENTER);
 
@@ -149,5 +147,21 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
         labelList.clear();
         gridPane.getRowConstraints().clear();
         gridPane.getColumnConstraints().clear();
+    }
+
+    public double getWidth() {
+        return gridPane.getWidth() / getColumns();
+    }
+
+    public double getHeight() {
+        return gridPane.getHeight() / getLines();
+    }
+
+    public double getLines() {
+        return (projectData != null) ? projectData.getLines() : 100;
+    }
+
+    public double getColumns() {
+        return (projectData != null) ? projectData.getColumns() : 100;
     }
 }
