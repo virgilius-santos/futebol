@@ -1,6 +1,9 @@
 package controller;
 
 import controller.FXMLMainController.ControlledScreen;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import model.entity.FrameData;
 import model.entity.ProjectData;
 import model.util.Conversion;
@@ -17,8 +20,9 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
 
     private ProjectData projectData;
 
-    @FXML
-    private AnchorPane innerPlayerView;
+    final KeyCombination keyCombLeft = new KeyCodeCombination(KeyCode.LEFT, KeyCombination.ALT_DOWN);
+    final KeyCombination keyCombRight = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.ALT_DOWN);
+
     @FXML
     private FXMLTableViewController innerTableViewController;
     @FXML
@@ -28,6 +32,31 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
     public void initialize(URL location, ResourceBundle resources) {
         configureTableView();
         configureMediaPlayer();
+
+    }
+
+    @FXML
+    private void handleOnKeyPressed(KeyEvent e){
+        if (projectData == null) return;
+        switch (e.getCode()){
+            case ENTER:
+                int index = projectData.addData(new FrameData());
+                if (index != -1) innerTableViewController.insertRow(index);
+                break;
+        }
+
+    }
+
+    @FXML
+    private void handleOnKeyReleased(KeyEvent e){
+        if (projectData == null) return;
+
+        if (keyCombLeft.match(e)) {
+            innerPlayerViewController.handleSteBackWard();
+        } else if (keyCombRight.match(e)) {
+            innerPlayerViewController.handleSteForWard();
+        }
+
     }
 
     private void configureTableView() {
@@ -92,12 +121,6 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
         innerPlayerViewController.loadMedia();
         innerTableViewController.loadFrames();
 
-        innerPlayerView.getScene().setOnKeyPressed( e -> {
-            if (e.getCode() == KeyCode.ENTER) {
-                int index = projectData.addData(new FrameData());
-                if (index != -1) innerTableViewController.insertRow(index);
-            }
-        });
     }
 
     @Override

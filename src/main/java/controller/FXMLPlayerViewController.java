@@ -15,7 +15,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -71,6 +70,8 @@ public class FXMLPlayerViewController implements Initializable {
         step.textProperty().addListener( (obs, o, n) ->
                 didStepUpdated(n)
         );
+
+
     }
 
     private void configureMediaPlayer() {
@@ -103,7 +104,7 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     @FXML
-    private void handleSteBackWard() {
+    void handleSteBackWard() {
         int set = Conversion.stringToInt(step.getText());
         skip(set,true);
     }
@@ -114,7 +115,7 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
     @FXML
-    private void handleSteForWard() {
+    void handleSteForWard() {
         int set = Conversion.stringToInt(step.getText());
         skip(set,false);
     }
@@ -157,7 +158,6 @@ public class FXMLPlayerViewController implements Initializable {
     }
 
 
-
     private void skip(Integer step, Boolean backward) {
         if (mediaPlayer == null) return;
         Integer newStep = (backward) ? -step : step;
@@ -168,6 +168,7 @@ public class FXMLPlayerViewController implements Initializable {
         seekSlider.setValue(newDuration.toSeconds()/(duration.toSeconds())*100);
         btnPlayPause.setText("Play");
         mediaPlayer.pause();
+        updateValues();
     }
 
     private void playPause(){
@@ -241,6 +242,7 @@ public class FXMLPlayerViewController implements Initializable {
         btnPlayPause.setText("Play");
         step.setText(getCurrentStep());
         disableView(false);
+
     }
 
     private void disableView(boolean state){
