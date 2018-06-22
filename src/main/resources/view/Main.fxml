@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
+   <center>
+       <AnchorPane fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+           <fx:include fx:id="innerMainPlayerView" source="MainPlayer.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+       </AnchorPane>
+   </center>
+   <top>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem fx:id="menuItemFileNew" mnemonicParsing="false" onAction="#handleMenuItemFileNew" text="New Project" />
+               <MenuItem fx:id="menuItemFileSave" mnemonicParsing="false" onAction="#handleMenuItemFileSave" text="Save" />
+               <MenuItem fx:id="menuItemFileSaveAs" mnemonicParsing="false" onAction="#handleMenuItemFileSaveAs" text="Save As.." />
+               <MenuItem fx:id="menuItemFileLoad" mnemonicParsing="false" onAction="#handleMenuItemFileLoad" text="Load" />
+               <SeparatorMenuItem mnemonicParsing="false" />
+               <MenuItem fx:id="menuItemFileExport" mnemonicParsing="false" onAction="#handleMenuItemFileExport" text="Export Project" />
+               <MenuItem fx:id="menuItemFileClose" mnemonicParsing="false" onAction="#handleMenuItemFileClose" text="Close Project" />
+           </Menu>
+           <Menu mnemonicParsing="false" text="Field">
+               <MenuItem fx:id="menuItemField" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="Open" />
+           </Menu>
+         <Menu mnemonicParsing="false" text="Hotkeys">
+           <items>
+               <MenuItem fx:id="menuItemField1" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="New Data Input (Enter)" />
+               <MenuItem fx:id="menuItemField11" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="Next Data Input (Tab)" />
+               <MenuItem fx:id="menuItemField1111" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="Previous Step (Alt + Left Arrow)" />
+               <MenuItem fx:id="menuItemField111" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="Next Step (Alt + Right Arrow)" />
+           </items>
+         </Menu>
+       </MenuBar>
+   </top>
+</BorderPane>
