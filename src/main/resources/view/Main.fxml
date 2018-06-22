@@ -29,10 +29,10 @@
            </Menu>
          <Menu mnemonicParsing="false" text="Hotkeys">
            <items>
-               <MenuItem fx:id="menuItemField1" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="New Data Input (Enter)" />
-               <MenuItem fx:id="menuItemField11" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="Next Data Input (Tab)" />
-               <MenuItem fx:id="menuItemField1111" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="Previous Step (Alt + Left Arrow)" />
-               <MenuItem fx:id="menuItemField111" mnemonicParsing="false" onAction="#handleMenuItemOpenField" text="Next Step (Alt + Right Arrow)" />
+               <MenuItem fx:id="menuItemField1" mnemonicParsing="false" text="New Data Input (Enter)" />
+               <MenuItem fx:id="menuItemField11" mnemonicParsing="false" text="Next Data Input (Tab)" />
+               <MenuItem fx:id="menuItemField1111" mnemonicParsing="false" text="Previous Step (Alt + Left Arrow)" />
+               <MenuItem fx:id="menuItemField111" mnemonicParsing="false" text="Next Step (Alt + Right Arrow)" />
            </items>
          </Menu>
        </MenuBar>
