@@ -21,7 +21,7 @@ public class Main extends Application {
         Parent root = screen.getParent();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("AGES - Futebol");
+        stage.setTitle("Sports Analytics");
         stage.show();
 
         double height = stage.getHeight();
