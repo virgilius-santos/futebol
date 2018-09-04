@@ -9,8 +9,5 @@
         <module name="FutebolAges" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="FutebolAges" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

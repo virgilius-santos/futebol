@@ -44,7 +44,7 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
     public void initialize(URL location, ResourceBundle resources) {
         nbRowsField.textProperty().addListener((observable, oldValue, newValue) -> setLinesQuantity(newValue));
         nbColumnsField.textProperty().addListener((observable, oldValue, newValue) -> setColumnsQuantity(newValue));
-//        addGridRowsAndColumns();
+       
     }
 
     @FXML
