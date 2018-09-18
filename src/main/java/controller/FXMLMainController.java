@@ -45,12 +45,20 @@ public class FXMLMainController implements Initializable {
         void screenDidDisappear();
     }
 
+
+    private Stage primaryStage;
+
     private ProjectData projectData;
     private ControlledScreen projectScreen;
     private ControlledScreen soccerFieldScreen;
 
     @FXML
     private FXMLProjectController innerMainPlayerViewController;
+
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -107,7 +115,7 @@ public class FXMLMainController implements Initializable {
         File file;
         String md5;
         try {
-            file = chooseFileToOpen(FileTypes.VIDEO);
+            file = chooseFileToOpen(FileTypes.VIDEO, primaryStage);
             if (file == null) throw new GenericException("arquivo de video nao encontrado");
 
             isValidateVideo(file.toURI().toString());
@@ -139,7 +147,7 @@ public class FXMLMainController implements Initializable {
         File file;
         try {
 
-            file = chooseFileToOpen(FileTypes.JSON);
+            file = chooseFileToOpen(FileTypes.JSON, primaryStage);
             if (file == null) return;
 
             ProjectData data = IOFiles.loadJsonFile(file, ProjectData.class);
@@ -175,7 +183,7 @@ public class FXMLMainController implements Initializable {
     private void handleMenuItemFileSaveAs() {
         if (projectData == null) return;
 
-        File file = chooseFileToSave(FileTypes.JSON);
+        File file = chooseFileToSave(FileTypes.JSON, primaryStage);
         if (file == null) return;
 
         projectData.setProjetoFile(file);
@@ -261,7 +269,7 @@ public class FXMLMainController implements Initializable {
         if(alert.getResult() == localizar) {
             File file;
             try {
-                file = chooseFileToOpen(FileTypes.VIDEO);
+                file = chooseFileToOpen(FileTypes.VIDEO, primaryStage);
                 if (file == null) throw new GenericException("Arquivo nao selecionado");
 
                 projectData.setVideoFile(file);
@@ -287,7 +295,7 @@ public class FXMLMainController implements Initializable {
     private void export(ProjectData projectData){
         if (projectData == null) return;
 
-        File file = chooseFileToSave(FileTypes.CSV);
+        File file = chooseFileToSave(FileTypes.CSV, primaryStage);
         if (file == null) return;
 
         String csv = convertToCSV(projectData.getDados());

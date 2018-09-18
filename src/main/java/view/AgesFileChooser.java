@@ -1,5 +1,6 @@
 package view;
 
+import javafx.stage.Stage;
 import main.Main;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -32,18 +33,18 @@ public class AgesFileChooser {
         }
     }
 
-    public static File chooseFileToOpen(FileTypes fileTypes){
+    public static File chooseFileToOpen(FileTypes fileTypes, Stage stage){
         FileChooser fileChooser = new FileChooser();
         ExtensionFilter filter = new ExtensionFilter(fileTypes.getDescription(), fileTypes.getExtensions());
         fileChooser.getExtensionFilters().add(filter);
-        return fileChooser.showOpenDialog(Main.primaryStage);
+        return fileChooser.showOpenDialog(stage);
     }
 
-    public static File chooseFileToSave(FileTypes fileTypes){
+    public static File chooseFileToSave(FileTypes fileTypes, Stage stage){
         FileChooser fileChooser = new FileChooser();
         ExtensionFilter filter = new ExtensionFilter(fileTypes.getDescription(), fileTypes.getExtensions());
         fileChooser.getExtensionFilters().add(filter);
-        return fileChooser.showSaveDialog(Main.primaryStage);
+        return fileChooser.showSaveDialog(stage);
     }
 
 

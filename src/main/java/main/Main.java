@@ -1,5 +1,6 @@
 package main;
 
+import controller.FXMLMainController;
 import model.io.ScreenLoader;
 import model.io.ScreenLoader.ScreenPath;
 import javafx.application.Application;
@@ -9,16 +10,18 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static Stage primaryStage;
+
 
     @Override
     public void start(Stage stage) throws Exception{
 
 
-        primaryStage = stage;
+
         ScreenLoader screen = new ScreenLoader(ScreenPath.MAIN);
+        ((FXMLMainController) screen.getLoader().getController()).setPrimaryStage(stage);
 
         Parent root = screen.getParent();
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Sports Analytics");
