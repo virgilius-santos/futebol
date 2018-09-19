@@ -52,6 +52,7 @@ public class FXMLMainController implements Initializable {
     private ControlledScreen projectScreen;
     private ControlledScreen soccerFieldScreen;
 
+    @SuppressWarnings("unused")
     @FXML
     private FXMLProjectController innerMainPlayerViewController;
 

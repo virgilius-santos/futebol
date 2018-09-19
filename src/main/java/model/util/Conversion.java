@@ -82,7 +82,7 @@ public class Conversion {
 
         if (value == null || value.isEmpty()) return 0;
 
-        Integer aux;
+        int aux;
 
         try {
             aux = Integer.parseInt(value);

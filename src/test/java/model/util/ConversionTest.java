@@ -36,7 +36,7 @@ public class ConversionTest {
 
     /**
      * Testa se o vídeo selecionado converte corretamente na hash MD5
-     * @throws Exception
+     * Exception
      */
     @org.junit.Test
     public void getMD5Checksum() throws Exception {

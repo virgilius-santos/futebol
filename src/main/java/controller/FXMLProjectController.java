@@ -19,11 +19,14 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
 
     private ProjectData projectData;
 
-    final KeyCombination keyCombLeft = new KeyCodeCombination(KeyCode.LEFT, KeyCombination.ALT_DOWN);
-    final KeyCombination keyCombRight = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.ALT_DOWN);
+    private final KeyCombination keyCombLeft = new KeyCodeCombination(KeyCode.LEFT, KeyCombination.ALT_DOWN);
+    private final KeyCombination keyCombRight = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.ALT_DOWN);
 
+    @SuppressWarnings("unused")
     @FXML
     private FXMLTableViewController innerTableViewController;
+
+    @SuppressWarnings("unused")
     @FXML
     private FXMLPlayerViewController innerPlayerViewController;
 

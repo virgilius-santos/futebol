@@ -3,17 +3,27 @@
   <component name="issues">
     <option name="index">
       <map>
-        <entry key="$PROJECT_DIR$/pom.xml">
+        <entry key="/Dummy.txt">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/src/main/java/controller/FXMLFieldController.java">
+        <entry key="$PROJECT_DIR$/src/main/java/controller/FXMLPlayerViewController.java">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/src/main/java/controller/FXMLMainController.java">
+        <entry key="$PROJECT_DIR$/src/main/java/model/util/Conversion.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/resources/view/Main.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/resources/view/MainPlayer.fxml">
           <value>
             <set />
           </value>

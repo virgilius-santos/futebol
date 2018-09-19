@@ -149,19 +149,19 @@ public class FXMLFieldController implements Initializable, ControlledScreen {
         gridPane.getColumnConstraints().clear();
     }
 
-    public double getWidth() {
+    private double getWidth() {
         return gridPane.getWidth() / getColumns();
     }
 
-    public double getHeight() {
+    private double getHeight() {
         return gridPane.getHeight() / getLines();
     }
 
-    public double getLines() {
+    private double getLines() {
         return (projectData != null) ? projectData.getLines() : 100;
     }
 
-    public double getColumns() {
+    private double getColumns() {
         return (projectData != null) ? projectData.getColumns() : 100;
     }
 }

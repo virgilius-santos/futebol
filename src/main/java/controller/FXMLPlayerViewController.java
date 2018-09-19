@@ -178,7 +178,7 @@ public class FXMLPlayerViewController implements Initializable {
             return;
         }
 
-        Double timeRemaing = duration.subtract(mediaPlayer.getCurrentTime()).toSeconds();
+        double timeRemaing = duration.subtract(mediaPlayer.getCurrentTime()).toSeconds();
         if ( status == MediaPlayer.Status.PAUSED
                 || status == MediaPlayer.Status.READY
                 || status == MediaPlayer.Status.STOPPED
