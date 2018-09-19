@@ -10,7 +10,6 @@ import model.util.Conversion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import java.net.URL;
