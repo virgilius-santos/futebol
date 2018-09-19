@@ -14,7 +14,8 @@ public class ProjectData {
     private File projetoFile;
 
     private Integer tempoDivisao;
-    private Integer lines, columns; // Variáveis que formam os quadrantes.
+    private Integer lines; // Variáveis que formam os quadrantes.
+    private Integer columns; // Variáveis que formam os quadrantes.
     private final ArrayList<FrameData> dados;
 
     public ProjectData(File videoFile) {

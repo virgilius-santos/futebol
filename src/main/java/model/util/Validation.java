@@ -1,6 +1,5 @@
 package model.util;
 
-import javafx.event.EventType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
