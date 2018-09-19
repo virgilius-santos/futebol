@@ -37,14 +37,9 @@ public class FXMLProjectController implements Initializable, ControlledScreen {
     @FXML
     private void handleOnKeyPressed(KeyEvent e){
         if (projectData == null) return;
-        switch (e.getCode()){
-            case ENTER:
-                int index = projectData.addData(new FrameData());
-                if (index != -1) innerTableViewController.insertRow(index);
-                break;
-            default:
-                break;
-
+        if (e.getCode() == KeyCode.ENTER){
+            int index = projectData.addData(new FrameData());
+            if (index != -1) innerTableViewController.insertRow(index);
         }
 
     }
