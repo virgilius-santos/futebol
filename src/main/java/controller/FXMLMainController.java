@@ -72,7 +72,7 @@ public class FXMLMainController implements Initializable {
     private void handleMenuItemOpenField() {
 
         try {
-            if (projectData == null) throw new Exception("Primeiro abra/carregue um projeto");
+            if (projectData == null) throw new GenericException("Primeiro abra/carregue um projeto");
 
             if (soccerFieldScreen != null) {
                 soccerFieldScreen.screenDidDisappear();
