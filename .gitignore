@@ -25,3 +25,11 @@ target/
 \.idea/libraries/
 
 FutebolAges\.iml
+
+src/main/resources/images/VideoA\.mp4
+
+*.csv
+
+*.mp4
+
+*.json
