@@ -1,5 +1,6 @@
 package system.pages;
 
+import javafx.scene.input.KeyCode;
 import system.TestFXBase;
 
 import static system.JavaFXIds.MENU_FILE;
@@ -13,9 +14,13 @@ public class MainPage {
         this.driver = driver;
     }
 
-    public MainPage pressMenuFile() {
+    public MainPage openProject() {
 
-        driver.clickOn(MENU_FILE);
+        driver.clickOn(MENU_FILE)
+                .clickOn(MENU_ITEM_NEW_PROJECT);
+        driver.press(KeyCode.V);
+        driver.press(KeyCode.ENTER);
+        driver.ensureEventQueueComplete();
         return this;
     }
 

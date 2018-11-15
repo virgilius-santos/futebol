@@ -1,20 +1,15 @@
 package system;
 
-import javafx.scene.Node;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.Button;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxRobotException;
+
+import org.testfx.matcher.base.NodeMatchers;
 import system.pages.MainPage;
 
-import java.util.Optional;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static system.JavaFXIds.MENU_FILE;
-import static system.JavaFXIds.MENU_ITEM_NEW_PROJECT;
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 
 public class MainTests extends TestFXBase {
 
@@ -32,12 +27,19 @@ public class MainTests extends TestFXBase {
     }
 
     @Test
-    public void clickOnMenu() {
+    public void openProject() {
+        String play = "Play";
+        String stepBack = "<<";
+        String stepFor = ">>";
 
-        moveTo("#menuFile");
-        sleep(2000);
-        clickOn("#menuFile");
-        sleep(2000);
+        verifyThat(play, NodeMatchers.isDisabled());
+        verifyThat(stepBack, NodeMatchers.isDisabled());
+        verifyThat(stepFor, NodeMatchers.isDisabled());
 
+        mainPage.openProject();
+
+        verifyThat(play, NodeMatchers.isEnabled());
+        verifyThat(stepBack, NodeMatchers.isEnabled());
+        verifyThat(stepFor, NodeMatchers.isEnabled());
     }
 }
