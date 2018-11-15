@@ -33,3 +33,5 @@ src/main/resources/images/VideoA\.mp4
 *.mp4
 
 *.json
+
+\.idea/
