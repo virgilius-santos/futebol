@@ -50,9 +50,7 @@ public class IOFilesTest {
         catch (IOException x) {
             System.err.format("Erro de E/S: %s%n", x);
         }
-        String expected = "{\"videoMD5\":\"a0e9d74b6ed985e3cfaa42df337d7f36\",\"videoURI\":\"file:/home/16200797/IdeaProjects/futebol/VideoA.mp4\"," +
-                "\"projetoFile\":{\"path\":\"teste.json\"},\"tempoDivisao\":2,\"linhas\":4,\"colunas\":8,\"dados\":[{\"name\":\"Jogador\"," +
-                "\"quadrants\":{\"0\":15}},{\"name\":\"Bola\",\"quadrants\":{\"0\":16}}]}";
+        String expected = "{\"videoMD5\":\"a0e9d74b6ed985e3cfaa42df337d7f36\",\"videoURI\":\"file:/Users/virgiliussantos/git/futebol/VideoA.mp4\",\"projetoFile\":{\"path\":\"teste.json\"},\"tempoDivisao\":2,\"lines\":2,\"columns\":4,\"dados\":[{\"name\":\"Jogador\",\"quadrants\":{\"0\":15}},{\"name\":\"Bola\",\"quadrants\":{\"0\":16}}]}";
         assertEquals(expected, actual.toString());
     }
 

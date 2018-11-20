@@ -73,7 +73,7 @@ public class ProjectDataTest {
      */
     @org.junit.Test
     public void getColunas() {
-        assertEquals((Integer) 8, projectData.getColumns());
+        assertEquals((Integer) 4, projectData.getColumns());
     }
 
     /**
@@ -91,7 +91,7 @@ public class ProjectDataTest {
      */
     @org.junit.Test
     public void getLinhas() {
-        assertEquals((Integer) 4, projectData.getLines());
+        assertEquals((Integer) 2, projectData.getLines());
     }
 
     /**
